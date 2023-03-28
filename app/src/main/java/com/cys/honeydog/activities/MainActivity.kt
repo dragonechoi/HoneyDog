@@ -1,7 +1,8 @@
-package com.cys.honeydog
+package com.cys.honeydog.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cys.honeydog.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
