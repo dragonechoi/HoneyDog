@@ -16,7 +16,7 @@
             android:name=".activities.SearchIdPw"
             android:exported="false" />
         <activity
-            android:name=".activities.NewId"
+            android:name=".activities.NewIdActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"

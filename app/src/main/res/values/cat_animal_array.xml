@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cat">
+        <item>페르시안 </item>
+        <item>메인 쿤</item>
+        <item>브리티쉬 쇼트 헤어</item>
+        <item>먼치킨</item>
+        <item>엑조틱 쇼트 헤어</item>
+        <item>시암 고양이</item>
+        <item>아메리칸 쇼트헤어</item>
+        <item>랙돌</item>
+        <item>뱅갈</item>
+        <item>맹크스 </item>
+        <item>스코티쉬 폴드</item>
+        <item>아비 시니안</item>
+        <item>러시안 블루</item>
+        <item>코리안 숏 헤어</item>
+        <item>세상에 단 하나 뿐인 나의 믹스</item>
+        <item>그 외 다른 친구들 추가예정</item>
+
+
+    </string-array>
+</resources>

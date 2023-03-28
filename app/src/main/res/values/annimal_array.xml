@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+<string-array name="dog">
+    <item>골든 리트리버</item>
+    <item>도베 르만 핀셔</item>
+    <item>로트 와일러</item>
+    <item>레브라도 리트리버</item>
+    <item>말티즈</item>
+    <item>보더 콜리</item>
+    <item>보스턴 테리어</item>
+    <item>시츄</item>
+    <item>셰틀렌드 쉽독</item>
+    <item>셰퍼드</item>
+    <item>슈나우저</item>
+    <item>오스트레일리아 캐들 독</item>
+    <item>요크셔 테리어</item>
+    <item>잉글리쉬 쉽독</item>
+    <item>치와와</item>
+    <item>카디건 웰시코기</item>
+    <item>파피용</item>
+    <item>포메 라니안</item>
+    <item>푸들</item>
+    <item>프렌치 불독</item>
+    <item>코카스 파니엘</item>
+    <item>펨브룩 웰시 코기</item>
+
+    <item>세상에 단 하나 뿐인 믹스견</item>
+    <item>그 외 친구들 추가 예정</item>
+
+
+</string-array>
+
+</resources>
