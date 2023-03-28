@@ -20,136 +20,151 @@
                 android:id="@+id/new_dok"
                 android:layout_width="120dp"
                 android:layout_height="100dp"
-                android:src="@drawable/new_friend"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="22dp"/>
+                android:layout_marginTop="28dp"
+                android:src="@drawable/new_acc"
+                android:layout_marginBottom="14dp"/>
 
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:fontFamily="@font/kotra_hope"
                 android:text="회원 가입  "
-                android:textSize="35sp"
-                android:layout_centerHorizontal="true"/>
+                android:textSize="35sp" />
+
             <EditText
                 android:id="@+id/et_email"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="15"
-                android:padding="16dp"
+                android:layout_below="@id/new_dok"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:hint="이메일 "
+                android:layout_marginRight="4dp"
+                android:ems="15"
                 android:fontFamily="@font/kotra_hope"
+                android:hint="이메일 "
                 android:inputType="textEmailAddress"
                 android:maxEms="25"
                 android:maxLength="18"
-                android:layout_below="@id/new_dok"/>
+                android:padding="16dp" />
 
             <EditText
                 android:id="@+id/et_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="15"
-                android:padding="16dp"
+                android:layout_below="@id/et_email"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:hint="닉네임 입력 "
+                android:layout_marginRight="4dp"
+                android:ems="15"
                 android:fontFamily="@font/kotra_hope"
+                android:hint="닉네임 입력 "
                 android:inputType="text"
                 android:maxEms="10"
                 android:maxLength="10"
-                android:layout_below="@id/et_email"/>
+                android:padding="16dp" />
+
             <EditText
                 android:id="@+id/et_pw"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="15"
-                android:padding="16dp"
+                android:layout_below="@id/et_name"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:hint="비밀번호 입력 "
+                android:layout_marginRight="4dp"
+                android:ems="15"
                 android:fontFamily="@font/kotra_hope"
+                android:hint="비밀번호 입력 "
                 android:inputType="text"
                 android:maxEms="10"
                 android:maxLength="10"
-                android:layout_below="@id/et_name"/>
+                android:padding="16dp" />
+
             <EditText
                 android:id="@+id/et_pw_recheck"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="15"
-                android:padding="16dp"
+                android:layout_below="@id/et_pw"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:hint="비밀 번호 재입력"
+                android:ems="15"
                 android:fontFamily="@font/kotra_hope"
+                android:hint="비밀 번호 재입력"
                 android:inputType="text"
                 android:maxEms="10"
                 android:maxLength="10"
-                android:layout_below="@id/et_pw"/>
+                android:padding="16dp" />
+
             <TextView
                 android:id="@+id/tv_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="연락처 : "
-                android:fontFamily="@font/kotra_hope"
                 android:layout_below="@id/et_pw_recheck"
-                android:layout_margin="10dp"
-                android:textSize="18sp"/>
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/kotra_hope"
+                android:text="연락처 : "
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="4"
-                android:layout_toRightOf="@id/tv_num"
                 android:layout_below="@id/et_pw_recheck"
+                android:layout_toRightOf="@id/tv_num"
+                android:ems="4"
                 android:hint="000"
                 android:inputType="phone"
-                android:maxLength="3"/>
+                android:maxLength="3" />
+
             <EditText
                 android:id="@+id/et_num2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="4"
-                android:layout_toRightOf="@id/et_num"
                 android:layout_below="@id/et_pw_recheck"
+                android:layout_toRightOf="@id/et_num"
+                android:ems="4"
                 android:hint="0000"
-                android:inputType="phone"/>
+                android:inputType="phone"
+                android:maxLength="4" />
+
             <EditText
                 android:id="@+id/et_num3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="4"
-                android:layout_toRightOf="@id/et_num2"
                 android:layout_below="@id/et_pw_recheck"
+                android:layout_toRightOf="@id/et_num2"
+                android:ems="4"
                 android:hint="0000"
-                android:inputType="phone"/>
+                android:inputType="phone"
+                android:maxLength="4" />
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:hint="우리 아이 종류"
+                android:layout_below="@id/tv_num"
 
-                android:layout_below="@id/tv_num">
+                android:hint="우리 아이 종류"
+                android:layout_marginTop="10dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/ac_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:dropDownHeight="100dp"/>
+                    android:dropDownHeight="100dp"
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
         </RelativeLayout>
-
 
 
     </ScrollView>
@@ -160,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="160dp"
         android:layout_marginRight="15dp"
         android:backgroundTint="@color/black"
         android:text="회원 가입"
