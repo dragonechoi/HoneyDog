@@ -13,6 +13,15 @@
         android:theme="@style/Theme.HoneyDog"
         tools:targetApi="31">
         <activity
+            android:name=".activities.SearchIdPw"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NewId"
+            android:exported="false" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
