@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#ffe4c4">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/main_logo"
@@ -23,16 +24,30 @@
             android:src="@drawable/cogi_love"
             app:civ_border_width="3dp"
             app:civ_border_color="#D7B306"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_marginLeft="170dp"/>
 
 
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:src="@drawable/welcome_honeydog"
+        android:layout_below="@id/appbar_title"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentRight="true"
+        android:visibility="visible"
+        android:padding="1dp"/>
+
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar_title">
+
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav"
@@ -51,10 +66,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_middle"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#5A4E39"
+        android:layout_height="170dp"
+        android:background="@drawable/flower"
         android:layout_below="@id/appbar_title"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="80dp" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,26 +78,51 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/main_home"
             android:layout_width="75dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:src="@drawable/cogi_love"
-            app:civ_border_width="3dp"
+            app:civ_border_width="1dp"
             app:civ_border_color="#D7B306"
-            android:layout_toLeftOf="@id/main_cmt"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/main_cmt"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:src="@drawable/cogi_love"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#D7B306"
-            android:layout_centerInParent="true"/>
+            android:layout_marginTop="8dp"
+            android:layout_above="@id/main_cmt"
+            android:layout_alignLeft="@id/main_cmt"
+            />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_cmt"
+                android:layout_width="75dp"
+                android:layout_height="60dp"
+                android:src="@drawable/cogi_love"
+                app:civ_border_color="#D7B306"
+                app:civ_border_width="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="130dp"/>
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/main_seting"
             android:layout_width="75dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:src="@drawable/cogi_love"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#D7B306"/>
+            app:civ_border_width="1dp"
+            app:civ_border_color="#D7B306"
+            android:layout_toRightOf="@id/main_cmt"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="13dp"
+            android:layout_marginBottom="10dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_search"
+                android:layout_width="75dp"
+                android:layout_height="60dp"
+                android:src="@drawable/cogi_love"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#D7B306"
+                android:layout_above="@id/main_seting"
+                android:layout_toRightOf="@id/main_home"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="13dp" />
+
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
