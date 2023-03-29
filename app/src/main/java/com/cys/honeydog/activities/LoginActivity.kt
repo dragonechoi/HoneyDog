@@ -14,26 +14,25 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_login)
         setContentView(binding.root)
-        binding.newId.setOnClickListener{clickNewId()}
-        binding.missId.setOnClickListener{clickMissId()}
-        binding.missPw.setOnClickListener{clickMissPw()}
+        binding.newId.setOnClickListener{
+            startActivity(Intent(this,NewIdActivity::class.java))
+        }
+        binding.missId.setOnClickListener{
+            startActivity(Intent(this,SearchIdActivity::class.java))
+        }
+        binding.missPw.setOnClickListener{
+            startActivity(Intent(this,SearchPwActivity::class.java))
+        }
+        binding.btnLogin.setOnClickListener{
+            startActivity(Intent(this,MainActivity::class.java))
+        }
+
+
 
 
 
     }
-    fun clickMissPw(){
-        val intent=Intent(this,SearchPwActivity::class.java)
-        startActivity(intent)
-    }
-    fun clickMissId(){
-        val intent=Intent(this,SearchIdActivity::class.java)
-        startActivity(intent)
-    }
 
-    fun clickNewId(){
-        val intent=Intent(this,NewIdActivity::class.java)
-        startActivity(intent)
-    }
 
 
 
