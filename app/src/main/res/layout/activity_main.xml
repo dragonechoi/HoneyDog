@@ -135,24 +135,54 @@
 
     </androidx.cardview.widget.CardView>
 
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <RelativeLayout
+        android:id="@+id/tv_rto"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="170dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
-        android:layout_marginBottom="1dp"
-        android:background="@color/white"
-        android:clickable="true"
-        app:menu="@menu/menu_bottom_navigation">
+        android:layout_marginBottom="110dp"
+        android:background="#ffe4c4">
+
+
+            <TextView
+                android:id="@+id/tv_mini_cmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미니 게시판"
+                android:fontFamily="@font/kotra_hope"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_go_cmm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시판 이동"
+                android:textSize="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tv_mini_end_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mini_cmt"
+            android:text="-------------------------------------------------------------------------------------------------"/>
 
 
 
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_mini_end_line"/>
 
 
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

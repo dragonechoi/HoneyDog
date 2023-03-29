@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="match_parent"
     android:background="#fff0f5">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/proufil"
@@ -34,5 +38,12 @@
         android:layout_below="@id/proufil_name"
         android:layout_centerHorizontal="true"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="----------------------------------------------------------------------------------------------------"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>

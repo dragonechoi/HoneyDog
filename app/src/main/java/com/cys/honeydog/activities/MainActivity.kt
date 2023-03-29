@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding.mainSeting.setOnClickListener {
             startActivity(Intent(this,MainSettingActivity::class.java))
         }
+        binding.tvGoCmm.setOnClickListener {
+            startActivity(Intent(this,DogCmmActivity::class.java))
+        }
 
 
 
