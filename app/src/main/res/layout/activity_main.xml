@@ -8,24 +8,22 @@
     android:background="#D7B306">
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
         android:layout_marginTop="15dp"
+        android:background="@color/white"
         android:backgroundTint="#ffe4c4">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/main_logo"
             android:layout_width="75dp"
             android:layout_height="50dp"
+            android:layout_marginLeft="170dp"
             android:src="@drawable/cogi_love"
-            app:civ_border_width="3dp"
             app:civ_border_color="#D7B306"
-            android:layout_marginLeft="170dp"/>
-
+            app:civ_border_width="3dp" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -67,7 +65,7 @@
         android:id="@+id/appbar_middle"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:background="@drawable/flower"
+        android:background="#D7B306"
         android:layout_below="@id/appbar_title"
         android:layout_marginTop="80dp" >
 
@@ -85,7 +83,7 @@
             android:layout_marginTop="8dp"
             android:layout_above="@id/main_cmt"
             android:layout_alignLeft="@id/main_cmt"
-            />
+           android:layout_marginBottom="15dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/main_cmt"
@@ -119,13 +117,40 @@
                 app:civ_border_color="#D7B306"
                 android:layout_above="@id/main_seting"
                 android:layout_toRightOf="@id/main_home"
-                android:layout_marginBottom="9dp"
+                android:layout_marginBottom="22dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="13dp" />
 
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        android:clickable="true"
+        app:menu="@menu/menu_bottom_navigation">
+
+
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 
