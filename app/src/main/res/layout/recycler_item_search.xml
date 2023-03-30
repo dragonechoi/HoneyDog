@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    app:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:id="@+id/layout_click"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EA5455"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iv_hospital"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cogi_love"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="13dp"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동물병원"
+            android:fontFamily="@font/kotra_hope"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:maxLength="20"
+            android:layout_toRightOf="@id/iv_hospital"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#d7ff03"/>
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="031-222-0000"
+            android:fontFamily="@font/kotra_hope"
+            android:layout_alignLeft="@id/iv_hospital"
+            android:layout_below="@id/iv_hospital"
+            android:layout_marginLeft="4dp"
+            android:textColor="#d7ff03"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오시는 길"
+            android:fontFamily="@font/kotra_hope"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/iv_hospital"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:maxLength="100"
+            android:maxLines="1"
+            android:textColor="#d7ff03"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="전화"
+            android:textSize="10dp"
+            android:fontFamily="@font/kotra_hope"
+            android:backgroundTint="@color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+<!--  이 버튼은 추후 다른 공유 버튼으로 바꿀 예정      -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_action_menu"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
