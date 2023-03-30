@@ -17,45 +17,50 @@
         android:src="@drawable/cogi_love"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_id"
+        android:id="@+id/layout_id"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="ID"
         app:helperText="ID 입력"
-        app:endIconMode="clear_text"
         app:counterEnabled="true"
+        app:endIconMode="clear_text"
         app:counterMaxLength="20"
         android:minEms="8"
         android:maxEms="20"
         android:layout_below="@id/civ_intro"
-        android:layout_marginLeft="50dp"
-        >
+        android:layout_marginLeft="50dp">
 
         <com.google.android.material.textfield.TextInputEditText
+          android:id="@+id/et_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_pw"
+        android:id="@+id/layout_pw"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="pw"
         app:helperText="페스워드 입력"
         app:endIconMode="password_toggle"
-        app:counterEnabled="true"
+        app:counterEnabled="false"
         app:counterMaxLength="20"
         android:minEms="8"
         android:maxEms="20"
-        android:layout_below="@id/et_id"
-        android:layout_alignLeft="@id/et_id">
+        android:layout_below="@id/layout_id"
+        android:layout_alignLeft="@id/layout_id">
 
         <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_pw"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -63,7 +68,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
-        android:layout_below="@id/et_pw"
+        android:layout_below="@id/layout_pw"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:text="로그인"

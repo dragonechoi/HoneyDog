@@ -43,7 +43,6 @@
         android:hint="이름 입력"
         android:inputType="text"
         android:maxLines="1"
-        android:layout_marginLeft="dp"
         android:layout_toRightOf="@id/tv_name"
         android:layout_alignLeft="@id/search_id"/>
 
