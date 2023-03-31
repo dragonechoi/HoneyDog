@@ -10,5 +10,8 @@ class SearchIdActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_search_id)
         setContentView(binding.root)
+
+
+
     }
 }
