@@ -9,12 +9,6 @@
 
 
 
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <ImageView
         android:id="@+id/love_dogid"
         android:layout_width="180dp"
@@ -22,7 +16,7 @@
         android:src="@drawable/search_name_bc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-       android:background="#FFF0F5" />
+        android:background="#FFF0F5" />
 
 
     <TextView
@@ -81,5 +75,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/kotra_hope"/>
+
 
 </RelativeLayout>

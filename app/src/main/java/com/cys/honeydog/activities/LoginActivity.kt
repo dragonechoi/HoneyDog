@@ -3,9 +3,7 @@ package com.cys.honeydog.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
 import com.cys.honeydog.G
 import com.cys.honeydog.UserAccount
 import com.cys.honeydog.databinding.ActivityLoginBinding
@@ -18,20 +16,25 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.activity_login)
         setContentView(binding.root)
+
         binding.newId.setOnClickListener{
             startActivity(Intent(this,NewIdActivity::class.java))
         }
-        binding.missId.setOnClickListener{
+        binding.missId.setOnClickListener {
             startActivity(Intent(this,SearchIdActivity::class.java))
         }
-        binding.missPw.setOnClickListener{
-            startActivity(Intent(this,SearchPwActivity::class.java))
+        binding.missPw.setOnClickListener {
+            startActivity(Intent(this,SearchIdActivity::class.java))
         }
+
         binding.btnLogin.setOnClickListener{btnLogin()}
 
     }
+
+
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
