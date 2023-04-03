@@ -12,31 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HoneyDog"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activities.PostActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.SearchIdActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.SearchPwActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.MainSettingActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.MainSearchActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.CatCmmActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.DogCmmActivity"
             android:exported="false" />
-
         <activity
             android:name=".activities.NewIdActivity"
             android:exported="false" />

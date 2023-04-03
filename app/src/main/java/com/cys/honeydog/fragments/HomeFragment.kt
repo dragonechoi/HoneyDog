@@ -1,26 +1,30 @@
 package com.cys.honeydog.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cys.honeydog.R
+import com.cys.honeydog.activities.CatCmmActivity
+import com.cys.honeydog.activities.DogCmmActivity
 import com.cys.honeydog.databinding.FragmentHomeBinding
 
 
-class HomeFragment: Fragment() {
-    private lateinit var Binding: FragmentHomeBinding
+class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Binding = FragmentHomeBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        return Binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.tvGoCmm.setOnClickListener {
+            val intent = Intent(requireContext(), CatCmmActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
-
-

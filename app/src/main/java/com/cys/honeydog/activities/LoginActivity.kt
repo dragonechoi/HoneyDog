@@ -28,6 +28,9 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
             startActivity(Intent(this,SearchIdActivity::class.java))
         }
 
+        binding.goPath.setOnClickListener { startActivity(Intent(this,MainActivity::class.java)) }
+
+
         binding.btnLogin.setOnClickListener{btnLogin()}
 
     }

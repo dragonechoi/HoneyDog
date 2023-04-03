@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:padding="4dp">
+
+    <TextView
+        android:id="@+id/main_post_title"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="임시 게시글 테스트입니다 안녕하세요 반갑습니다"
+       android:textSize="12sp"
+         android:fontFamily="@font/kotra_hope"
+        android:maxLines="1"
+        android:maxEms="20"
+        android:ellipsize="end"/>
+
+</RelativeLayout>

@@ -9,24 +9,40 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/title_bar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:backgroundTint="#d2dff3">
+            android:layout_height="?attr/actionBarSize"
+            android:background="#d2dff3">
 
-            <androidx.appcompat.widget.SearchView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"/>
 
-        </com.google.android.material.appbar.AppBarLayout>
+
+            <ImageView
+                android:id="@+id/image_location"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_action_menu" />
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_login_btn"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:hint="검색어 입력"
+                android:inputType="text"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:imeOptions="actionSearch"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/title_bar"
+            android:layout_below="@id/tool_bar"
             android:background="#31cdda">
 
             <androidx.recyclerview.widget.RecyclerView
