@@ -11,25 +11,12 @@
         android:id="@+id/appbar_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:background="@color/white"
-        android:backgroundTint="#ffe4c4">
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/main_logo"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="170dp"
-            android:src="@drawable/cogi_love"
-            app:civ_border_color="#D7B306"
-            app:civ_border_width="3dp" />
-
+        android:visibility="gone">
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <androidx.drawerlayout.widget.DrawerLayout
