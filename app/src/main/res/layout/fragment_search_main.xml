@@ -30,22 +30,25 @@
                 android:inputType="text"
                 android:textSize="12sp"
                 android:gravity="center"
-                android:imeOptions="actionSearch"/>
+                android:imeOptions="actionSearch"
+                android:layout_marginRight="8dp"/>
 
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="560dp"
             android:layout_below="@id/tool_bar"
             android:background="#31cdda">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="4dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"/>
 
 
         </LinearLayout>

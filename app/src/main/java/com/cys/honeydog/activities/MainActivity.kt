@@ -1,11 +1,8 @@
 package com.cys.honeydog.activities
 
-import android.os.Bundle
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
+import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.navigation.ui.AppBarConfiguration
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityMainBinding
 import com.cys.honeydog.fragments.HomeFragment
@@ -17,16 +14,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        supportFragmentManager.beginTransaction().add(binding.frameLayout.id,HomeFragment()).commit()
+
         initNavigationBar()
-
-
-
     }
-
 
 
     //Main Activity Fragment 화면 전환
@@ -34,16 +29,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
-             R.id.menu_home -> {
-                changeFragment(HomeFragment())
+    R.id.menu_home -> {
+        changeFragment(HomeFragment())
              }
-                  R.id.menu_search -> {
-                  changeFragment(SearchMainFragment())
+          R.id.menu_search -> {
+         changeFragment(SearchMainFragment())
 
           }
 
-                    R.id.menu_profil -> {
-                        changeFragment(ProfilMainFragment())
+             R.id.menu_profil -> {
+                 changeFragment(ProfilMainFragment())
           }
 
         }

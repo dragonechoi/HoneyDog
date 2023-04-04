@@ -4,13 +4,15 @@
     android:layout_height="110dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    android:layout_margin="16dp">
 
     <RelativeLayout
         android:id="@+id/layout_click"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EA5455"
+        android:background="@drawable/bg_login_btn"
+        android:backgroundTint="#EA5455"
         android:clickable="true">
 
         <ImageView
@@ -46,6 +48,7 @@
             android:layout_marginLeft="4dp"
             android:textColor="#d7ff03"/>
         <TextView
+            android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오시는 길"
@@ -69,6 +72,7 @@
 
 <!--  이 버튼은 추후 다른 공유 버튼으로 바꿀 예정      -->
         <ImageView
+            android:id="@+id/share_hospital"
             android:layout_width="30dp"
             android:layout_height="15dp"
             android:src="@drawable/ic_action_menu"

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/recycler_item_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="게시글 테스트"
+            android:maxLength="10"
+            android:ellipsize="end"
+            android:padding="8dp"/>
+        <ImageView
+            android:id="@+id/recycler_profil_item"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:src="@drawable/cogi_love"
+            android:layout_below="@id/recycler_item_tv"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="4dp"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>
