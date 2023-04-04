@@ -19,26 +19,7 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/appbar_title">
 
-
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/dr_main"
-            app:menu="@menu/menu_item"/>
-
-
-
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

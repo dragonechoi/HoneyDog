@@ -1,13 +1,11 @@
 package com.cys.honeydog.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cys.honeydog.activities.CatCmmActivity
-import com.cys.honeydog.activities.DogCmmActivity
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.cys.honeydog.databinding.FragmentHomeBinding
 
 
@@ -21,10 +19,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.tvGoCmm.setOnClickListener {
-            val intent = Intent(requireContext(), CatCmmActivity::class.java)
-            startActivity(intent)
-        }
+        binding.tvGoCmm.setOnClickListener { Toast.makeText(requireActivity(), "aaa", Toast.LENGTH_SHORT).show() }
     }
 }

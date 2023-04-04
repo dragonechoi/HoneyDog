@@ -29,16 +29,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
-    R.id.menu_home -> {
-        changeFragment(HomeFragment())
+             R.id.menu_home -> {
+                changeFragment(HomeFragment())
              }
-          R.id.menu_search -> {
-         changeFragment(SearchMainFragment())
+                  R.id.menu_search -> {
+                  changeFragment(SearchMainFragment())
 
           }
 
-             R.id.menu_profil -> {
-                 changeFragment(ProfilMainFragment())
+                    R.id.menu_profil -> {
+                        changeFragment(ProfilMainFragment())
           }
 
         }
