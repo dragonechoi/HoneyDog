@@ -7,13 +7,6 @@
     tools:context=".activities.MainActivity"
     android:background="#D7B306">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_title"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:visibility="gone">
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -33,6 +26,4 @@
         app:menu="@menu/menu_bottom_navigation"
         android:background="@drawable/round"
         app:itemTextColor="@color/black"/>
-
-
 </RelativeLayout>

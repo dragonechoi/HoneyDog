@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#D7B306"
     tools:context=".fragments.HomeFragment">
 
 
+
+
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_title"
+        android:id="@+id/tool_bar_title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -21,121 +23,120 @@
             android:id="@+id/main_logo"
             android:layout_width="75dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="160dp"
             android:src="@drawable/cogi_love"
             app:civ_border_color="#D7B306"
-            app:civ_border_width="3dp" />
+            app:civ_border_width="3dp"
+            android:layout_marginLeft="160dp"/>
 
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
+
+
+
     <ImageView
         android:layout_width="80dp"
         android:layout_height="50dp"
-        android:layout_below="@id/appbar_title"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="35dp"
-        android:padding="1dp"
         android:src="@drawable/welcome_honeydog"
-        android:visibility="visible" />
+        android:layout_below="@id/tool_bar_title"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentRight="true"
+        android:visibility="visible"
+        android:padding="1dp"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/main_dog_cmm"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:src="@drawable/cogi_love"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#D7B306"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"/>
 
-    <RelativeLayout
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/main_dog_search"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/main_dog_cmm"
+        android:src="@drawable/cogi_love"
+        app:civ_border_color="#D7B306"
+        app:civ_border_width="1dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/main_dog_profil"
+        android:layout_width="75dp"
+        android:layout_height="60dp"
+        android:src="@drawable/cogi_love"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#D7B306"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toLeftOf="@id/main_dog_cmm"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_below="@id/appbar_title"
-        android:layout_marginTop="80dp"
-        android:background="#D7B306">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/main_dog_cmm"
-            android:layout_width="75dp"
-            android:layout_height="60dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="15dp"
-            android:src="@drawable/cogi_love"
-            app:civ_border_color="#D7B306"
-            app:civ_border_width="1dp" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/main_dog_search"
-            android:layout_width="75dp"
-            android:layout_height="60dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@id/main_dog_cmm"
-            android:src="@drawable/cogi_love"
-            app:civ_border_color="#D7B306"
-            app:civ_border_width="1dp" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/main_dog_profil"
-            android:layout_width="75dp"
-            android:layout_height="60dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="15dp"
-            android:layout_toLeftOf="@id/main_dog_cmm"
-            android:src="@drawable/cogi_love"
-            app:civ_border_color="#D7B306"
-            app:civ_border_width="1dp" />
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/tv_rto"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="110dp"
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/main_dog_profil"
         android:background="#ffe4c4">
 
-
-        <TextView
-            android:id="@+id/tv_mini_cmt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kotra_hope"
-            android:text="미니 게시판"
-            android:textSize="20sp" />
-
-
-        <TextView
-            android:id="@+id/tv_mini_end_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_mini_cmt"
-            android:text="-------------------------------------------------------------------------------------------------" />
-
-        <TextView
-            android:id="@+id/tv_go_cmm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="8dp"
-            android:clickable="true"
-            android:text="게시판 이동"
-            android:textSize="15dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/tv_mini_end_line"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_mini_cmt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미니 게시판"
+                android:fontFamily="@font/kotra_hope"
+                android:textSize="20sp" />
 
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/tv_mini_end_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_mini_cmt"
+                android:text="-------------------------------------------------------------------------------------------------"/>
+
+            <TextView
+                android:id="@+id/tv_go_cmm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시판 이동"
+                android:textSize="15sp"
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_mini_end_line"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>
+
+
+
+
+
+

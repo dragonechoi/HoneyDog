@@ -17,12 +17,7 @@
 
 
 
-            <ImageView
-                android:id="@+id/image_location"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_action_menu" />
+
 
             <EditText
                 android:id="@+id/et_search"
@@ -49,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="4dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:layout_marginTop="15dp"/>
 
 
         </LinearLayout>

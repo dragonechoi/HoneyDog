@@ -1,8 +1,11 @@
 package com.cys.honeydog.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.ui.AppBarConfiguration
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityMainBinding
 import com.cys.honeydog.fragments.HomeFragment
@@ -14,14 +17,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        supportFragmentManager.beginTransaction().add(binding.frameLayout.id,HomeFragment()).commit()
-
         initNavigationBar()
+
+
+
     }
+
 
 
     //Main Activity Fragment 화면 전환
