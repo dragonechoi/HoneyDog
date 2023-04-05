@@ -42,66 +42,77 @@
 
 
 
+
            </com.google.android.material.appbar.AppBarLayout>
 
 
-
            <ImageView
-               android:layout_width="80dp"
-               android:layout_height="50dp"
-               android:src="@drawable/welcome_honeydog"
+               android:layout_width="150dp"
+               android:layout_height="100dp"
                android:layout_below="@id/appbar_title"
-               android:layout_marginTop="35dp"
                android:layout_alignParentRight="true"
-               android:visibility="visible"
-               android:padding="1dp"/>
+               android:layout_marginTop="-1dp"
+               android:layout_marginRight="-1dp"
+               android:layout_marginBottom="3dp"
+               android:padding="1dp"
+               android:src="@drawable/welcome_honeydog" />
 
-
-               <RelativeLayout
+           <RelativeLayout
                    android:layout_width="match_parent"
                    android:layout_height="170dp"
-                   android:background="#D7B306"
+                   android:background="@color/white"
                    android:layout_below="@id/appbar_title"
                    android:layout_marginTop="80dp">
 
-                   <de.hdodenhof.circleimageview.CircleImageView
-                       android:id="@+id/main_dog_cmm"
-                       android:layout_width="75dp"
-                       android:layout_height="60dp"
-                       android:src="@drawable/cogi_love"
-                       app:civ_border_width="1dp"
-                       app:civ_border_color="#D7B306"
-                       android:layout_marginTop="8dp"
-                       android:layout_marginBottom="15dp"
-                       android:layout_centerInParent="true"
-                       android:layout_margin="10dp"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="커뮤니티 항목"
+                   android:layout_marginLeft="8dp"
+                   android:fontFamily="@font/kotra_hope"
+                   android:textStyle="bold"
+                   android:textSize="19dp"/>
+
+               <de.hdodenhof.circleimageview.CircleImageView
+                   android:id="@+id/main_dog_text"
+                   android:layout_width="100dp"
+                   android:layout_height="130dp"
+                   android:layout_centerInParent="true"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginBottom="10dp"
+                   android:src="@drawable/cogi_love"
+                   app:civ_border_color="@color/black"
+                   app:civ_border_width="1dp" />
 
                    <de.hdodenhof.circleimageview.CircleImageView
-                       android:id="@+id/main_dog_search"
-                       android:layout_width="75dp"
-                       android:layout_height="60dp"
+                       android:id="@+id/main_cat_community"
+                       android:layout_width="100dp"
+                       android:layout_height="130dp"
                        android:layout_centerVertical="true"
                        android:layout_marginStart="10dp"
                        android:layout_marginTop="10dp"
                        android:layout_marginEnd="10dp"
                        android:layout_marginBottom="10dp"
-                       android:layout_toRightOf="@id/main_dog_cmm"
-                       android:src="@drawable/cogi_love"
-                       app:civ_border_color="#D7B306"
+                       android:layout_toRightOf="@id/main_dog_text"
+                       android:src="@drawable/cat_community"
+                       app:civ_border_color="@color/black"
                        app:civ_border_width="1dp" />
 
                    <de.hdodenhof.circleimageview.CircleImageView
-                       android:id="@+id/main_dog_profil"
-                       android:layout_width="75dp"
-                       android:layout_height="60dp"
-                       android:src="@drawable/cogi_love"
-                       app:civ_border_width="1dp"
-                       app:civ_border_color="#D7B306"
-                       android:layout_marginTop="8dp"
-                       android:layout_marginBottom="15dp"
-                       android:layout_toLeftOf="@id/main_dog_cmm"
+                       android:id="@+id/main_dog_community"
+                       android:layout_width="100dp"
+                       android:layout_height="130dp"
                        android:layout_centerVertical="true"
-                       android:layout_margin="8dp"/>
+                       android:layout_marginStart="8dp"
+                       android:layout_marginTop="8dp"
+                       android:layout_marginEnd="8dp"
+                       android:layout_marginBottom="8dp"
+                       android:layout_toLeftOf="@id/main_dog_text"
+                       android:src="@drawable/dog_community"
+                       app:civ_border_color="@color/black"
+                       app:civ_border_width="1dp" />
 
 
 
@@ -124,7 +135,8 @@
                    android:layout_height="wrap_content"
                    android:text="미니 게시판"
                    android:fontFamily="@font/kotra_hope"
-                   android:textSize="20sp" />
+                   android:textSize="20sp"
+                   android:layout_marginLeft="6dp"/>
 
                <TextView
                    android:id="@+id/tv_go_cmm"

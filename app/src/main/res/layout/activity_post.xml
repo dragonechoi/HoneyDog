@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/post_title"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="@drawable/bg_login_btn"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true">
@@ -22,7 +22,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재목"/>
+            android:text="재목"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"/>
     </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/post_civ"
@@ -46,7 +48,7 @@
         android:id="@+id/end_lin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="==============================================="
+        android:text="=================================================="
         android:layout_below="@id/post_civ"/>
 
 
@@ -60,14 +62,16 @@
         <ImageView
             android:id="@+id/post_imv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/flower"/>
 
         <TextView
             android:id="@+id/post_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/post_imv"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:text="오늘 꽃이 너무 이뻐서  그려보았어요 "/>
 
 
 
@@ -86,7 +90,8 @@
         android:layout_below="@id/relative_layout_text"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="80dp"
-        android:background="@drawable/bg_login_btn">
+        android:background="@drawable/bg_login_btn"
+        android:clickable="true">
 
         <ImageView
             android:layout_width="25dp"
@@ -129,7 +134,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:background="@drawable/bg_login_btn"
-        android:layout_toRightOf="@id/like">
+        android:layout_toRightOf="@id/like"
+        android:clickable="true">
 
 
         <ImageView
@@ -178,20 +184,21 @@
 
     <EditText
         android:id="@+id/et_comment"
-        android:layout_width="270dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/bg_login_btn"
-        android:layout_alignParentBottom="true"
         android:layout_below="@id/share_post"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="30dp"
+        android:inputType="textMultiLine"
+        android:maxLines="3"/>
 
     <Button
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignBottom="@id/et_comment"
-        android:layout_marginLeft="2dp"
+        android:layout_below="@id/share_post"
+        android:layout_marginLeft="7dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="-19dp"
         android:layout_toRightOf="@id/et_comment"

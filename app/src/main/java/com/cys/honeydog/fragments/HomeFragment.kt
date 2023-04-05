@@ -49,6 +49,15 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), CatCmmActivity::class.java)
             startActivity(intent)
 
+            binding.mainDogCommunity.setOnClickListener {
+             val  intent =Intent(requireContext(),DogCmmActivity::class.java)
+                startActivity(intent)
+            }
+            binding.mainCatCommunity.setOnClickListener {
+                val intent2 = Intent(requireContext(),CatCmmActivity::class.java)
+                startActivity(intent2)
+            }
+
 
         }
     }

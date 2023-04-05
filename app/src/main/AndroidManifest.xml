@@ -13,6 +13,9 @@
         android:theme="@style/Theme.HoneyDog"
         tools:targetApi="31">
         <activity
+            android:name=".activities.NewPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.PostActivity"
             android:exported="false" />
         <activity
@@ -20,12 +23,6 @@
             android:exported="false" />
         <activity
             android:name=".activities.SearchPwActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainSettingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainSearchActivity"
             android:exported="false" />
         <activity
             android:name=".activities.CatCmmActivity"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_comment_profile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/cat_community"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/comment_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="닉네임"
+            android:layout_toRightOf="@id/civ_comment_profile"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/comment_nickname"
+            android:layout_toRightOf="@id/civ_comment_profile">
+
+            <TextView
+                android:id="@+id/comment_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="입력된 댓글"
+                android:padding="8dp"
+                android:textSize="17dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
