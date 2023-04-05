@@ -7,28 +7,47 @@
     tools:context=".activities.DogCmmActivity"
     android:background="#d1f5f3">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/box_dog_cmm"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/dog_community_appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="강아지"
-        android:layout_marginTop="10dp">
+        android:layout_height="200dp"
+        android:background="@drawable/dog_community_header" />
 
-        <AutoCompleteTextView
-            android:id="@+id/ac_tv"
-            android:layout_width="match_parent"
+
+    <Button
+            android:id="@+id/community_intent_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:dropDownHeight="100dp"
-            android:inputType="none"/>
+            android:backgroundTint="@color/white"
+            android:text="고양이 커뮤니티 이동"
+            android:textColor="@color/black"
+            android:layout_below="@id/dog_community_appbar"
+            android:layout_alignParentRight="true"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dog_cmm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/box_dog_cmm"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@id/community_intent_btn"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/edit_post"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:layout_marginRight="18dp"
+        android:src="@drawable/ic_action_post"/>
+
 
 </RelativeLayout>

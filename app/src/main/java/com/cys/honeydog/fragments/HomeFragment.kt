@@ -44,21 +44,23 @@ class HomeFragment : Fragment() {
         item.add(MiniCmtItem("오늘 강아지와 함꺠 광주 나들이"))
 
         binding.recyclerTitle.adapter=MiniCmtItemAdapter(requireContext(),item)
-
+        clickDogCmm()
         binding.tvGoCmm.setOnClickListener {
             val intent = Intent(requireContext(), CatCmmActivity::class.java)
             startActivity(intent)
+        }
 
-            binding.mainDogCommunity.setOnClickListener {
-             val  intent =Intent(requireContext(),DogCmmActivity::class.java)
-                startActivity(intent)
-            }
-            binding.mainCatCommunity.setOnClickListener {
-                val intent2 = Intent(requireContext(),CatCmmActivity::class.java)
-                startActivity(intent2)
-            }
-
+        binding.mainCatCommunity.setOnClickListener {
+            val intent2 = Intent(requireContext(),CatCmmActivity::class.java)
+            startActivity(intent2)
 
         }
+    }
+
+    fun clickDogCmm(){
+       binding.mainDogCommunity.setOnClickListener {
+           val intent=Intent(requireActivity(),DogCmmActivity::class.java)
+           startActivity(intent)
+       }
     }
 }
