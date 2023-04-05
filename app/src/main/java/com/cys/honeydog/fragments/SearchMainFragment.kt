@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.cys.honeydog.R
 import com.cys.honeydog.adapters.SearchFragmentAdapter
-import com.cys.honeydog.databinding.FragmentProfilMainBinding
+import com.cys.honeydog.databinding.FragmentProfileMainBinding
 import com.cys.honeydog.databinding.FragmentSearchMainBinding
 import com.cys.honeydog.model.MiniCmtItem
 import com.cys.honeydog.model.SearchItem

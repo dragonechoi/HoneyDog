@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityMainBinding
 import com.cys.honeydog.fragments.HomeFragment
-import com.cys.honeydog.fragments.ProfilMainFragment
+import com.cys.honeydog.fragments.ProfileMainFragment
 import com.cys.honeydog.fragments.SearchMainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
           }
 
              R.id.menu_profil -> {
-                 changeFragment(ProfilMainFragment())
+                 changeFragment(ProfileMainFragment())
           }
 
         }

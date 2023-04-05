@@ -7,17 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.cys.honeydog.R
-import com.cys.honeydog.activities.DogCmmActivity
+import com.cys.honeydog.activities.CatCmmActivity
+import com.cys.honeydog.activities.ProfileSettingActivity
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
-import com.cys.honeydog.databinding.FragmentHomeBinding
-import com.cys.honeydog.databinding.FragmentProfilMainBinding
+import com.cys.honeydog.databinding.FragmentProfileMainBinding
 import com.cys.honeydog.model.ProfilRecyclerItem
 
-class ProfilMainFragment: Fragment() {
-    private lateinit var Binding: FragmentProfilMainBinding
+class ProfileMainFragment: Fragment() {
+    private lateinit var Binding: FragmentProfileMainBinding
     var item:MutableList<ProfilRecyclerItem> = mutableListOf()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { Binding = FragmentProfilMainBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { Binding = FragmentProfileMainBinding.inflate(inflater, container, false)
         return Binding.root
     }
 
@@ -45,6 +45,11 @@ class ProfilMainFragment: Fragment() {
         item.add(ProfilRecyclerItem("게시글 작성 리사이클러뷰 테스트",R.drawable.cogi_love))
         item.add(ProfilRecyclerItem("게시글 작성 리사이클러뷰 테스트",R.drawable.cogi_love))
         item.add(ProfilRecyclerItem("게시글 작성 리사이클러뷰 테스트",R.drawable.cogi_love))
+
+        Binding.profileChange.setOnClickListener {
+            val intent = Intent(requireContext(), ProfileSettingActivity::class.java)
+            startActivity(intent)
+        }
 
         Binding.profilRecycler.adapter=ProfilFragmentAdapter(requireContext(),item)
     }

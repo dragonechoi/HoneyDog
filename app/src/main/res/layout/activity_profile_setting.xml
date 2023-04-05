@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ProfileSettingActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_change_profile"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="8dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/cogi_love"/>
+
+    <EditText
+        android:id="@+id/profile_nickname_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="닉네임 변경"
+        android:layout_below="@id/civ_change_profile"
+        android:layout_margin="16dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+        android:fontFamily="@font/kotra_hope"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:hint="우리 아이 종은 무엇이에요?"
+        android:layout_below="@id/profile_nickname_change">
+
+        <AutoCompleteTextView
+            android:id="@+id/ac_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:dropDownHeight="140dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+<Button
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/black"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="110dp"
+    android:text="수정 완료"
+    android:fontFamily="@font/kotra_hope"
+    android:textSize="21sp"
+    android:textStyle="bold"/>
+
+
+
+</RelativeLayout>
