@@ -29,6 +29,16 @@
             android:layout_below="@id/dog_community_appbar"
             android:layout_alignParentRight="true"/>
 
+    <Button
+        android:id="@+id/go_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:layout_below="@id/dog_community_appbar"
+        android:text="홈"
+        android:textColor="@color/black"
+        android:layout_marginLeft="130dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dog_cmm"
