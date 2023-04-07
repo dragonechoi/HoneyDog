@@ -11,10 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
 import com.cys.honeydog.model.ProfilRecyclerItem
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 class ProfilMainFragment : Fragment() {
     private lateinit var Binding: FragmentProfilMainBinding
@@ -64,7 +67,26 @@ private fun clickChangeProfile(){
     val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
     resultLauncher.launch(intent)
 
+    var changeNickname:String=Binding.profilNickname.text.toString()
+
+    val firestor:FirebaseFirestore= FirebaseFirestore.getInstance()
+    val userProfileSetting=firestor.collection("userProfileSetting")
+
+    userProfileSetting.document("idUsers").get().addOnSuccessListener {
+        it-> if (it.exists()){
+            val userProfileData= it.toObject(ProfilMainFragment::class.java)
+        if (userProfileData != null){
+
+        }
+    }
+
+    }
+
+
+
 }
+
+
 
     var resultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -76,4 +98,7 @@ private fun clickChangeProfile(){
 
         }
     }
+
 }
+
+

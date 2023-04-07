@@ -63,6 +63,9 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
         db.collection("idUsers")
             .whereEqualTo("id",email)
             .whereEqualTo("password",password)
+
+
+
             .get().addOnSuccessListener {
                 if (it.documents.size>0){
 

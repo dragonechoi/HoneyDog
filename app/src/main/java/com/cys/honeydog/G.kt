@@ -4,4 +4,5 @@ class G {
     companion object{
         var userAccount:UserAccount?=null
     }
+
 }

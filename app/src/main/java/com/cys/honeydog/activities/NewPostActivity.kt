@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.cys.honeydog.G
+import com.cys.honeydog.Profile
 import com.cys.honeydog.databinding.ActivityNewPostBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -23,13 +24,13 @@ class NewPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.upLoadBtn.setOnClickListener { UpLoadBtn() }
+        binding.upLoadBtn.setOnClickListener { upLoadBtn() }
 
         binding.imageBtn.setOnClickListener { clickImgSelectBnt() }
 
     }
 
-    private fun UpLoadBtn() {
+    private fun upLoadBtn() {
         //DB입력한 게시글 재목 및 내용 작성
         var title: String = binding.postTitle.text.toString()
         var postText: String = binding.etPost.text.toString()
@@ -41,18 +42,19 @@ class NewPostActivity : AppCompatActivity() {
         val PostnRef = firestore.collection("Post")
 
 
-
         //Field값들을 Map 으로 준비
         val person: MutableMap<String, Any> = HashMap()
         person["title"] = title
         person["postText"] = postText
+        person["nickName"]=Profile.profileInfo?.nickname ?:"홍길동"
+        person["profile"] = Profile.profileInfo?.ProfileUri ?:"https://firebasestorage.googleapis.com/v0/b/honeydogcys990918.appspot.com/o/photo%2FIMG_20230407070608.png?alt=media&token=e7178533-cf36-4134-8e44-49af90d6d560"
+        person["id"] = G.userAccount?.id ?:"vasco1379"
+
 
 
 
         PostnRef.add(person).addOnSuccessListener {
             finish()
-        }.addOnFailureListener {
-
         }
 
 
@@ -72,6 +74,14 @@ class NewPostActivity : AppCompatActivity() {
 
         //위 저장경로 참조객체에게 실제 파일업로드 시키기
         imgRef.putFile(imgUri!!).addOnSuccessListener {
+
+            imgRef.downloadUrl.addOnSuccessListener { imgUri ->
+                person["imageUri"] = imgUri.toString()
+                PostnRef.add(person).addOnSuccessListener {
+                    finish()
+                }
+            }
+
             Toast.makeText(
                 this,
                 "게시글 업로드 완료",
@@ -84,9 +94,8 @@ class NewPostActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         }
-
-
     }
+
 
     private fun clickImgSelectBnt() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
