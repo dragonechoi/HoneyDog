@@ -42,6 +42,16 @@
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/post_civ"
             android:text="닉네임" />
+        <TextView
+            android:id="@+id/account_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(id)"
+            android:layout_toRightOf="@id/post_id"
+            android:layout_below="@id/post_title"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/end_lin"

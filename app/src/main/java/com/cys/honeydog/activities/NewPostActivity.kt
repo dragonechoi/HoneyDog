@@ -20,6 +20,8 @@ import java.util.Date
 class NewPostActivity : AppCompatActivity() {
     val binding: ActivityNewPostBinding by lazy { ActivityNewPostBinding.inflate(layoutInflater) }
     var imgUri: Uri? = null
+    var profileUrl: String? = null  // 클래스 변수로 선언
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -29,7 +31,6 @@ class NewPostActivity : AppCompatActivity() {
         binding.imageBtn.setOnClickListener { clickImgSelectBnt() }
 
         saveUserProfile()
-
     }
 
     fun saveUserProfile(){
@@ -39,7 +40,9 @@ class NewPostActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { document ->
                 val nickname = document.getString("nickname")
-                val profileUrl = document.getString("imageUrl")
+                profileUrl = document.getString("imageUrl")  // 클래스 변수에 저장
+                val userId = document.getString("id")
+                binding.accountId.text = userId
                 binding.postId.text = nickname
 
                 if (profileUrl != null && binding.postCiv != null) {
@@ -54,72 +57,56 @@ class NewPostActivity : AppCompatActivity() {
             }
     }
 
-
     private fun upLoadBtn() {
-        //DB입력한 게시글 재목 및 내용 작성
-        var title: String = binding.postTitle.text.toString()
-        var postText: String = binding.etPost.text.toString()
+        //DB입력한 게시글 제목 및 내용 작성
+        val title: String = binding.postTitle.text.toString()
+        val postText: String = binding.etPost.text.toString()
+        val nickname: String = binding.postId.text.toString()
+        val userId: String = binding.accountId.text.toString()
 
-
-        //FireStore DB저장 [ Map Collection 단위로 저장]
+        //FireStore DB 저장 [ Map Collection 단위로 저장]
         val firestore = FirebaseFirestore.getInstance()
-
-        val PostnRef = firestore.collection("Post")
-
-
-        //Field값들을 Map 으로 준비
-        val person: MutableMap<String, Any> = HashMap()
-        person["title"] = title
-        person["postText"] = postText
-        person["nickName"]=Profile.profileInfo?.nickname ?:"홍길동"
-        person["profile"] = Profile.profileInfo?.ProfileUri ?:"https://firebasestorage.googleapis.com/v0/b/honeydogcys990918.appspot.com/o/photo%2FIMG_20230407070608.png?alt=media&token=e7178533-cf36-4134-8e44-49af90d6d560"
-        person["id"] = G.userAccount?.id ?:"vasco1379"
-
-
-
-
-        PostnRef.add(person).addOnSuccessListener {
-            finish()
-        }
-
+        val postRef = firestore.collection("Post")
 
         //DB 이미지 저장
         if (imgUri == null) return
-        var fireBase: FirebaseStorage = FirebaseStorage.getInstance()
-
+        val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
 
         //저장할 파일명이 중복되지 않도록..날짜로 변수명 정하기
         val sdf = SimpleDateFormat("yyyyMMddHHmmss")
         val fileName = "IMG_" + sdf.format(Date()) + ".png"
 
-
         //저장할 파일 위치에 대한 참조객체
-        val imgRef: StorageReference =
-            fireBase.getReference("photo/$fileName") //photo 폴더가 없으면 만들고..있으면 그냥 참조
+        val imgRef: StorageReference = firebaseStorage.getReference("photo/$fileName")
 
         //위 저장경로 참조객체에게 실제 파일업로드 시키기
-        imgRef.putFile(imgUri!!).addOnSuccessListener {
+        imgRef.putFile(imgUri!!)
+            .addOnSuccessListener {
+                // 이미지 업로드 성공
+                imgRef.downloadUrl.addOnSuccessListener { imgUri ->
+                    // 게시글 데이터 추가
+                    val post: MutableMap<String, Any> = HashMap()
+                    post["title"] = title
+                    post["postText"] = postText
+                    post["nickname"] = nickname
+                    post["profileUrl"] = profileUrl!!
+                    post["id"] = userId
+                    post["imageUri"] = imgUri.toString()
 
-            imgRef.downloadUrl.addOnSuccessListener { imgUri ->
-                person["imageUri"] = imgUri.toString()
-                PostnRef.add(person).addOnSuccessListener {
-                    finish()
+                    postRef.add(post).addOnSuccessListener {
+                        Toast.makeText(
+                            this,
+                            "게시글 업로드 완료",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }.addOnFailureListener { e ->
+
+                    }
                 }
             }
-
-            Toast.makeText(
-                this,
-                "게시글 업로드 완료",
-                Toast.LENGTH_SHORT
-            ).show()
-        }.addOnFailureListener { e ->
-            Toast.makeText(
-                this,
-                "에러 : " + e.message,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
     }
+
 
 
     private fun clickImgSelectBnt() {
