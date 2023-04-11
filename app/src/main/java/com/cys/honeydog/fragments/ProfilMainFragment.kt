@@ -1,5 +1,6 @@
 package com.cys.honeydog.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -77,6 +78,7 @@ class ProfilMainFragment : Fragment() {
             }
     }
 
+     @SuppressLint("SuspiciousIndentation")
      fun ClickChangeProfileBtn(){
         val db = FirebaseFirestore.getInstance()
         val documentRef = db.collection("idUsers").document(G.userAccount!!.id)

@@ -28,7 +28,32 @@ class NewPostActivity : AppCompatActivity() {
 
         binding.imageBtn.setOnClickListener { clickImgSelectBnt() }
 
+        saveUserProfile()
+
     }
+
+    fun saveUserProfile(){
+        val db=FirebaseFirestore.getInstance()
+        db.collection("idUsers")
+            .document(G.userAccount!!.id)
+            .get()
+            .addOnSuccessListener { document ->
+                val nickname = document.getString("nickname")
+                val profileUrl = document.getString("imageUrl")
+                binding.postId.text = nickname
+
+                if (profileUrl != null && binding.postCiv != null) {
+                    Glide.with(this)
+                        .load(profileUrl)
+                        .into(binding.postCiv)
+                    Toast.makeText(this, "읽어오기 성공", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                // 문서 읽기 실패
+            }
+    }
+
 
     private fun upLoadBtn() {
         //DB입력한 게시글 재목 및 내용 작성
@@ -109,6 +134,7 @@ class NewPostActivity : AppCompatActivity() {
         if (it.resultCode != RESULT_CANCELED) {
 
             imgUri = it.getData()?.getData()
+
             Glide.with(this).load(imgUri).into(binding.resultImage)
 
         }
