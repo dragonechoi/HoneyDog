@@ -19,10 +19,12 @@
             android:layout_marginTop="15dp"
             android:background="@drawable/bg_login_btn"
             android:hint="제목 최대 40자"
-            android:inputType="textMultiLine"
+            android:inputType="text"
             android:maxLength="40"
             android:maxLines="8"
-            android:textColorHint="@color/black" />
+            android:textColorHint="@color/black"
+            android:layout_marginLeft="8dp"
+            android:padding="8dp"/>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
