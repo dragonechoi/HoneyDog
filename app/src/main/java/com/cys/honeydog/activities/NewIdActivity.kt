@@ -2,22 +2,38 @@ package com.cys.honeydog.activities
 
 import android.annotation.SuppressLint
 import android.content.DialogInterface
+import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityNewIdBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
+import java.util.Date
 
 
 class NewIdActivity : AppCompatActivity() {
     val binding: ActivityNewIdBinding by lazy { ActivityNewIdBinding.inflate(layoutInflater) }
     var ac: AutoCompleteTextView? = null
+    var imgUri: Uri? = null
 
-    @SuppressLint("SuspiciousIndentation")
+    lateinit var profileUrl: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -29,6 +45,7 @@ class NewIdActivity : AppCompatActivity() {
         ac!!.setAdapter(adapter)
 
         binding.clickBtn.setOnClickListener { clickBtn() }
+        binding.profileNewIv.setOnClickListener { clickChangeImage() }
 
     }
 
@@ -39,6 +56,35 @@ class NewIdActivity : AppCompatActivity() {
 
 
     fun clickBtn() {
+
+        if (imgUri == null) {
+            profileUrl = ""
+            saveUserId()
+        } else {
+            var fireBase: FirebaseStorage = FirebaseStorage.getInstance()
+
+
+            //저장할 파일명이 중복되지 않도록..날짜로 변수명 정하기
+            val sdf = java.text.SimpleDateFormat("yyyyMMddHHmmss")
+            val fileName = "IMG_" + sdf.format(Date()) + ".png"
+
+
+            //저장할 파일 위치에 대한 참조객체
+            val imgRef: StorageReference =
+                fireBase.getReference("userProfile/$fileName") //userProfile 폴더가 없으면 만들고..있으면 그냥 참조
+
+            //위 저장경로 참조객체에게 실제 파일업로드 시키기
+            imgRef.putFile(imgUri!!).addOnSuccessListener {
+                imgRef.downloadUrl.addOnSuccessListener {
+                    profileUrl = it.toString()
+                    saveUserId()
+                }
+            }
+
+        }
+    }
+
+    fun saveUserId() {
         var id: String = binding.etEmail.text.toString()
         var password: String = binding.etPw.text.toString()
         var passwordConfirm: String = binding.etPwRecheck.text.toString()
@@ -48,20 +94,15 @@ class NewIdActivity : AppCompatActivity() {
 
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-
-
-
         if (password != passwordConfirm) {
             AlertDialog.Builder(this).setMessage("패스워드 확인에 문제가 생겼습니다").show()
             binding.etPwRecheck.selectAll()
 
-        }else if(id==""){
+        } else if (id == "") {
             AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").show()
             binding.etEmail.selectAll()
             return
         }
-
-
 
         db.collection("idUsers")
             .whereEqualTo("id", id)
@@ -77,6 +118,8 @@ class NewIdActivity : AppCompatActivity() {
                     user.put("password", password)
                     user.put("nickname", nickname)
                     user.put("animalType", animalType)
+                    user.put("imageUrl", profileUrl)
+
 
                     db.collection("idUsers").add(user).addOnSuccessListener {
                         AlertDialog.Builder(this)
@@ -87,17 +130,38 @@ class NewIdActivity : AppCompatActivity() {
                                 }
 
                             }).show()
+
+
                     }.addOnFailureListener {
-             Toast.makeText(this, "회원가입에 오류가 발생했습니다 \n다시 시도해주세요", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "회원가입에 오류가 발생했습니다 \n다시 시도해주세요", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }.addOnFailureListener {
+                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
+
     }
- }
-}           .addOnFailureListener {
-             Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
- }
 
- }
 
- }
+    fun clickChangeImage() {
+        //이미지 선택
+        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+        resultLauncher.launch(intent)
+    }
+
+    var resultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode != RESULT_CANCELED) {
+
+            imgUri = it.getData()?.getData()
+            Glide.with(this).load(imgUri).into(binding.profileNewIv)
+
+        }
+    }
+
+}
 
 
 

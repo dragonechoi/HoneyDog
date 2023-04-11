@@ -8,6 +8,7 @@ import com.cys.honeydog.databinding.ActivityMainBinding
 import com.cys.honeydog.fragments.HomeFragment
 import com.cys.honeydog.fragments.ProfilMainFragment
 import com.cys.honeydog.fragments.SearchMainFragment
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -21,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(binding.frameLayout.id,HomeFragment()).commit()
 
         initNavigationBar()
-    }
 
+    }
 
     //Main Activity Fragment 화면 전환
     fun initNavigationBar() {

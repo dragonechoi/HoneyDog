@@ -1,6 +1,7 @@
 package com.cys.honeydog.model
 
-import android.media.Image
-import android.widget.TextView
-
-data class ProfilRecyclerItem(var tvTitle:String,var viewImage:Int)
+data class ProfilRecyclerItem(var tvTitle:String, var viewImage: String?) {
+    fun add(item: ProfilRecyclerItem?) {
+        TODO("Not yet implemented")
+    }
+}
