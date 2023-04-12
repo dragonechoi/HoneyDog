@@ -84,7 +84,8 @@
                    android:layout_marginBottom="10dp"
                    android:src="@drawable/cogi_love"
                    app:civ_border_color="@color/black"
-                   app:civ_border_width="1dp" />
+                   app:civ_border_width="1dp"
+                   android:visibility="invisible"/>
 
                    <de.hdodenhof.circleimageview.CircleImageView
                        android:id="@+id/main_cat_community"

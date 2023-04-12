@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
+import com.cys.honeydog.model.MiniCmtItem
 import com.cys.honeydog.model.ProfilRecyclerItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -28,6 +29,8 @@ class ProfilMainFragment : Fragment() {
     var item: MutableList<ProfilRecyclerItem> = mutableListOf()
     var imgUri: Uri? = null
     var nickname: String? = null
+
+
 
 
     override fun onCreateView(
@@ -47,6 +50,9 @@ class ProfilMainFragment : Fragment() {
         Binding.profilImage.setOnClickListener { clickChangeProfile() }
 
         Binding.chProfileBtn.setOnClickListener { ClickChangeProfileBtn() }
+
+        loadData()
+
 
         // Firebase 데이터 가져오기
         val db = FirebaseFirestore.getInstance()
@@ -78,56 +84,55 @@ class ProfilMainFragment : Fragment() {
             }
     }
 
-     @SuppressLint("SuspiciousIndentation")
-     fun ClickChangeProfileBtn(){
+    @SuppressLint("SuspiciousIndentation")
+    fun ClickChangeProfileBtn() {
         val db = FirebaseFirestore.getInstance()
         val documentRef = db.collection("idUsers").document(G.userAccount!!.id)
         val updates = hashMapOf<String, Any>()
 
 
 
-            if (imgUri != null) {
+        if (imgUri != null) {
 
-                Toast.makeText(requireActivity(), "aaa", Toast.LENGTH_SHORT).show()
-
-
-                // 이미지 업로드
-                val fireBase: FirebaseStorage = FirebaseStorage.getInstance()
-
-                // 저장할 파일명이 중복되지 않도록 날짜로 변수명 정하기
-                val sdf = java.text.SimpleDateFormat("yyyyMMddHHmmss")
-                val fileName = "IMG_" + sdf.format(Date()) + ".png"
-
-                // 저장할 파일 위치에 대한 참조객체
-                val imgRef: StorageReference = fireBase.getReference("userProfile/$fileName")
-
-                // 위 저장경로 참조객체에게 실제 파일 업로드 시키기
-                imgRef.putFile(imgUri!!).addOnSuccessListener {
-                    imgRef.downloadUrl.addOnSuccessListener { uri ->
-                        // 이미지 URL 업데이트
-                        val imgUrl = uri.toString()
-                        updates["imageUrl"] = imgUrl
+            Toast.makeText(requireActivity(), "aaa", Toast.LENGTH_SHORT).show()
 
 
+            // 이미지 업로드
+            val fireBase: FirebaseStorage = FirebaseStorage.getInstance()
 
-                        // 프로필 정보 업데이트
-                        documentRef.update(updates).addOnSuccessListener {
+            // 저장할 파일명이 중복되지 않도록 날짜로 변수명 정하기
+            val sdf = java.text.SimpleDateFormat("yyyyMMddHHmmss")
+            val fileName = "IMG_" + sdf.format(Date()) + ".png"
+
+            // 저장할 파일 위치에 대한 참조객체
+            val imgRef: StorageReference = fireBase.getReference("userProfile/$fileName")
+
+            // 위 저장경로 참조객체에게 실제 파일 업로드 시키기
+            imgRef.putFile(imgUri!!).addOnSuccessListener {
+                imgRef.downloadUrl.addOnSuccessListener { uri ->
+                    // 이미지 URL 업데이트
+                    val imgUrl = uri.toString()
+                    updates["imageUrl"] = imgUrl
 
 
-                        }.addOnFailureListener { e ->
-                            // 업데이트 실패
+                    // 프로필 정보 업데이트
+                    documentRef.update(updates).addOnSuccessListener {
 
-                        }
+
+                    }.addOnFailureListener { e ->
+                        // 업데이트 실패
+
                     }
                 }
-            } else {
-                // 이미지가 선택되지 않은 경우, 프로필 정보 업데이트
-                documentRef.update(updates).addOnSuccessListener {
-                    // 업데이트 성공
+            }
+        } else {
+            // 이미지가 선택되지 않은 경우, 프로필 정보 업데이트
+            documentRef.update(updates).addOnSuccessListener {
+                // 업데이트 성공
 
-                }.addOnFailureListener { e ->
+            }.addOnFailureListener { e ->
 
-                }
+            }
 
         }
 
@@ -149,11 +154,27 @@ class ProfilMainFragment : Fragment() {
     }
 
 
+    private fun loadData() {
+        val fireStore = FirebaseFirestore.getInstance()
+        val postRef = fireStore.collection("Post")
+
+        //Post 컬렉션데이터 호출
+        postRef.get().addOnSuccessListener { documents ->
+            for (document in documents){
+                val post=document.toObject(ProfilRecyclerItem::class.java)
+                item.add(post)
+            }
+            // 데이터를 모두 가져온 후 어댑터 설정
+            val adapter = ProfilFragmentAdapter(requireContext(), item)
+            Binding.profilRecycler.adapter = adapter
+        }.addOnFailureListener {
+            // 호출 실패 시 처리할 내용
+        }
+    }
+
     private fun clickChangeProfile() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
         resultLauncher.launch(intent)
-
-
     }
 
     var resultLauncher = registerForActivityResult(
@@ -163,7 +184,7 @@ class ProfilMainFragment : Fragment() {
             var imageUri = result.data?.data
             Binding.profilImage.setImageURI(imageUri)
 
-            imgUri= imageUri
+            imgUri = imageUri
 
         }
     }

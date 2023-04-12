@@ -1,6 +1,11 @@
 package com.cys.honeydog.model
 
-data class ProfilRecyclerItem(var tvTitle:String, var viewImage: String?) {
+data class ProfilRecyclerItem(var title: String? = null,
+                              var postText: String? = null,
+                              var nickname: String? = null,
+                              var profileUrl: String? = null,
+                              var id: String? = null,
+                              var imageUri: String? = null) {
     fun add(item: ProfilRecyclerItem?) {
         TODO("Not yet implemented")
     }
