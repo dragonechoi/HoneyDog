@@ -28,7 +28,7 @@ class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<
         return VH(itemView)
     }
 
-    //return 실행문을 = (할당 연산자) 로 단순화
+
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
@@ -37,7 +37,17 @@ class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<
 
         holder.tvTitle.text=item.title
 
-        holder.itemView.setOnClickListener{context.startActivity(Intent(context,PostActivity::class.java))}
+        holder.tvTitle.setOnClickListener {
+            val intent: Intent = Intent(context, PostActivity::class.java)
+            intent.putExtra("image", item.imageUri)
+            intent.putExtra("title", item.title)
+            intent.putExtra("nickname", item.nickname)
+            intent.putExtra("postText", item.postText)
+            intent.putExtra("id",item.id)
+
+            context.startActivity(intent)
+        }
+
 
         }
     }

@@ -13,9 +13,6 @@ class PostActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val binding = ActivityPostBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         viewPost()
 
 
@@ -30,6 +27,7 @@ class PostActivity : AppCompatActivity() {
         binding.titleTv.text = title
         binding.postId.text = nickname
         binding.postText.text = postText
+
     }
 
 
