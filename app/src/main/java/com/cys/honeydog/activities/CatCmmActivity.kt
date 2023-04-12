@@ -1,13 +1,11 @@
 package com.cys.honeydog.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.cys.honeydog.R
 import com.cys.honeydog.adapters.CatCmmAdapter
-import com.cys.honeydog.adapters.DogCmmAdapter
 import com.cys.honeydog.databinding.ActivityCatCmmBinding
-import com.cys.honeydog.fragments.HomeFragment
 import com.cys.honeydog.model.CatCmmItem
 
 class CatCmmActivity : AppCompatActivity() {

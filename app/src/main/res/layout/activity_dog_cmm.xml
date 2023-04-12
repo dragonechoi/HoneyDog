@@ -4,12 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DogCmmActivity"
-    android:background="#d1f5f3">
-
-
-
-
+    android:background="#d1f5f3"
+    tools:context=".activities.DogCmmActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,34 +16,33 @@
 
 
     <Button
-            android:id="@+id/community_intent_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:text="고양이 커뮤니티 이동"
-            android:textColor="@color/black"
-            android:layout_below="@id/dog_community_appbar"
-            android:layout_alignParentRight="true"/>
+        android:id="@+id/community_intent_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dog_community_appbar"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/white"
+        android:text="고양이 커뮤니티 이동"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/go_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
         android:layout_below="@id/dog_community_appbar"
+        android:layout_marginLeft="130dp"
+        android:backgroundTint="@color/white"
         android:text="홈"
-        android:textColor="@color/black"
-        android:layout_marginLeft="130dp"/>
+        android:textColor="@color/black" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_dog_cmm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_below="@id/community_intent_btn"
-        />
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/edit_post"
@@ -55,9 +50,9 @@
         android:layout_height="80dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="45dp"
         android:layout_marginRight="18dp"
-        android:src="@drawable/ic_action_post"/>
+        android:layout_marginBottom="45dp"
+        android:src="@drawable/ic_action_post" />
 
 
 </RelativeLayout>

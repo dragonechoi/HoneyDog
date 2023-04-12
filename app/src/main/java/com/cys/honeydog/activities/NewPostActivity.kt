@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.Profile
+import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityNewPostBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -50,6 +51,8 @@ class NewPostActivity : AppCompatActivity() {
                         .load(profileUrl)
                         .into(binding.postCiv)
                     Toast.makeText(this, "읽어오기 성공", Toast.LENGTH_SHORT).show()
+                }else{
+                    Glide.with(this).load(R.drawable.baseline_insert_photo_24)
                 }
             }
             .addOnFailureListener { e ->
@@ -69,42 +72,63 @@ class NewPostActivity : AppCompatActivity() {
         val postRef = firestore.collection("Post")
 
         //DB 이미지 저장
-        if (imgUri == null) return
         val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
 
-        //저장할 파일명이 중복되지 않도록..날짜로 변수명 정하기
-        val sdf = SimpleDateFormat("yyyyMMddHHmmss")
-        val fileName = "IMG_" + sdf.format(Date()) + ".png"
+        if (imgUri == null ) {
+            // 이미지를 선택하지 않은 경우, 이미지 없이 게시글만 저장
+            val post: MutableMap<String, Any> = HashMap()
+            post["title"] = title
+            post["postText"] = postText
+            post["nickname"] = nickname
+            post["profileUrl"] = profileUrl!!
+            post["id"] = userId
 
-        //저장할 파일 위치에 대한 참조객체
-        val imgRef: StorageReference = firebaseStorage.getReference("photo/$fileName")
+            postRef.add(post).addOnSuccessListener {
+                Toast.makeText(
+                    this,
+                    "게시글 업로드 완료",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }.addOnFailureListener { e ->
 
-        //위 저장경로 참조객체에게 실제 파일업로드 시키기
-        imgRef.putFile(imgUri!!)
-            .addOnSuccessListener {
-                // 이미지 업로드 성공
-                imgRef.downloadUrl.addOnSuccessListener { imgUri ->
-                    // 게시글 데이터 추가
-                    val post: MutableMap<String, Any> = HashMap()
-                    post["title"] = title
-                    post["postText"] = postText
-                    post["nickname"] = nickname
-                    post["profileUrl"] = profileUrl!!
-                    post["id"] = userId
-                    post["imageUri"] = imgUri.toString()
+            }
+        } else {
+            // 이미지를 선택한 경우, 이미지 업로드 후 게시글 저장
+            //저장할 파일명이 중복되지 않도록..날짜로 변수명 정하기
+            val sdf = SimpleDateFormat("yyyyMMddHHmmss")
+            val fileName = "IMG_" + sdf.format(Date()) + ".png"
 
-                    postRef.add(post).addOnSuccessListener {
-                        Toast.makeText(
-                            this,
-                            "게시글 업로드 완료",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        finish()
-                    }.addOnFailureListener { e ->
+            //저장할 파일 위치에 대한 참조객체
+            val imgRef: StorageReference = firebaseStorage.getReference("photo/$fileName")
 
+            //위 저장경로 참조객체에게 실제 파일업로드 시키기
+            imgRef.putFile(imgUri!!)
+                .addOnSuccessListener {
+                    // 이미지 업로드 성공
+                    imgRef.downloadUrl.addOnSuccessListener { imgUri ->
+                        // 게시글 데이터 추가
+                        val post: MutableMap<String, Any> = HashMap()
+                        post["title"] = title
+                        post["postText"] = postText
+                        post["nickname"] = nickname
+                        post["profileUrl"] = profileUrl!!
+                        post["id"] = userId
+                        post["imageUri"] = imgUri.toString()
+
+                        postRef.add(post).addOnSuccessListener {
+                            Toast.makeText(
+                                this,
+                                "게시글 업로드 완료",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }.addOnFailureListener { e ->
+
+                        }
                     }
                 }
-            }
+        }
     }
 
 
