@@ -1,20 +1,29 @@
 package com.cys.honeydog.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cys.honeydog.R
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.cys.honeydog.adapters.SearchFragmentAdapter
-import com.cys.honeydog.databinding.FragmentProfilMainBinding
 import com.cys.honeydog.databinding.FragmentSearchMainBinding
-import com.cys.honeydog.model.MiniCmtItem
-import com.cys.honeydog.model.SearchItem
+import com.cys.honeydog.network.AniMalHospital
+import com.cys.honeydog.network.RetRofitHospital
+import com.cys.honeydog.network.RetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class SearchMainFragment: Fragment() {
     private lateinit var Binding: FragmentSearchMainBinding
-    var  item:MutableList<SearchItem> = mutableListOf()
+    var  item:MutableList<AniMalHospital> = mutableListOf()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { Binding = FragmentSearchMainBinding.inflate(inflater, container, false)
 
@@ -25,24 +34,45 @@ class SearchMainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 탑동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 구운동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 서둔동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 칠보"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 화서동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 당수동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 호메실동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 매탄동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 권선동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
-        item.add(SearchItem(R.drawable.cogi_love,"24시 반려동물 응급 수술 전문","031-000-000","경기도 수원시 권선구 세류동"))
 
-        Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(),item)
+
+        Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(), item)
+        Binding.searchBtn.setOnClickListener{searchDataHospital()}
+
     }
+
+    fun searchDataHospital(){
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+
+        val retrofit:Retrofit=Retrofit.Builder()
+            .baseUrl("https://openapi.naver.com")
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val retrofitService:RetrofitService=retrofit.create(RetrofitService::class.java)
+
+        val call: Call<RetRofitHospital> =retrofitService.searchDataByJson(Binding.etSearch.text.toString())
+
+        call.enqueue(object  : Callback<RetRofitHospital>{
+            override fun onResponse(
+                call: Call<RetRofitHospital>,
+                response: Response<RetRofitHospital>
+            ) {
+                val naverSearch : RetRofitHospital? = response.body()
+
+                Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(),naverSearch!!.items)
+
+            }
+
+            override fun onFailure(call: Call<RetRofitHospital>, t: Throwable) {
+                Toast.makeText(requireContext(), "검색에 실패 했습니다 ", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
 }
+
+

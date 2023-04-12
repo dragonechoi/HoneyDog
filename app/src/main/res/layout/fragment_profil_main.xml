@@ -68,14 +68,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/profil_recycler"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="320dp"
         android:layout_below="@id/profil_change"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="vertical"
         app:spanCount="2" />
 
 

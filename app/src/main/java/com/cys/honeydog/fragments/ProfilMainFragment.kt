@@ -19,6 +19,7 @@ import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
 import com.cys.honeydog.model.MiniCmtItem
 import com.cys.honeydog.model.ProfilRecyclerItem
+import com.cys.honeydog.model.ProfileItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -27,6 +28,7 @@ import java.util.Date
 class ProfilMainFragment : Fragment() {
     private lateinit var Binding: FragmentProfilMainBinding
     var item: MutableList<ProfilRecyclerItem> = mutableListOf()
+
     var imgUri: Uri? = null
     var nickname: String? = null
 
@@ -50,9 +52,7 @@ class ProfilMainFragment : Fragment() {
         Binding.profilImage.setOnClickListener { clickChangeProfile() }
 
         Binding.chProfileBtn.setOnClickListener { ClickChangeProfileBtn() }
-
         loadData()
-
 
         // Firebase 데이터 가져오기
         val db = FirebaseFirestore.getInstance()
@@ -82,6 +82,10 @@ class ProfilMainFragment : Fragment() {
                     }
                 }
             }
+
+
+
+
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -160,13 +164,15 @@ class ProfilMainFragment : Fragment() {
 
         //Post 컬렉션데이터 호출
         postRef.get().addOnSuccessListener { documents ->
-            for (document in documents){
-                val post=document.toObject(ProfilRecyclerItem::class.java)
+            for (document in documents) {
+                val post = document.toObject(ProfilRecyclerItem::class.java)
                 item.add(post)
             }
             // 데이터를 모두 가져온 후 어댑터 설정
+
             val adapter = ProfilFragmentAdapter(requireContext(), item)
             Binding.profilRecycler.adapter = adapter
+            adapter.notifyDataSetChanged()
         }.addOnFailureListener {
             // 호출 실패 시 처리할 내용
         }
@@ -188,4 +194,7 @@ class ProfilMainFragment : Fragment() {
 
         }
     }
+
+
+
 }

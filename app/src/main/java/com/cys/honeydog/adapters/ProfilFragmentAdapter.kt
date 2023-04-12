@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.model.ProfilRecyclerItem
@@ -36,7 +37,11 @@ class ProfilFragmentAdapter constructor(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val post: ProfilRecyclerItem = posts[position]
         holder.rcTv.text = post.title
-        Glide.with(context).load(post.imageUri).into(holder.rcIV)
+        if (post.imageUri?.isNotEmpty() == true) {
+            Glide.with(context).load(post.imageUri).into(holder.rcIV)
+        } else {
+            Glide.with(context).load(R.drawable.cogi_love).into(holder.rcIV)
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, PostActivity::class.java)
@@ -45,25 +50,24 @@ class ProfilFragmentAdapter constructor(
             intent.putExtra("nickname", post.nickname)
             intent.putExtra("postText", post.postText)
             intent.putExtra("id", post.id)
-            post.id?.let { it1 -> loadUserPosts(it1) }
             context.startActivity(intent)
         }
+
     }
 
-    fun loadUserPosts(userId: String) {
-        val db = FirebaseFirestore.getInstance()
-        val documentRef = db.collection("Posts").whereEqualTo("idUser", userId)
+fun loadUserPosts(userId: String) {
+    val db = FirebaseFirestore.getInstance()
+    val documentRef = db.collection("Posts").whereEqualTo("id", userId)
 
-        documentRef.get().addOnSuccessListener { documents ->
-            val postList = mutableListOf<ProfilRecyclerItem>()
-            for (document in documents) {
-                val post = document.toObject(ProfilRecyclerItem::class.java)
-                postList.add(post)
-            }
-            posts = postList
-            notifyDataSetChanged()
-        }.addOnFailureListener { exception ->
-            // 예외 처리 코드 추가
+    documentRef.get().addOnSuccessListener { documents ->
+        val postList = mutableListOf<ProfilRecyclerItem>()
+        for (document in documents) {
+            val post = document.toObject(ProfilRecyclerItem::class.java)
+            postList.add(post)
         }
+        posts = postList
+    }.addOnFailureListener { exception ->
+        // 예외 처리 코드 추가
     }
+}
 }

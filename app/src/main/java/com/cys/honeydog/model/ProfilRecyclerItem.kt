@@ -6,7 +6,5 @@ data class ProfilRecyclerItem(var title: String? = null,
                               var profileUrl: String? = null,
                               var id: String? = null,
                               var imageUri: String? = null) {
-    fun add(item: ProfilRecyclerItem?) {
-        TODO("Not yet implemented")
-    }
+
 }
