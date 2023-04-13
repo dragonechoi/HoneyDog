@@ -57,6 +57,7 @@ class NewPostActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 // 문서 읽기 실패
+                Toast.makeText(this, "서버 문제로 인해 유저 정보를 불러오지 못했습니다", Toast.LENGTH_SHORT).show()
             }
     }
 

@@ -98,9 +98,6 @@ class ProfilMainFragment : Fragment() {
 
         if (imgUri != null) {
 
-            Toast.makeText(requireActivity(), "aaa", Toast.LENGTH_SHORT).show()
-
-
             // 이미지 업로드
             val fireBase: FirebaseStorage = FirebaseStorage.getInstance()
 
@@ -149,7 +146,7 @@ class ProfilMainFragment : Fragment() {
         documentRef.update(updates)
             .addOnSuccessListener {
                 // 업데이트 성공
-                Toast.makeText(requireContext(), "업로드 완료", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "프로필 변경 완료", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 // 업데이트 실패

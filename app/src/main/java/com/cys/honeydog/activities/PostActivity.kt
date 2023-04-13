@@ -17,16 +17,26 @@ class PostActivity : AppCompatActivity() {
 
 
     }
+
+
+
     fun viewPost(){
         val imageUri = intent.getStringExtra("image")
         val title = intent.getStringExtra("title")
         val nickname = intent.getStringExtra("nickname")
         val postText = intent.getStringExtra("postText")
+        val profile = intent.getStringExtra("profileUrl")
+
+
 
         Glide.with(this).load(imageUri).into(binding.postImv)
+        Glide.with(this).load(profile).into(binding.postCiv)
         binding.titleTv.text = title
         binding.postId.text = nickname
         binding.postText.text = postText
+
+
+
 
     }
 

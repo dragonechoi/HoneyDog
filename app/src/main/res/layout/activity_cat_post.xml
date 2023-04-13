@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".activities.CatPostActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/post_title"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_login_btn">
+
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:text="재목" />
+        </LinearLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/post_civ"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/post_title"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/franch_pw" />
+
+        <TextView
+            android:id="@+id/post_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_title"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/post_civ"
+            android:text="닉네임" />
+
+        <TextView
+            android:id="@+id/end_lin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/post_civ"
+            android:text="==================================================" />
+
+
+        <RelativeLayout
+            android:id="@+id/relative_layout_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/end_lin">
+
+            <ImageView
+                android:id="@+id/post_imv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/flower" />
+
+            <TextView
+                android:id="@+id/post_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/post_imv"
+                android:padding="8dp"
+                android:text="오늘 꽃이 너무 이뻐서  그려보았어요 " />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/like"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/relative_layout_text"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_login_btn"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/bichon_like" />
+
+            <TextView
+                android:id="@+id/like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLength="1000"
+                android:maxLines="1"
+                android:text="0"
+                android:textColor="#ff0000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/like_count"
+                android:fontFamily="@font/kotra_hope"
+                android:text="비추천" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/unlike"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/relative_layout_text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/like"
+            android:background="@drawable/bg_login_btn"
+            android:clickable="true">
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/bichon_like" />
+
+            <TextView
+                android:id="@+id/unlike_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLength="1000"
+                android:maxLines="1"
+                android:text="0"
+                android:textColor="#0000ff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/unlike_count"
+                android:fontFamily="@font/kotra_hope"
+                android:text="비추천" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/share_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/like"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="13sp"
+            android:text="공유하기"
+            android:textSize="18dp" />
+
+
+        <EditText
+            android:id="@+id/et_comment"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/share_post"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/bg_login_btn"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/share_post"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="-19dp"
+            android:layout_toRightOf="@id/et_comment"
+            android:backgroundTint="@color/black"
+            android:text="등록"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_comment" />
+
+
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,3 +1,8 @@
 package com.cys.honeydog.model
 
-data class CatCmmItem(var image:Int, var title:String, var nickname:String)
+data class CatCmmItem(var title: String? = null,
+                      var postText: String? = null,
+                      var nickname: String? = null,
+                      var profile: String? = null,
+                      var userId: String? = null,
+                      var imgUri: String? = null)

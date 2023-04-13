@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +14,14 @@
         android:roundIcon="@drawable/cogi_love"
         android:supportsRtl="true"
         android:theme="@style/Theme.HoneyDog"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
-
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".activities.CatPostActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NewPostCatActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.NewPostActivity"
             android:exported="false" />

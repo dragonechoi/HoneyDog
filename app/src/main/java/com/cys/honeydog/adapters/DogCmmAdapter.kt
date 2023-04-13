@@ -49,6 +49,8 @@ class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
             intent.putExtra("title", list.title)
             intent.putExtra("nickname", list.nickname)
             intent.putExtra("postText", list.postText)
+            intent.putExtra("profileUrl",list.profileUrl)
+            intent.putExtra("id",list.id)
 
             context.startActivity(intent)
         }
