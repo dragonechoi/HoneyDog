@@ -183,7 +183,10 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/bg_login_btn"
             android:inputType="textMultiLine"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:hint="댓글 입력"
+            android:gravity="start"
+            android:padding="8dp"/>
 
         <Button
             android:layout_width="60dp"

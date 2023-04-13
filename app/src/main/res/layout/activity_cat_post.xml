@@ -47,6 +47,8 @@
             android:layout_toRightOf="@id/post_civ"
             android:text="닉네임" />
 
+
+
         <TextView
             android:id="@+id/end_lin"
             android:layout_width="wrap_content"
@@ -184,9 +186,13 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/bg_login_btn"
             android:inputType="textMultiLine"
-            android:maxLines="3" />
+            android:maxLines="3"
+            android:hint="댓글 입력"
+            android:padding="4dp"
+            android:gravity="start"/>
 
         <Button
+            android:id="@+id/comment_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_below="@id/share_post"
@@ -200,9 +206,12 @@
             android:textSize="13sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/et_comment" />
+            android:layout_below="@id/et_comment"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
 
 
     </RelativeLayout>

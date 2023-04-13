@@ -1,19 +1,32 @@
 package com.cys.honeydog.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
+import com.cys.honeydog.adapters.CommentAdapter
 import com.cys.honeydog.databinding.ActivityCatPostBinding
+import com.cys.honeydog.model.CommentItem
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class CatPostActivity : AppCompatActivity() {
     val binding:ActivityCatPostBinding by lazy { ActivityCatPostBinding.inflate(layoutInflater) }
+    val item:MutableList<CommentItem> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         ViewCatPost()
 
+       binding.recyclerComment.adapter=CommentAdapter(this,item)
+
+
+        binding.commentBtn.setOnClickListener { saveUserId() }
+        saveUserId()
     }
 
     fun ViewCatPost(){
@@ -32,4 +45,11 @@ class CatPostActivity : AppCompatActivity() {
 
 
     }
+
+    fun saveUserId(){
+
+    }
+
+
+
 }

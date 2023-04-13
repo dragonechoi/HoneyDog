@@ -54,7 +54,6 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("postText",list.postText)
             intent.putExtra("profile",list.profile)
             intent.putExtra("userId",list.userId)
-
             context.startActivity(intent)
 
 

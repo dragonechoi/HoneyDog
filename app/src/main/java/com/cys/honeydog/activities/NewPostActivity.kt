@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
-import com.cys.honeydog.Profile
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityNewPostBinding
 import com.google.firebase.firestore.FirebaseFirestore
