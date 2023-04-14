@@ -50,24 +50,12 @@ class ProfilFragmentAdapter constructor(
             intent.putExtra("nickname", post.nickname)
             intent.putExtra("postText", post.postText)
             intent.putExtra("id", post.id)
+            intent.putExtra("profile",post.profileUrl)
+
+
             context.startActivity(intent)
         }
 
     }
 
-fun loadUserPosts(userId: String) {
-    val db = FirebaseFirestore.getInstance()
-    val documentRef = db.collection("Posts").whereEqualTo("id", userId)
-
-    documentRef.get().addOnSuccessListener { documents ->
-        val postList = mutableListOf<ProfilRecyclerItem>()
-        for (document in documents) {
-            val post = document.toObject(ProfilRecyclerItem::class.java)
-            postList.add(post)
-        }
-        posts = postList
-    }.addOnFailureListener { exception ->
-        // 예외 처리 코드 추가
-    }
-}
 }
