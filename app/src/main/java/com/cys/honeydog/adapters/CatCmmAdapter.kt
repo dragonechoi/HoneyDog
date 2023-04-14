@@ -4,15 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
+import com.cys.honeydog.UserAccount
 import com.cys.honeydog.activities.CatPostActivity
 import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.databinding.RecyclerCommunityListItemBinding
 import com.cys.honeydog.model.CatCmmItem
 import com.cys.honeydog.model.DogCmmItem
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
     Adapter<CatCmmAdapter.VH>() {
@@ -35,6 +40,7 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
     override fun onBindViewHolder(holder: VH, position: Int) {
         var list: CatCmmItem = items[position]
 
+
         if (list.imgUri.isNullOrEmpty()) {
             // 이미지가 없을 경우 대체 이미지 사용
             Glide.with(context).load(R.drawable.cat_community_header).into(holder.binding.communityListIv)
@@ -43,11 +49,14 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             Glide.with(context).load(list.imgUri).into(holder.binding.communityListIv)
         }
 
-        holder.binding.communityListTitle.text=list.title
-        holder.binding.communityListNickname.text=list.nickname
+        holder.binding.communityListTitle.text= list.title
+
+        // 닉네임과 프로필 이미지 설정하기
+        loadUserData(holder.binding.communityListNickname)
+        loadCatPost(holder.binding.communityListTitle,holder.binding.communityListIv)
 
         holder.binding.communityList.setOnClickListener {
-           val intent:Intent=Intent(context,CatPostActivity::class.java)
+            val intent:Intent=Intent(context,CatPostActivity::class.java)
             intent.putExtra("imgUri",list.imgUri)
             intent.putExtra("title",list.title)
             intent.putExtra("nickname",list.nickname)
@@ -55,12 +64,48 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("profile",list.profile)
             intent.putExtra("userId",list.userId)
             context.startActivity(intent)
-
-
         }
     }
+
+    private fun loadUserData(nicknameView: TextView ) {
+        val firestore= FirebaseFirestore.getInstance()
+        firestore.collection("idUsers")
+            .document(G.userAccount!!.id)
+            .addSnapshotListener{snapshot, e ->
+                if (e != null) {
+                    // 오류 처리
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    // 닉네임 가져오기
+                    val nickname = snapshot.getString("nickname")
+
+                    // 프로필 이미지 가져오기
+                    val profileUrl = snapshot.getString("imageUrl")
+                    // 가져온 정보로 뷰 업데이트하기
+                    nicknameView.text = nickname
+
+
+                }
+            }
+    }
+
+    private fun loadCatPost(titleView:TextView, img:ImageView ){
+        val firestore=FirebaseFirestore.getInstance()
+        firestore.collection("catPost")
+            .document(G.userAccount!!.id)
+            .addSnapshotListener{snapshot,e->
+                if (e != null){
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && snapshot.exists()){
+                    val title= snapshot.getString("title")
+                    val iv=snapshot.getString("imgUri")
+                    titleView.text=title
+                    Glide.with(context).load(iv).into(img)
+                }
+            }
+    }
+
+
 }
-
-
-
-

@@ -12,7 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
+import com.cys.honeydog.Profile
 import com.cys.honeydog.R
+import com.cys.honeydog.UserAccount
 import com.cys.honeydog.databinding.ActivityNewPostCatBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -25,6 +27,8 @@ class NewPostCatActivity : AppCompatActivity() {
     var profileUrl: String? = null
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -34,6 +38,8 @@ class NewPostCatActivity : AppCompatActivity() {
         binding.upLoadBtn.setOnClickListener { upLoadBtn() }
 
         saveUserProfile()
+
+
 
     }
 
