@@ -38,6 +38,7 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/kotra_hope"/>
 
+
     </RelativeLayout>
 
 

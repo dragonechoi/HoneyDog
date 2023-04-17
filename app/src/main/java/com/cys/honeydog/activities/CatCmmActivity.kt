@@ -65,8 +65,4 @@ class CatCmmActivity : AppCompatActivity() {
         }
 
     }
-
-
-
-
 }

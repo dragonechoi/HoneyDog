@@ -6,14 +6,18 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.model.MiniCmtItem
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<MiniCmtItem>): Adapter<MiniCmtItemAdapter.VH>() {
 
@@ -37,6 +41,9 @@ class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<
 
         holder.tvTitle.text=item.title
 
+
+
+
         holder.tvTitle.setOnClickListener {
             val intent: Intent = Intent(context, PostActivity::class.java)
             intent.putExtra("image", item.imageUri)
@@ -50,7 +57,9 @@ class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<
 
 
         }
-    }
+
+
+}
 
 
 

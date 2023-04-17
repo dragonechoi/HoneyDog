@@ -2,6 +2,8 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
@@ -9,6 +11,7 @@ import com.cys.honeydog.R
 import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.databinding.RecyclerCommunityListItemBinding
 import com.cys.honeydog.model.DogCmmItem
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -43,6 +46,9 @@ class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
         holder.binding.communityListTitle.text = list.title
         holder.binding.communityListNickname.text = list.nickname
 
+
+        loadCatPost(holder.binding.communityListTitle,holder.binding.communityListIv,holder.binding.communityListNickname)
+
         holder.binding.communityList.setOnClickListener {
             val intent: Intent = Intent(context, PostActivity::class.java)
             intent.putExtra("image", list.imageUri)
@@ -54,5 +60,26 @@ class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
 
             context.startActivity(intent)
         }
+    }
+
+    private fun loadCatPost(titleView: TextView, img: ImageView, nicknameView: TextView){
+        val firestore= FirebaseFirestore.getInstance()
+        firestore.collection("Post")
+            .document(G.userAccount!!.id)
+            .addSnapshotListener{snapshot,e->
+                if (e != null){
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && snapshot.exists()){
+
+                    val nickName= snapshot.getString("nickname")
+                    val title= snapshot.getString("title")
+                    val iv=snapshot.getString("imgUri")
+                    titleView.text=title
+                    Glide.with(context).load(iv).into(img)
+                    nicknameView.text=nickName
+
+                }
+            }
     }
 }

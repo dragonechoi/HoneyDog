@@ -50,10 +50,10 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
         }
 
         holder.binding.communityListTitle.text= list.title
+        holder.binding.communityListNickname.text = list.nickname
 
         // 닉네임과 프로필 이미지 설정하기
-        loadUserData(holder.binding.communityListNickname)
-        loadCatPost(holder.binding.communityListTitle,holder.binding.communityListIv)
+        loadCatPost(holder.binding.communityListTitle,holder.binding.communityListIv,holder.binding.communityListNickname)
 
         holder.binding.communityList.setOnClickListener {
             val intent:Intent=Intent(context,CatPostActivity::class.java)
@@ -63,34 +63,12 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("postText",list.postText)
             intent.putExtra("profile",list.profile)
             intent.putExtra("userId",list.userId)
+            intent.putExtra("no",list.no)
+
             context.startActivity(intent)
         }
     }
-
-    private fun loadUserData(nicknameView: TextView ) {
-        val firestore= FirebaseFirestore.getInstance()
-        firestore.collection("idUsers")
-            .document(G.userAccount!!.id)
-            .addSnapshotListener{snapshot, e ->
-                if (e != null) {
-                    // 오류 처리
-                    return@addSnapshotListener
-                }
-                if (snapshot != null && snapshot.exists()) {
-                    // 닉네임 가져오기
-                    val nickname = snapshot.getString("nickname")
-
-                    // 프로필 이미지 가져오기
-                    val profileUrl = snapshot.getString("imageUrl")
-                    // 가져온 정보로 뷰 업데이트하기
-                    nicknameView.text = nickname
-
-
-                }
-            }
-    }
-
-    private fun loadCatPost(titleView:TextView, img:ImageView ){
+    private fun loadCatPost(titleView:TextView, img:ImageView,nicknameView: TextView ){
         val firestore=FirebaseFirestore.getInstance()
         firestore.collection("catPost")
             .document(G.userAccount!!.id)
@@ -99,10 +77,14 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
                     return@addSnapshotListener
                 }
                 if (snapshot != null && snapshot.exists()){
+
+                    val nickName= snapshot.getString("nickname")
                     val title= snapshot.getString("title")
                     val iv=snapshot.getString("imgUri")
                     titleView.text=title
                     Glide.with(context).load(iv).into(img)
+                    nicknameView.text=nickName
+
                 }
             }
     }
