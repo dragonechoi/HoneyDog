@@ -16,6 +16,8 @@ import com.cys.honeydog.databinding.RecyclerCommentItemBinding
 import com.cys.honeydog.model.CommentItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
+import de.hdodenhof.circleimageview.CircleImageView
+import org.w3c.dom.Text
 
 class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) :
     Adapter<CommentAdapter.VH>() {
@@ -24,67 +26,71 @@ class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) 
         ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val binding = RecyclerCommentItemBinding.inflate(LayoutInflater.from(context))
+        val binding = RecyclerCommentItemBinding.inflate(
+            LayoutInflater.from(context),
+            parent,
+            false
+        ) // 수정된 부분
         return VH(binding)
     }
 
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        var list: CommentItem = items[position]
+        val commentItem = items[position]
 
-        if (list.imgUrl.isNullOrEmpty()) {
+        if (commentItem.imgUrl.isNullOrEmpty()) {
             Glide.with(context).load(R.drawable.cat_community_header)
                 .into(holder.binding.civCommentProfile)
         } else {
-            Glide.with(context).load(list.imgUrl).into(holder.binding.civCommentProfile)
-
+            Glide.with(context).load(commentItem.imgUrl).into(holder.binding.civCommentProfile)
         }
-        holder.binding.commentNickname.text = list.nickname
-        holder.binding.commentTv.text = list.comment
+        holder.binding.commentTv.text = commentItem.comment
+        holder.binding.commentNum.text = commentItem.no.toString()
+        holder.binding.commentNickname.text = commentItem.nickname
 
-        loadUser(holder.binding.civCommentProfile, holder.binding.commentNickname)
-        loadComment(holder.binding.commentTv,holder.binding.commentNum)
+        commentDater(
+            holder.binding.civCommentProfile,
+            holder.binding.commentNickname,
+            holder.binding.commentTv,
+            holder.binding.commentNum
+        )
 
     }
 
-    private fun loadUser(profile: ImageView, nicknameView: TextView) {
+    private fun userAccount(
+    ) {
         val firestore = FirebaseFirestore.getInstance()
-        firestore.collection("idUsers")
+
+    }
+
+    private fun commentDater(
+        profileView: CircleImageView,
+        nicknameView: TextView,
+        commentView: TextView,
+        numView: TextView
+
+
+    ) {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.collection("comment")
             .document(G.userAccount!!.id)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     return@addSnapshotListener
                 }
                 if (snapshot != null && snapshot.exists()) {
-
-                    val nicknames = snapshot.getString("nickname")
-                    val iv = snapshot.getString("imgUrl")
-                    nicknameView.text = nicknames
-                    Glide.with(context).load(iv).into(profile)
-
-
-                }
-            }
-    }
-
-    private fun loadComment(commentView: TextView,numView:TextView) {
-        val comments = FirebaseFirestore.getInstance()
-        comments.collection("catPost")
-            .document()
-            .addSnapshotListener { snapshot, e ->
-                if (e != null) {
-                    return@addSnapshotListener
-                }
-
-                if (snapshot != null && snapshot.exists()) {
+                    val profile = snapshot.getString("imgUrl")
+                    val nickname = snapshot.getString("nickname")
                     val comment = snapshot.getString("comment")
-                    val commentNum=snapshot.getString("no")
+                    val no = snapshot.getString("no").toString()
+
+                    Glide.with(context).load(profile).into(profileView)
+                    nicknameView.text = nickname
                     commentView.text = comment
-                    numView.text=commentNum
+                    numView.text = no
+
                 }
-
-
             }
     }
 }

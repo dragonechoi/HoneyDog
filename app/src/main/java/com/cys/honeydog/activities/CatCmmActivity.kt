@@ -21,6 +21,7 @@ class CatCmmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         loadData()
 
         binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
