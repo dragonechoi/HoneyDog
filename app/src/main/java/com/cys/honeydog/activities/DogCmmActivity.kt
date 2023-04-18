@@ -57,6 +57,7 @@ class DogCmmActivity : AppCompatActivity() {
 
         //Post 컬렉션데이터 호춣
         postRef.get().addOnSuccessListener { documents ->
+            item.clear() // 기존에 있던 데이터를 삭제
             for (document in documents) {
                 val post = document.toObject(DogCmmItem::class.java)
                 item.add(post)
@@ -67,15 +68,5 @@ class DogCmmActivity : AppCompatActivity() {
         }.addOnFailureListener { exception ->
 
         }
-
     }
 }
-
-
-
-
-
-
-
-
-

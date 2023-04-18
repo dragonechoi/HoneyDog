@@ -12,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.ActivityNewIdBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -80,12 +79,13 @@ class NewIdActivity : AppCompatActivity() {
     }
 
     fun saveUserId() {
-        var id: String = binding.etEmail.text.toString()
+        val id = binding.etEmail.text.toString().trim()
         var password: String = binding.etPw.text.toString()
         var passwordConfirm: String = binding.etPwRecheck.text.toString()
         var nickname: String = binding.etName.text.toString()
         var animalType: String = binding.acTv.text.toString()
-
+        val regex =
+            "^[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,}$|^[A-Za-z0-9]+$".toRegex()
 
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -93,7 +93,7 @@ class NewIdActivity : AppCompatActivity() {
             AlertDialog.Builder(this).setMessage("패스워드 확인에 문제가 생겼습니다").show()
             binding.etPwRecheck.selectAll()
 
-        } else if (id == "") {
+        } else if (!id.matches(regex)) {
             AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").show()
             binding.etEmail.selectAll()
             return

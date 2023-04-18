@@ -50,8 +50,9 @@ class MiniCmtItemAdapter constructor(var context:Context, var items:MutableList<
             intent.putExtra("title", item.title)
             intent.putExtra("nickname", item.nickname)
             intent.putExtra("postText", item.postText)
-            intent.putExtra("id",item.id)
+            intent.putExtra("id",item.userId)
             intent.putExtra("profileUrl",item.profileUrl)
+            intent.putExtra("no", item.no)
 
             context.startActivity(intent)
         }

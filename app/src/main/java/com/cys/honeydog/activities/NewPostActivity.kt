@@ -33,8 +33,8 @@ class NewPostActivity : AppCompatActivity() {
         saveUserProfile()
     }
 
-    fun saveUserProfile(){
-        val db=FirebaseFirestore.getInstance()
+    fun saveUserProfile() {
+        val db = FirebaseFirestore.getInstance()
         db.collection("idUsers")
             .document(G.userAccount!!.id)
             .get()
@@ -50,7 +50,7 @@ class NewPostActivity : AppCompatActivity() {
                         .load(profileUrl)
                         .into(binding.postCiv)
                     Toast.makeText(this, "읽어오기 성공", Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     Glide.with(this).load(R.drawable.baseline_insert_photo_24)
                 }
             }
@@ -74,7 +74,7 @@ class NewPostActivity : AppCompatActivity() {
         //DB 이미지 저장
         val firebaseStorage: FirebaseStorage = FirebaseStorage.getInstance()
 
-        if (imgUri == null ) {
+        if (imgUri == null) {
             // 이미지를 선택하지 않은 경우, 이미지 없이 게시글만 저장
             val post: MutableMap<String, Any> = HashMap()
             post["title"] = title
@@ -86,6 +86,10 @@ class NewPostActivity : AppCompatActivity() {
             postRef.get().addOnSuccessListener { querySnapshot ->
                 val no = querySnapshot.size() + 1
                 post["no"] = no
+                postRef.add(post).addOnSuccessListener {
+                    Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
             }.addOnFailureListener { e ->
 
             }
@@ -112,23 +116,22 @@ class NewPostActivity : AppCompatActivity() {
                         post["id"] = userId
                         post["imageUri"] = imgUri.toString()
 
-                        postRef.get().addOnSuccessListener {querySnapshot->
-                        val no = querySnapshot.size() + 1
-                        post["no"] = no
-                        postRef.add(post).addOnSuccessListener {
-                            Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
-                            finish()
-                        }
+                        postRef.get().addOnSuccessListener { querySnapshot ->
+                            val no = querySnapshot.size() + 1
+                            post["no"] = no
+                            postRef.add(post).addOnSuccessListener {
+                                Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
                         }
 
-                        }.addOnFailureListener { e ->
+                    }.addOnFailureListener { e ->
 
-                        }
                     }
+                }
 
         }
     }
-
 
 
     private fun clickImgSelectBnt() {

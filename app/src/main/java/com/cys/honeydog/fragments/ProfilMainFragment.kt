@@ -1,8 +1,10 @@
 package com.cys.honeydog.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,15 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
-import com.cys.honeydog.model.MiniCmtItem
 import com.cys.honeydog.model.ProfilRecyclerItem
-import com.cys.honeydog.model.ProfileItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -31,6 +32,7 @@ class ProfilMainFragment : Fragment() {
 
     var imgUri: Uri? = null
     var nickname: String? = null
+
 
 
 
@@ -174,7 +176,6 @@ class ProfilMainFragment : Fragment() {
             // 호출 실패 시 처리할 내용
         }
     }
-
     private fun clickChangeProfile() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
         resultLauncher.launch(intent)
@@ -191,7 +192,4 @@ class ProfilMainFragment : Fragment() {
 
         }
     }
-
-
-
 }
