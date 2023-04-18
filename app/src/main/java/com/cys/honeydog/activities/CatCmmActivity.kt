@@ -17,7 +17,7 @@ import com.google.firebase.firestore.ktx.toObject
 class CatCmmActivity : AppCompatActivity() {
     val binding: ActivityCatCmmBinding by lazy { ActivityCatCmmBinding.inflate(layoutInflater) }
     var item: MutableList<CatCmmItem> = mutableListOf()
-    var profileItem: MutableList<ProfileItem> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -35,6 +35,7 @@ class CatCmmActivity : AppCompatActivity() {
                     DogCmmActivity::class.java
                 )
             )
+            finish()
         }
         binding.goHome.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
         binding.editPost.setOnClickListener {
@@ -42,8 +43,10 @@ class CatCmmActivity : AppCompatActivity() {
                 Intent(
                     this,
                     NewPostCatActivity::class.java
+
                 )
             )
+            finish()
         }
 
     }

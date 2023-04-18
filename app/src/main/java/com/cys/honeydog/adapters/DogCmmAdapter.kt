@@ -47,37 +47,42 @@ class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
         holder.binding.communityListNickname.text = list.nickname
 
 
-        loadCatPost(holder.binding.communityListTitle,holder.binding.communityListIv,holder.binding.communityListNickname)
+        loadDogPost(
+            holder.binding.communityListTitle,
+            holder.binding.communityListIv,
+            holder.binding.communityListNickname
+        )
 
         holder.binding.communityList.setOnClickListener {
             val intent: Intent = Intent(context, PostActivity::class.java)
-            intent.putExtra("image", list.imageUri)
+            intent.putExtra("imageUri", list.imageUri)
             intent.putExtra("title", list.title)
             intent.putExtra("nickname", list.nickname)
             intent.putExtra("postText", list.postText)
-            intent.putExtra("profileUrl",list.profileUrl)
-            intent.putExtra("id",list.id)
+            intent.putExtra("profileUrl", list.profileUrl)
+            intent.putExtra("id", list.userId)
+            intent.putExtra("no", list.no)
 
             context.startActivity(intent)
         }
     }
 
-    private fun loadCatPost(titleView: TextView, img: ImageView, nicknameView: TextView){
-        val firestore= FirebaseFirestore.getInstance()
+    private fun loadDogPost(titleView: TextView, img: ImageView, nicknameView: TextView) {
+        val firestore = FirebaseFirestore.getInstance()
         firestore.collection("Post")
             .document(G.userAccount!!.id)
-            .addSnapshotListener{snapshot,e->
-                if (e != null){
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
                     return@addSnapshotListener
                 }
-                if (snapshot != null && snapshot.exists()){
+                if (snapshot != null && snapshot.exists()) {
 
-                    val nickName= snapshot.getString("nickname")
-                    val title= snapshot.getString("title")
-                    val iv=snapshot.getString("imgUri")
-                    titleView.text=title
+                    val nickName = snapshot.getString("nickname")
+                    val title = snapshot.getString("title")
+                    val iv = snapshot.getString("imageUri")
+                    titleView.text = title
                     Glide.with(context).load(iv).into(img)
-                    nicknameView.text=nickName
+                    nicknameView.text = nickName
 
                 }
             }

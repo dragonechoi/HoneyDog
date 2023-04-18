@@ -3,38 +3,33 @@ package com.cys.honeydog.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.Adapter
 import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.R
-import com.cys.honeydog.UserAccount
 import com.cys.honeydog.databinding.RecyclerCommentItemBinding
 import com.cys.honeydog.model.CommentItem
+import com.cys.honeydog.model.DogCommentItem
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
 import de.hdodenhof.circleimageview.CircleImageView
-import org.w3c.dom.Text
 
-class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) :
-    Adapter<CommentAdapter.VH>() {
+class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentItem>) :
+    RecyclerView.Adapter<DogCommentAdapter.VH>() {
 
     inner class VH(val binding: RecyclerCommentItemBinding) :
         ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val binding = RecyclerCommentItemBinding.inflate(
-            LayoutInflater.from(context),
-            parent,
-            false
-        ) // 수정된 부분
+        val binding =
+            RecyclerCommentItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return VH(binding)
     }
 
     override fun getItemCount(): Int = items.size
+
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val commentItem = items[position]
@@ -49,18 +44,13 @@ class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) 
         holder.binding.commentNum.text = commentItem.no.toString()
         holder.binding.commentNickname.text = commentItem.nickname
 
+        //가져온 FireBase 데이터를 리사이클러뷰 아이템에 적용
         commentDater(
             holder.binding.civCommentProfile,
             holder.binding.commentNickname,
             holder.binding.commentTv,
             holder.binding.commentNum
         )
-
-    }
-
-    private fun userAccount(
-    ) {
-        val firestore = FirebaseFirestore.getInstance()
 
     }
 
@@ -73,7 +63,7 @@ class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) 
 
     ) {
         val firestore = FirebaseFirestore.getInstance()
-        firestore.collection("comment")
+        firestore.collection("DogComment")
             .document(G.userAccount!!.id)
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
@@ -94,3 +84,5 @@ class CommentAdapter(var context: Context, var items: MutableList<CommentItem>) 
             }
     }
 }
+
+

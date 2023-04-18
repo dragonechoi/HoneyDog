@@ -189,6 +189,7 @@
             android:padding="8dp"/>
 
         <Button
+            android:id="@+id/comment_btn"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_below="@id/share_post"
@@ -202,9 +203,12 @@
             android:textSize="13sp" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_comment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/et_comment" />
+            android:layout_below="@id/et_comment"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
 
 
     </RelativeLayout>

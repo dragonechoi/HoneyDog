@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.UserProfile
-import com.cys.honeydog.adapters.CommentAdapter
+import com.cys.honeydog.adapters.CatCommentAdapter
 import com.cys.honeydog.databinding.ActivityCatPostBinding
 import com.cys.honeydog.model.CommentItem
 import com.google.firebase.firestore.FirebaseFirestore
@@ -26,7 +26,7 @@ class CatPostActivity : AppCompatActivity() {
 
         ViewCatPost()
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
-        binding.recyclerComment.adapter = CommentAdapter(this, commentList)
+        binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
 
     }
 
@@ -59,7 +59,7 @@ class CatPostActivity : AppCompatActivity() {
             val imageUrl = idUserDocSnapshot.getString("imageUrl") ?: UserProfile?.ProfileUri
 
             // comment 컬렉션에 댓글 저장
-            val commentDocRef = fireStore.collection("comment").document()
+            val commentDocRef = fireStore.collection("CatComment").document()
             val commentItem = hashMapOf(
                 "comment" to binding.etComment.text.toString(),
                 "nickname" to nickname,
@@ -84,7 +84,7 @@ class CatPostActivity : AppCompatActivity() {
     private fun loadComments() {
         val fireStore = FirebaseFirestore.getInstance()
         val commentRef =
-            fireStore.collection("comment").whereEqualTo("no", intent.getIntExtra("no", -1))
+            fireStore.collection("CatComment").whereEqualTo("no", intent.getIntExtra("no", -1))
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
@@ -92,9 +92,9 @@ class CatPostActivity : AppCompatActivity() {
                 val comment = document.toObject(CommentItem::class.java)
                 commentList.add(comment)
             }
-            binding.recyclerComment.adapter = CommentAdapter(this, commentList)
+            binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
         }.addOnFailureListener { exception ->
-            // handle exception
+
         }
     }
 }

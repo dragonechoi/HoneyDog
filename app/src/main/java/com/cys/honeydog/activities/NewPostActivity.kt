@@ -83,13 +83,9 @@ class NewPostActivity : AppCompatActivity() {
             post["profileUrl"] = profileUrl!!
             post["id"] = userId
 
-            postRef.add(post).addOnSuccessListener {
-                Toast.makeText(
-                    this,
-                    "게시글 업로드 완료",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
+            postRef.get().addOnSuccessListener { querySnapshot ->
+                val no = querySnapshot.size() + 1
+                post["no"] = no
             }.addOnFailureListener { e ->
 
             }
@@ -116,18 +112,20 @@ class NewPostActivity : AppCompatActivity() {
                         post["id"] = userId
                         post["imageUri"] = imgUri.toString()
 
+                        postRef.get().addOnSuccessListener {querySnapshot->
+                        val no = querySnapshot.size() + 1
+                        post["no"] = no
                         postRef.add(post).addOnSuccessListener {
-                            Toast.makeText(
-                                this,
-                                "게시글 업로드 완료",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
                             finish()
+                        }
+                        }
+
                         }.addOnFailureListener { e ->
 
                         }
                     }
-                }
+
         }
     }
 

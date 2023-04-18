@@ -29,10 +29,17 @@ class DogCmmActivity : AppCompatActivity() {
                 Intent(
                     this,
                     CatCmmActivity::class.java
+
                 )
+
             )
+            finish()
         }
-        binding.goHome.setOnClickListener { startActivity(Intent(this, MainActivity::class.java)) }
+        binding.goHome.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
     }
 
     fun newPostBtn() {
