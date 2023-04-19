@@ -38,6 +38,13 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/kotra_hope"/>
 
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:text="1"/>
+
 
     </RelativeLayout>
 

@@ -26,7 +26,7 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
             startActivity(Intent(this,SearchIdActivity::class.java))
         }
         binding.missPw.setOnClickListener {
-            startActivity(Intent(this,SearchIdActivity::class.java))
+            startActivity(Intent(this,SearchPwActivity::class.java))
         }
 
         binding.goPath.setOnClickListener { startActivity(Intent(this,MainActivity::class.java)) }

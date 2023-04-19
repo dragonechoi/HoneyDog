@@ -18,9 +18,17 @@ import com.cys.honeydog.databinding.RecyclerCommunityListItemBinding
 import com.cys.honeydog.model.CatCmmItem
 import com.cys.honeydog.model.DogCmmItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import org.w3c.dom.Text
 
 class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
     Adapter<CatCmmAdapter.VH>() {
+
+
+
+
+
+
 
     inner class VH(val binding: RecyclerCommunityListItemBinding) :
         ViewHolder(binding.root) {
@@ -52,6 +60,7 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
 
         holder.binding.communityListTitle.text = list.title
         holder.binding.communityListNickname.text = list.nickname
+        holder.binding.num.text = list.no?.toString()
 
         // 닉네임과 프로필 이미지 설정하기
         loadCatPost(
@@ -70,10 +79,10 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("userId", list.userId)
             intent.putExtra("no", list.no)
 
+
             context.startActivity(intent)
         }
     }
-
     private fun loadCatPost(titleView: TextView, img: ImageView, nicknameView: TextView) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("catPost")
@@ -83,17 +92,14 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
                     return@addSnapshotListener
                 }
                 if (snapshot != null && snapshot.exists()) {
-
                     val nickName = snapshot.getString("nickname")
                     val title = snapshot.getString("title")
                     val iv = snapshot.getString("imgUri")
                     titleView.text = title
                     Glide.with(context).load(iv).into(img)
                     nicknameView.text = nickName
-
                 }
             }
     }
-
 
 }

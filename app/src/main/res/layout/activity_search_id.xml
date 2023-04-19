@@ -24,30 +24,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kotra_hope"
-        android:text="이름"
+        android:text="닉네임"
         android:textSize="30sp"
         android:layout_below="@id/love_dogid"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        />
 
     <EditText
-        android:id="@+id/search_name"
+        android:id="@+id/search_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="15"
         android:layout_below="@id/love_dogid"
-        android:hint="이름 입력"
+        android:hint="닉네임 입력"
         android:inputType="text"
         android:maxLines="1"
         android:layout_toRightOf="@id/tv_name"
-        android:layout_alignLeft="@id/search_id"/>
+        android:layout_marginLeft="8dp"/>
 
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/tv_animalType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kotra_hope"
-        android:text="아이디"
+        android:text="견종"
         android:textSize="30sp"
         android:layout_below="@id/tv_name"
         android:padding="8dp"/>
@@ -57,13 +58,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="15"
-        android:layout_below="@id/search_name"
-        android:hint="아이디 입력"
+        android:layout_below="@id/search_nickname"
+        android:hint="견종 입력"
         android:inputType="text"
         android:maxLines="1"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/tv_id" />
+        android:layout_toRightOf="@id/tv_animalType" />
 
     <Button
         android:id="@+id/btn_id"

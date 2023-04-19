@@ -12,6 +12,7 @@ import com.cys.honeydog.model.CatCmmItem
 import com.cys.honeydog.model.DogCmmItem
 import com.cys.honeydog.model.ProfileItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 
 class CatCmmActivity : AppCompatActivity() {
@@ -63,11 +64,11 @@ class CatCmmActivity : AppCompatActivity() {
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
-        val postRef = fireStore.collection("catPost")
+        val postRef = fireStore.collection("catPost").orderBy("no", Query.Direction.DESCENDING)
 
         item.clear()
 
-        //Post 컬렉션데이터 호춣
+        //Post 컬렉션데이터 호출
         postRef.get().addOnSuccessListener { documents ->
             for (document in documents) {
                 val post = document.toObject(CatCmmItem::class.java)
@@ -81,6 +82,5 @@ class CatCmmActivity : AppCompatActivity() {
         }.addOnFailureListener { exception ->
 
         }
-
     }
 }

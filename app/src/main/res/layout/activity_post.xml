@@ -37,6 +37,11 @@
             android:src="@drawable/franch_pw" />
 
         <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+        <TextView
             android:id="@+id/post_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,14 +49,14 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/post_civ"
-            android:text="닉네임" />
+            android:text="닉네임"/>
 
         <TextView
             android:id="@+id/end_lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/post_civ"
-            android:text="=====================================================" />
+            android:text="===================================================" />
 
 
         <RelativeLayout
@@ -183,7 +188,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:clickable="true"/>
 
 
         <EditText

@@ -1,6 +1,8 @@
 package com.cys.honeydog.activities
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -10,6 +12,7 @@ import com.cys.honeydog.adapters.CatCommentAdapter
 import com.cys.honeydog.databinding.ActivityCatPostBinding
 import com.cys.honeydog.model.CommentItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class CatPostActivity : AppCompatActivity() {
     private val binding: ActivityCatPostBinding by lazy {
@@ -19,6 +22,8 @@ class CatPostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<CommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
+    private var commentNum = 0 // 코멘트 고유 식별번호 추가
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +42,7 @@ class CatPostActivity : AppCompatActivity() {
         val postText = intent.getStringExtra("postText")
         val profile = intent.getStringExtra("profile")
         val no = intent.getIntExtra("no", -1)
+
 
         Glide.with(this).load(profile).into(binding.postCiv)
         Glide.with(this).load(imgUri).into(binding.postImv)
@@ -60,18 +66,28 @@ class CatPostActivity : AppCompatActivity() {
 
             // comment 컬렉션에 댓글 저장
             val commentDocRef = fireStore.collection("CatComment").document()
+            //식별값 증가
+            commentNum++
+
             val commentItem = hashMapOf(
                 "comment" to binding.etComment.text.toString(),
                 "nickname" to nickname,
                 "uid" to userId,
                 "imgUrl" to imageUrl,
-                "no" to no
+                "no" to no,
+                "commentNum" to commentNum
+
             )
 
             commentDocRef.set(commentItem).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
                     loadComments()
+
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
+                    binding.etComment.text.clear()
+
                 } else {
                     Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -83,8 +99,11 @@ class CatPostActivity : AppCompatActivity() {
 
     private fun loadComments() {
         val fireStore = FirebaseFirestore.getInstance()
-        val commentRef =
-            fireStore.collection("CatComment").whereEqualTo("no", intent.getIntExtra("no", -1))
+        val commentRef = fireStore.collection("CatComment")
+            .whereEqualTo("no", intent.getIntExtra("no", -1))
+
+            
+
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
@@ -94,7 +113,8 @@ class CatPostActivity : AppCompatActivity() {
             }
             binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
         }.addOnFailureListener { exception ->
-
+            // 실패 시 동작
+            Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
         }
     }
 }

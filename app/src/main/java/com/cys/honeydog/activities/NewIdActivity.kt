@@ -116,7 +116,7 @@ class NewIdActivity : AppCompatActivity() {
                     user.put("imageUrl", profileUrl)
 
 
-                    db.collection("idUsers").add(user).addOnSuccessListener {
+                    db.collection("idUsers").document(id).set(user).addOnSuccessListener {
                         AlertDialog.Builder(this)
                             .setMessage("환영합니다 \n 회원가입에 성공 하였습니다")
                             .setPositiveButton("확인", object : DialogInterface.OnClickListener {
@@ -125,7 +125,6 @@ class NewIdActivity : AppCompatActivity() {
                                 }
 
                             }).show()
-
 
                     }.addOnFailureListener {
                         Toast.makeText(this, "회원가입에 오류가 발생했습니다 \n다시 시도해주세요", Toast.LENGTH_SHORT)

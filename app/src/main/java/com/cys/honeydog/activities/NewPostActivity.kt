@@ -122,6 +122,7 @@ class NewPostActivity : AppCompatActivity() {
                             postRef.add(post).addOnSuccessListener {
                                 Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
                                 finish()
+
                             }
                         }
 

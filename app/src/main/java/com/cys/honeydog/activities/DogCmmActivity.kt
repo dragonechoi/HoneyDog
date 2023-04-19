@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cys.honeydog.databinding.ActivityDogCmmBinding
 import com.cys.honeydog.model.DogCmmItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 
 class DogCmmActivity : AppCompatActivity() {
@@ -18,9 +19,8 @@ class DogCmmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        loadData()
 
-        binding.recyclerDogCmm.adapter = DogCmmAdapter(this, item)
+
 
 
         binding.editPost.setOnClickListener { newPostBtn() }
@@ -40,15 +40,14 @@ class DogCmmActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.recyclerDogCmm.adapter = DogCmmAdapter(this, item)
+        loadData()
+
     }
 
     fun newPostBtn() {
         startActivity(
-            Intent(
-                this,
-                NewPostActivity::class.java
-            )
-        )
+            Intent(this, NewPostActivity::class.java ))
     }
 
     override fun onResume() {
@@ -62,7 +61,7 @@ class DogCmmActivity : AppCompatActivity() {
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
-        val postRef = fireStore.collection("Post")
+        val postRef = fireStore.collection("Post").orderBy("no", Query.Direction.DESCENDING)
 
         //Post 컬렉션데이터 호춣
         postRef.get().addOnSuccessListener { documents ->

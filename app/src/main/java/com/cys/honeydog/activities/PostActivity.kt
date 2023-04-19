@@ -1,24 +1,21 @@
 package com.cys.honeydog.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
-import com.cys.honeydog.R
 import com.cys.honeydog.UserProfile
-import com.cys.honeydog.adapters.CatCommentAdapter
 import com.cys.honeydog.adapters.DogCommentAdapter
-import com.cys.honeydog.databinding.ActivityCatPostBinding
 import com.cys.honeydog.databinding.ActivityPostBinding
-import com.cys.honeydog.model.CommentItem
 import com.cys.honeydog.model.DogCommentItem
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 
 class PostActivity : AppCompatActivity() {
-    private val binding: ActivityCatPostBinding by lazy {
-        ActivityCatPostBinding.inflate(
+    private val binding: ActivityPostBinding by lazy {
+        ActivityPostBinding.inflate(
             layoutInflater
         )
     }
@@ -33,7 +30,7 @@ class PostActivity : AppCompatActivity() {
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
 
-       
+
 
     }
 
@@ -46,6 +43,7 @@ class PostActivity : AppCompatActivity() {
         val nickname = intent.getStringExtra("nickname")
         val postText = intent.getStringExtra("postText")
         val profile = intent.getStringExtra("profileUrl")
+        val id = intent.getStringExtra("id")
         val no = intent.getIntExtra("no", -1)
 
         Glide.with(this).load(profile).into(binding.postCiv)
@@ -53,6 +51,7 @@ class PostActivity : AppCompatActivity() {
         binding.titleTv.text = title
         binding.postText.text = postText
         binding.postId.text = nickname
+        binding.id.text = id
         loadComments()
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
@@ -82,13 +81,18 @@ class PostActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
                     loadComments()
+
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
+                    binding.etComment.text.clear()
+
+
                 } else {
                     Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
 
 
     private fun loadComments() {
