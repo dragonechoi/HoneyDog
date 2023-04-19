@@ -15,7 +15,7 @@
             android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="19dp"
             android:background="@drawable/bg_login_btn">
 
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/post_civ"
-            android:text="==================================================" />
+            android:text="=====================================================" />
 
 
         <RelativeLayout
@@ -170,7 +170,20 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="13sp"
             android:text="공유하기"
-            android:textSize="18dp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/delete_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/like"
+            android:layout_toLeftOf="@id/share_post"
+            android:text="삭제"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
 
         <EditText

@@ -33,10 +33,15 @@ class PostActivity : AppCompatActivity() {
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
 
+       
+
     }
 
+
+
+
     private fun ViewCatPost() {
-        val imgUri = intent.getStringExtra("imgUri")
+        val imgUri = intent.getStringExtra("imageUri")
         val title = intent.getStringExtra("title")
         val nickname = intent.getStringExtra("nickname")
         val postText = intent.getStringExtra("postText")

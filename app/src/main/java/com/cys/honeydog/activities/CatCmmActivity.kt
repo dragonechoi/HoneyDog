@@ -46,14 +46,26 @@ class CatCmmActivity : AppCompatActivity() {
 
                 )
             )
-            finish()
+            
         }
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            //데이터 로드
+            loadData()
+        }
+        binding.swipeRefreshLayout.isEnabled = true
     }
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
         val postRef = fireStore.collection("catPost")
+
+        item.clear()
 
         //Post 컬렉션데이터 호춣
         postRef.get().addOnSuccessListener { documents ->
@@ -64,6 +76,8 @@ class CatCmmActivity : AppCompatActivity() {
 
             //아답터 업데이트
             binding.recyclerCatCmm.adapter?.notifyDataSetChanged()
+
+            binding.swipeRefreshLayout.isRefreshing = false
         }.addOnFailureListener { exception ->
 
         }

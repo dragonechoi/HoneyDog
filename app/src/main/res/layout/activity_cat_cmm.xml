@@ -33,16 +33,29 @@
         android:textColor="@color/black"
         android:layout_marginLeft="130dp"/>
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/community_intent_btn">
 
-
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_cat_cmm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_below="@id/community_intent_btn" />
+        android:orientation="vertical"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+</RelativeLayout>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/edit_post"
@@ -54,5 +67,6 @@
         android:layout_marginRight="18dp"
         android:src="@drawable/ic_action_post"
         android:clickable="true"/>
+
 
 </RelativeLayout>

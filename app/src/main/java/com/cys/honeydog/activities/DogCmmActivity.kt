@@ -51,6 +51,15 @@ class DogCmmActivity : AppCompatActivity() {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            loadData()
+                binding.swipeRefreshLayout.isEnabled=true
+        }
+
+    }
+
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
         val postRef = fireStore.collection("Post")
@@ -65,6 +74,7 @@ class DogCmmActivity : AppCompatActivity() {
 
             //아답터 업데이트
             binding.recyclerDogCmm.adapter?.notifyDataSetChanged()
+            binding.swipeRefreshLayout.isRefreshing = false
         }.addOnFailureListener { exception ->
 
         }

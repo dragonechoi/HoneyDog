@@ -1,20 +1,16 @@
 package com.cys.honeydog.fragments
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
@@ -32,9 +28,6 @@ class ProfilMainFragment : Fragment() {
 
     var imgUri: Uri? = null
     var nickname: String? = null
-
-
-
 
 
     override fun onCreateView(
@@ -86,11 +79,8 @@ class ProfilMainFragment : Fragment() {
             }
 
 
-
-
     }
 
-    @SuppressLint("SuspiciousIndentation")
     fun ClickChangeProfileBtn() {
         val db = FirebaseFirestore.getInstance()
         val documentRef = db.collection("idUsers").document(G.userAccount!!.id)
@@ -131,7 +121,7 @@ class ProfilMainFragment : Fragment() {
         } else {
             // 이미지가 선택되지 않은 경우, 프로필 정보 업데이트
             documentRef.update(updates).addOnSuccessListener {
-                // 업데이트 성공
+                Log.i("이미지 업로드 성공", "성공")
 
             }.addOnFailureListener { e ->
 
@@ -152,7 +142,7 @@ class ProfilMainFragment : Fragment() {
             }
             .addOnFailureListener {
                 // 업데이트 실패
-
+                Toast.makeText(context, "프로필 변경 실패", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -176,6 +166,7 @@ class ProfilMainFragment : Fragment() {
             // 호출 실패 시 처리할 내용
         }
     }
+
     private fun clickChangeProfile() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
         resultLauncher.launch(intent)

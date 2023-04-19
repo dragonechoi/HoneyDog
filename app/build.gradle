@@ -52,6 +52,8 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.4.0")
 
+    //게시글 화면 갱신을 위한라이브러리
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
     //FireBaseLibs
     implementation platform('com.google.firebase:firebase-bom:31.3.0')
