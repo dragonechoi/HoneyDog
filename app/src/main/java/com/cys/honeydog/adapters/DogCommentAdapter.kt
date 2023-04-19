@@ -43,12 +43,14 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
         holder.binding.commentTv.text = commentItem.comment
         holder.binding.commentNum.text = commentItem.no.toString()
         holder.binding.commentNickname.text = commentItem.nickname
+        holder.binding.commentNum.text = commentItem.commentNum.toString()
 
         //가져온 FireBase 데이터를 리사이클러뷰 아이템에 적용
         commentDater(
             holder.binding.civCommentProfile,
             holder.binding.commentNickname,
             holder.binding.commentTv,
+            holder.binding.commentNum,
             holder.binding.commentNum
         )
 
@@ -58,8 +60,8 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
         profileView: CircleImageView,
         nicknameView: TextView,
         commentView: TextView,
-        numView: TextView
-
+        numView: TextView,
+        commentNumView :TextView
 
     ) {
         val firestore = FirebaseFirestore.getInstance()
@@ -74,11 +76,14 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
                     val nickname = snapshot.getString("nickname")
                     val comment = snapshot.getString("comment")
                     val no = snapshot.getString("no").toString()
+                    val dogcommentNum = snapshot.getString("commentNum").toString()
 
                     Glide.with(context).load(profile).into(profileView)
                     nicknameView.text = nickname
                     commentView.text = comment
                     numView.text = no
+                    commentNumView.text=dogcommentNum
+
 
                 }
             }

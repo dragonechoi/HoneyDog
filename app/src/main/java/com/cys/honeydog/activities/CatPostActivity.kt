@@ -24,7 +24,9 @@ class CatPostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<CommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
-    private var commentNum = 0 // 코멘트 고유 식별번호 추가
+   companion object{
+       var commentNum = 0 // 코멘트 고유 식별번호 추가
+   }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +71,7 @@ class CatPostActivity : AppCompatActivity() {
             // comment 컬렉션에 댓글 저장
             val commentDocRef = fireStore.collection("CatComment").document()
             //식별값 증가
-            commentNum++
+            commentNum ++
 
             val commentItem = hashMapOf(
                 "comment" to binding.etComment.text.toString(),

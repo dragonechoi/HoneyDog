@@ -8,7 +8,6 @@ import com.cys.honeydog.databinding.ActivityDogCmmBinding
 import com.cys.honeydog.model.DogCmmItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.ktx.toObject
 
 class DogCmmActivity : AppCompatActivity() {
     val binding: ActivityDogCmmBinding by lazy { ActivityDogCmmBinding.inflate(layoutInflater) }

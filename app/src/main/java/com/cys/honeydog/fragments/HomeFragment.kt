@@ -16,6 +16,7 @@ import com.cys.honeydog.databinding.FragmentHomeBinding
 import com.cys.honeydog.model.DogCmmItem
 import com.cys.honeydog.model.MiniCmtItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.toObject
 
 
@@ -24,6 +25,10 @@ class HomeFragment : Fragment() {
 
     var item: MutableList<MiniCmtItem> = mutableListOf()
     lateinit var adapter: MiniCmtItemAdapter
+
+    companion object{
+        var commentNum = 0
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +70,7 @@ class HomeFragment : Fragment() {
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
         val postRef = fireStore.collection("Post")
+            .orderBy("no", Query.Direction.DESCENDING)
 
         //Post 컬렉션데이터 호출
         postRef.get().addOnSuccessListener { documents ->

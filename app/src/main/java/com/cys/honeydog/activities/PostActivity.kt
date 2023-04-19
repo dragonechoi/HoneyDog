@@ -3,6 +3,7 @@ package com.cys.honeydog.activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import com.cys.honeydog.adapters.DogCommentAdapter
 import com.cys.honeydog.databinding.ActivityPostBinding
 import com.cys.honeydog.model.DogCommentItem
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class PostActivity : AppCompatActivity() {
     private val binding: ActivityPostBinding by lazy {
@@ -21,6 +23,9 @@ class PostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<DogCommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
+    companion object{
+        var commentNum = 0 // 코멘트 고유 식별번호 추가
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +36,7 @@ class PostActivity : AppCompatActivity() {
         binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
 
 
-
     }
-
-
 
 
     private fun ViewCatPost() {
@@ -69,12 +71,16 @@ class PostActivity : AppCompatActivity() {
 
             // comment 컬렉션에 댓글 저장
             val commentDocRef = fireStore.collection("DogComment").document()
+
+           commentNum++
+
             val commentItem = hashMapOf(
                 "comment" to binding.etComment.text.toString(),
                 "nickname" to nickname,
                 "uid" to userId,
                 "imgUrl" to imageUrl,
-                "no" to no
+                "no" to no,
+                "commentNum" to commentNum
             )
 
             commentDocRef.set(commentItem).addOnCompleteListener { task ->
@@ -97,8 +103,9 @@ class PostActivity : AppCompatActivity() {
 
     private fun loadComments() {
         val fireStore = FirebaseFirestore.getInstance()
-        val commentRef =
-            fireStore.collection("DogComment").whereEqualTo("no", intent.getIntExtra("no", -1))
+        val commentRef = fireStore.collection("DogComment")
+            .whereEqualTo("no", intent.getIntExtra("no", -1))
+            .orderBy("commentNum",Query.Direction.DESCENDING)
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
@@ -108,7 +115,8 @@ class PostActivity : AppCompatActivity() {
             }
             binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
         }.addOnFailureListener { exception ->
-
+            Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
+                Log.i("Error","${exception.message}")
         }
     }
 }
