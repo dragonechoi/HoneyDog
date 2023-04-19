@@ -2,6 +2,7 @@ package com.cys.honeydog.activities
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.cys.honeydog.databinding.ActivityCatPostBinding
 import com.cys.honeydog.model.CommentItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlin.math.log
 
 class CatPostActivity : AppCompatActivity() {
     private val binding: ActivityCatPostBinding by lazy {
@@ -101,12 +103,13 @@ class CatPostActivity : AppCompatActivity() {
         val fireStore = FirebaseFirestore.getInstance()
         val commentRef = fireStore.collection("CatComment")
             .whereEqualTo("no", intent.getIntExtra("no", -1))
+            .orderBy("commentNum",Query.Direction.DESCENDING)
 
-            
 
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
+            Log.i("클리어","클리어 완료 ")
             for (document in documents) {
                 val comment = document.toObject(CommentItem::class.java)
                 commentList.add(comment)
@@ -115,6 +118,7 @@ class CatPostActivity : AppCompatActivity() {
         }.addOnFailureListener { exception ->
             // 실패 시 동작
             Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
+            Log.i("Error","${exception.message}")
         }
     }
 }

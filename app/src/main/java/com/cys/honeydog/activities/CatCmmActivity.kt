@@ -64,7 +64,8 @@ class CatCmmActivity : AppCompatActivity() {
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
-        val postRef = fireStore.collection("catPost").orderBy("no", Query.Direction.DESCENDING)
+        val postRef = fireStore.collection("catPost")
+            .orderBy("no", Query.Direction.DESCENDING)
 
         item.clear()
 
