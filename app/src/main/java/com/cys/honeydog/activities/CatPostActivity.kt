@@ -33,6 +33,8 @@ class CatPostActivity : AppCompatActivity() {
         ViewCatPost()
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
+        binding.like.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
+        binding.unlike.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
 
     }
 

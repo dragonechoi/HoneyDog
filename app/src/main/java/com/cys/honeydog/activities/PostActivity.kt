@@ -55,6 +55,8 @@ class PostActivity : AppCompatActivity() {
         binding.id.text = id
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
+        binding.like.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
+            binding.unlike.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
         loadComments()
     }
 
