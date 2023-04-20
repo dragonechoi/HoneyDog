@@ -12,6 +12,7 @@ import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.DogCommentAdapter
 import com.cys.honeydog.databinding.ActivityPostBinding
 import com.cys.honeydog.model.DogCommentItem
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -23,9 +24,7 @@ class PostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<DogCommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
-    companion object{
-        var commentNum = 0 // 코멘트 고유 식별번호 추가
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,14 +53,15 @@ class PostActivity : AppCompatActivity() {
         binding.postText.text = postText
         binding.postId.text = nickname
         binding.id.text = id
-        loadComments()
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
+        loadComments()
     }
 
     private fun commentUpload(no: Int) {
         val fireStore = FirebaseFirestore.getInstance()
         val userId = G.userAccount?.id ?: return
+
 
         // idUsers 컬렉션에서 유저의 닉네임과 imgUrl 가져오기
         val idUserDocRef = fireStore.collection("idUsers").document(userId)
@@ -69,32 +69,39 @@ class PostActivity : AppCompatActivity() {
             val nickname = idUserDocSnapshot.getString("nickname") ?: UserProfile?.nickname
             val imageUrl = idUserDocSnapshot.getString("imageUrl") ?: UserProfile?.ProfileUri
 
-            // comment 컬렉션에 댓글 저장
-            val commentDocRef = fireStore.collection("DogComment").document()
+            //댓글 저장
+            val commentRef = fireStore.collection("DogComment")
+            commentRef.orderBy("DogCommentNum", Query.Direction.DESCENDING).limit(1)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    val commentNum = if (!querySnapshot.isEmpty) {
+                        querySnapshot.documents[0].getLong("DogCommentNum")!! + 1
+                    } else {
+                        1
+                    }
+                    val commentItem = hashMapOf(
+                        "comment" to binding.etComment.text.toString(),
+                        "nickname" to nickname,
+                        "uid" to userId,
+                        "imgUrl" to imageUrl,
+                        "no" to no,
+                        "DogCommentNum" to commentNum
+                    )
 
-           commentNum++
+                commentRef.document().set(commentItem).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
 
-            val commentItem = hashMapOf(
-                "comment" to binding.etComment.text.toString(),
-                "nickname" to nickname,
-                "uid" to userId,
-                "imgUrl" to imageUrl,
-                "no" to no,
-                "commentNum" to commentNum
-            )
+                        Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
+                        loadComments()
 
-            commentDocRef.set(commentItem).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
-                    loadComments()
-
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
-                    binding.etComment.text.clear()
+                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
+                        binding.etComment.text.clear()
 
 
-                } else {
-                    Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
@@ -105,10 +112,11 @@ class PostActivity : AppCompatActivity() {
         val fireStore = FirebaseFirestore.getInstance()
         val commentRef = fireStore.collection("DogComment")
             .whereEqualTo("no", intent.getIntExtra("no", -1))
-            .orderBy("commentNum",Query.Direction.DESCENDING)
+            .orderBy("DogCommentNum",Query.Direction.DESCENDING)
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
+
             for (document in documents) {
                 val comment = document.toObject(DogCommentItem::class.java)
                 commentList.add(comment)

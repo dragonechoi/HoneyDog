@@ -164,6 +164,7 @@ class ProfilMainFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }.addOnFailureListener {
             // 호출 실패 시 처리할 내용
+            Log.i("Error",it.message.toString())
         }
     }
 

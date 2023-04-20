@@ -60,7 +60,8 @@ class DogCmmActivity : AppCompatActivity() {
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
-        val postRef = fireStore.collection("Post").orderBy("no", Query.Direction.DESCENDING)
+        val postRef = fireStore.collection("Post")
+            .orderBy("no", Query.Direction.DESCENDING)
 
         //Post 컬렉션데이터 호춣
         postRef.get().addOnSuccessListener { documents ->

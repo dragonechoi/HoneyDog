@@ -43,7 +43,7 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
         holder.binding.commentTv.text = commentItem.comment
         holder.binding.commentNum.text = commentItem.no.toString()
         holder.binding.commentNickname.text = commentItem.nickname
-        holder.binding.commentNum.text = commentItem.commentNum.toString()
+        holder.binding.commentNum.text = commentItem.DogCommentNum.toString()
 
         //가져온 FireBase 데이터를 리사이클러뷰 아이템에 적용
         commentDater(
