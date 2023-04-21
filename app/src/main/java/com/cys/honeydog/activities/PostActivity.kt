@@ -1,18 +1,17 @@
 package com.cys.honeydog.activities
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.DogCommentAdapter
 import com.cys.honeydog.databinding.ActivityPostBinding
 import com.cys.honeydog.model.DogCommentItem
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -55,8 +54,10 @@ class PostActivity : AppCompatActivity() {
         binding.id.text = id
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
-        binding.like.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
-            binding.unlike.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
+        binding.like.setOnClickListener { Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show() }
+        binding.unlike.setOnClickListener {
+            Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()
+        }
         loadComments()
     }
 
@@ -90,22 +91,23 @@ class PostActivity : AppCompatActivity() {
                         "DogCommentNum" to commentNum
                     )
 
-                commentRef.document().set(commentItem).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+                    commentRef.document().set(commentItem).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
 
-                        Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
-                        loadComments()
+                            Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
+                            loadComments()
 
-                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
-                        binding.etComment.text.clear()
+                            val imm =
+                                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
+                            binding.etComment.text.clear()
 
 
-                    } else {
-                        Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -114,7 +116,7 @@ class PostActivity : AppCompatActivity() {
         val fireStore = FirebaseFirestore.getInstance()
         val commentRef = fireStore.collection("DogComment")
             .whereEqualTo("no", intent.getIntExtra("no", -1))
-            .orderBy("DogCommentNum",Query.Direction.DESCENDING)
+            .orderBy("DogCommentNum", Query.Direction.DESCENDING)
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
@@ -126,7 +128,7 @@ class PostActivity : AppCompatActivity() {
             binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
         }.addOnFailureListener { exception ->
             Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
-                Log.i("Error","${exception.message}")
+            Log.i("Error", "${exception.message}")
         }
     }
 }

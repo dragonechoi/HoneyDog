@@ -40,7 +40,8 @@
             android:id="@+id/id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/post_id"
             android:layout_width="wrap_content"
@@ -49,14 +50,14 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/post_civ"
-            android:text="닉네임"/>
+            android:text="닉네임" />
 
         <TextView
             android:id="@+id/end_lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/post_civ"
-            android:text="=====================================================" />
+            android:text="===================================================" />
 
 
         <RelativeLayout
@@ -176,20 +177,20 @@
             android:layout_marginRight="13sp"
             android:text="공유하기"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/delete_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/like"
-            android:layout_toLeftOf="@id/share_post"
-            android:text="삭제"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/share_post"
+            android:clickable="true"
+            android:text="삭제"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:clickable="true"/>
+            android:textStyle="bold" />
 
 
         <EditText
@@ -201,11 +202,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/bg_login_btn"
+            android:gravity="start"
+            android:hint="댓글 입력"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:hint="댓글 입력"
-            android:gravity="start"
-            android:padding="8dp"/>
+            android:padding="8dp" />
 
         <Button
             android:id="@+id/comment_btn"
@@ -226,8 +227,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/et_comment"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </RelativeLayout>

@@ -4,17 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
-    android:background="#D7B306">
+    android:background="#D7B306"
+    tools:context=".activities.MainActivity">
 
 
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
+        android:layout_height="match_parent" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        app:menu="@menu/menu_bottom_navigation"
         android:background="@drawable/round"
-        app:itemTextColor="@color/black"/>
+        app:itemTextColor="@color/black"
+        app:menu="@menu/menu_bottom_navigation" />
 </RelativeLayout>

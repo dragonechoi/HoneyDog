@@ -12,8 +12,6 @@ import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.databinding.RecyclerCommunityListItemBinding
 import com.cys.honeydog.model.DogCmmItem
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
     RecyclerView.Adapter<DogCmmAdapter.VH>() {

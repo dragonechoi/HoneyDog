@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ProfilMainFragment"
-    android:background="#cde4c4">
+    android:background="#cde4c4"
+    tools:context=".fragments.ProfilMainFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profil_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/franch_pw"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp"
+        android:src="@drawable/franch_pw" />
 
     <TextView
         android:id="@+id/profil_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="닉네임"
         android:layout_below="@id/profil_image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textStyle="bold"/>
+        android:text="닉네임"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_name_change"
@@ -32,10 +32,10 @@
         android:layout_below="@id/profil_nickname"
         android:layout_centerHorizontal="true"
         android:hint="닉네임 변경"
-        android:textSize="10sp"
-        android:maxLength="15"
         android:inputType="text"
-        android:maxLines="0"/>
+        android:maxLength="15"
+        android:maxLines="0"
+        android:textSize="10sp" />
 
     <LinearLayout
         android:id="@+id/profil_change"
@@ -44,25 +44,20 @@
         android:layout_below="@id/et_name_change"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:clickable="true">
+        android:clickable="true"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/ch_profile_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:backgroundTint="@color/black"
             android:text="프로필 저장 완료"
             android:textSize="10sp"
-            android:textStyle="bold"
-            android:layout_marginLeft="12dp"
-            android:backgroundTint="@color/black"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
-
-
-
-
-
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -74,14 +69,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="vertical"
-        app:spanCount="2"
-        android:visibility="invisible"/>
-
-
-
-
+        android:visibility="invisible"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />
 
 
 </RelativeLayout>

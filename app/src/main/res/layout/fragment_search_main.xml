@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#31cdda"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SearchMainFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
@@ -21,25 +22,25 @@
                 android:id="@+id/et_search"
                 android:layout_width="170dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_login_btn"
+                android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:hint="검색어 입력"
-                android:inputType="text"
-                android:textSize="12sp"
-                android:gravity="center"
-                android:imeOptions="actionSearch"
                 android:layout_marginRight="8dp"
-                android:layout_gravity="center"/>
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_login_btn"
+                android:gravity="center"
+                android:hint="검색어 입력"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textSize="12sp" />
+
             <Button
                 android:id="@+id/search_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="검색"
                 android:layout_gravity="right"
                 android:layout_marginRight="16dp"
                 android:backgroundTint="@color/black"
-                />
+                android:text="검색" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -53,11 +54,11 @@
                 android:id="@+id/recycler_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="2dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="vertical"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"/>
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical"
+                android:padding="2dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
         </LinearLayout>

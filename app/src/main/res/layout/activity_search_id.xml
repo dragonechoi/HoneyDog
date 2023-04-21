@@ -4,78 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SearchIdActivity"
-    android:background="#FFF0F5">
-
+    android:background="#FFF0F5"
+    tools:context=".activities.SearchIdActivity">
 
 
     <ImageView
         android:id="@+id/love_dogid"
         android:layout_width="180dp"
         android:layout_height="100dp"
-        android:src="@drawable/search_name_bc"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:background="#FFF0F5" />
+        android:background="#FFF0F5"
+        android:src="@drawable/search_name_bc" />
 
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kotra_hope"
-        android:text="닉네임"
-        android:textSize="30sp"
         android:layout_below="@id/love_dogid"
+        android:fontFamily="@font/kotra_hope"
         android:padding="8dp"
-        />
+        android:text="닉네임"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/search_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
         android:layout_below="@id/love_dogid"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/tv_name"
+        android:ems="15"
         android:hint="닉네임 입력"
         android:inputType="text"
-        android:maxLines="1"
-        android:layout_toRightOf="@id/tv_name"
-        android:layout_marginLeft="8dp"/>
+        android:maxLines="1" />
 
 
     <TextView
         android:id="@+id/tv_animalType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kotra_hope"
-        android:text="견종"
-        android:textSize="30sp"
         android:layout_below="@id/tv_name"
-        android:padding="8dp"/>
+        android:fontFamily="@font/kotra_hope"
+        android:padding="8dp"
+        android:text="견종"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/search_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
         android:layout_below="@id/search_nickname"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/tv_animalType"
+        android:ems="15"
         android:hint="견종 입력"
         android:inputType="text"
-        android:maxLines="1"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/tv_animalType" />
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/btn_id"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="아이디 찾기"
         android:layout_below="@id/search_id"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/kotra_hope"/>
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/kotra_hope"
+        android:text="아이디 찾기" />
 
 
 </RelativeLayout>

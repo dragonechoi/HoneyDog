@@ -81,8 +81,8 @@ class NewPostCatActivity : AppCompatActivity() {
             catPostRef.get().addOnSuccessListener { querySnapshot ->
                 val no = querySnapshot.size() + 1
                 catPost["no"] = no
-            catPostRef.add(catPost).addOnSuccessListener {
-                    val commentData: MutableMap<String,Any> = HashMap()
+                catPostRef.add(catPost).addOnSuccessListener {
+                    val commentData: MutableMap<String, Any> = HashMap()
                     commentData["timestamp"] = FieldValue.serverTimestamp()
                     commentData["userId"] = userId
                     commentData["nickname"] = nickname
@@ -122,7 +122,11 @@ class NewPostCatActivity : AppCompatActivity() {
                                 Toast.makeText(this, "게시글 업로드 성공", Toast.LENGTH_SHORT).show()
                                 finish()
                             }.addOnFailureListener {
-                                Toast.makeText(this, "게시글 업로드에 실패 했습니다 다시 확인 부탁드립니다.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "게시글 업로드에 실패 했습니다 다시 확인 부탁드립니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }.addOnFailureListener { e ->
 

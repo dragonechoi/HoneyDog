@@ -2,12 +2,12 @@ package com.cys.honeydog.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.cys.honeydog.adapters.SearchFragmentAdapter
 import com.cys.honeydog.databinding.FragmentSearchMainBinding
 import com.cys.honeydog.network.AniMalHospital
@@ -20,12 +20,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-class SearchMainFragment: Fragment() {
+class SearchMainFragment : Fragment() {
     private lateinit var Binding: FragmentSearchMainBinding
-    var  item:MutableList<AniMalHospital> = mutableListOf()
+    var item: MutableList<AniMalHospital> = mutableListOf()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { Binding = FragmentSearchMainBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Binding = FragmentSearchMainBinding.inflate(inflater, container, false)
 
         return Binding.root
 
@@ -36,33 +41,36 @@ class SearchMainFragment: Fragment() {
 
 
 
-        Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(), item)
-        Binding.searchBtn.setOnClickListener{searchDataHospital()}
+        Binding.recyclerSearch.adapter = SearchFragmentAdapter(requireContext(), item)
+        Binding.searchBtn.setOnClickListener { searchDataHospital() }
 
     }
 
-    fun searchDataHospital(){
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    fun searchDataHospital() {
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
 
-        val retrofit:Retrofit=Retrofit.Builder()
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://openapi.naver.com")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val retrofitService:RetrofitService=retrofit.create(RetrofitService::class.java)
+        val retrofitService: RetrofitService = retrofit.create(RetrofitService::class.java)
 
-        val call: Call<RetRofitHospital> =retrofitService.searchDataByJson(Binding.etSearch.text.toString())
+        val call: Call<RetRofitHospital> =
+            retrofitService.searchDataByJson(Binding.etSearch.text.toString())
 
-        call.enqueue(object  : Callback<RetRofitHospital>{
+        call.enqueue(object : Callback<RetRofitHospital> {
             override fun onResponse(
                 call: Call<RetRofitHospital>,
                 response: Response<RetRofitHospital>
             ) {
-                val naverSearch : RetRofitHospital? = response.body()
+                val naverSearch: RetRofitHospital? = response.body()
 
-                Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(),naverSearch!!.items)
+                Binding.recyclerSearch.adapter =
+                    SearchFragmentAdapter(requireContext(), naverSearch!!.items)
 
             }
 

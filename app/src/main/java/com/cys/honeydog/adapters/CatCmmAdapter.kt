@@ -11,23 +11,13 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.R
-import com.cys.honeydog.UserAccount
 import com.cys.honeydog.activities.CatPostActivity
-import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.databinding.RecyclerCommunityListItemBinding
 import com.cys.honeydog.model.CatCmmItem
-import com.cys.honeydog.model.DogCmmItem
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import org.w3c.dom.Text
 
 class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
     Adapter<CatCmmAdapter.VH>() {
-
-
-
-
-
 
 
     inner class VH(val binding: RecyclerCommunityListItemBinding) :
@@ -84,6 +74,7 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             context.startActivity(intent)
         }
     }
+
     private fun loadCatPost(titleView: TextView, img: ImageView, nicknameView: TextView) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("catPost")

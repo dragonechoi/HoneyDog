@@ -3,81 +3,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SearchPwActivity"
-    android:background="#C8BFE7">
-
-
-
-
+    android:background="#C8BFE7"
+    tools:context=".activities.SearchPwActivity">
 
 
     <ImageView
         android:id="@+id/love_dogid"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/franch_pw"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:src="@drawable/franch_pw" />
 
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kotra_hope"
-        android:text="닉네임"
-        android:textSize="30sp"
         android:layout_below="@id/love_dogid"
-        android:padding="8dp"/>
+        android:fontFamily="@font/kotra_hope"
+        android:padding="8dp"
+        android:text="닉네임"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/search_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
         android:layout_below="@id/love_dogid"
+        android:layout_alignLeft="@id/search_id"
+        android:layout_toRightOf="@id/tv_name"
+        android:ems="15"
         android:hint="이름 입력"
         android:inputType="text"
-        android:maxLines="1"
-        android:layout_toRightOf="@id/tv_name"
-        android:layout_alignLeft="@id/search_id"/>
+        android:maxLines="1" />
 
 
     <TextView
         android:id="@+id/tv_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/kotra_hope"
-        android:text="아이디"
-        android:textSize="30sp"
         android:layout_below="@id/tv_name"
-        android:padding="8dp"/>
+        android:fontFamily="@font/kotra_hope"
+        android:padding="8dp"
+        android:text="아이디"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/search_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="15"
         android:layout_below="@id/search_nickname"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/tv_id"
+        android:ems="15"
         android:hint="아이디 입력"
         android:inputType="text"
-        android:maxLines="1"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/tv_id" />
-
-
+        android:maxLines="1" />
 
 
     <Button
         android:id="@+id/search_btn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="비밀번호 찾기"
-        android:fontFamily="@font/kotra_hope"
-        android:backgroundTint="@color/black"
         android:layout_below="@id/tv_id"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="18dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/kotra_hope"
+        android:text="비밀번호 찾기" />
 
 </RelativeLayout>

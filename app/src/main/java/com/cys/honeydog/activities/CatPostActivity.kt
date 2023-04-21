@@ -33,8 +33,10 @@ class CatPostActivity : AppCompatActivity() {
         ViewCatPost()
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
-        binding.like.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
-        binding.unlike.setOnClickListener{ Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()}
+        binding.like.setOnClickListener { Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show() }
+        binding.unlike.setOnClickListener {
+            Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -107,32 +109,31 @@ class CatPostActivity : AppCompatActivity() {
     }
 
 
-
-        fun loadComments() {
-            val fireStore = FirebaseFirestore.getInstance()
-            val commentRef = fireStore.collection("CatComment")
-                .whereEqualTo("no", intent.getIntExtra("no", -1))
-                .orderBy("commentNum", Query.Direction.DESCENDING)
-
+    fun loadComments() {
+        val fireStore = FirebaseFirestore.getInstance()
+        val commentRef = fireStore.collection("CatComment")
+            .whereEqualTo("no", intent.getIntExtra("no", -1))
+            .orderBy("commentNum", Query.Direction.DESCENDING)
 
 
 
-            commentRef.get().addOnSuccessListener { documents ->
-                commentList.clear()
-                Log.i("클리어", "클리어 완료 ")
 
-                for (document in documents) {
-                    val comment = document.toObject(CommentItem::class.java)
-                    commentList.add(comment)
-                }
-                binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
-            }.addOnFailureListener { exception ->
-                // 실패 시 동작
-                Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
-                Log.i("Error", "${exception.message}")
+        commentRef.get().addOnSuccessListener { documents ->
+            commentList.clear()
+            Log.i("클리어", "클리어 완료 ")
+
+            for (document in documents) {
+                val comment = document.toObject(CommentItem::class.java)
+                commentList.add(comment)
             }
+            binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
+        }.addOnFailureListener { exception ->
+            // 실패 시 동작
+            Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
+            Log.i("Error", "${exception.message}")
         }
-
     }
+
+}
 
 

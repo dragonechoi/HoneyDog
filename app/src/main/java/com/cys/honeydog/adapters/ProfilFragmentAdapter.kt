@@ -10,11 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.activities.PostActivity
 import com.cys.honeydog.model.ProfilRecyclerItem
-import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfilFragmentAdapter constructor(
     var context: Context,
@@ -50,7 +48,7 @@ class ProfilFragmentAdapter constructor(
             intent.putExtra("nickname", post.nickname)
             intent.putExtra("postText", post.postText)
             intent.putExtra("id", post.id)
-            intent.putExtra("profile",post.profileUrl)
+            intent.putExtra("profile", post.profileUrl)
 
 
             context.startActivity(intent)

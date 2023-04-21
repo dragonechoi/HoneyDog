@@ -46,14 +46,15 @@ class DogCmmActivity : AppCompatActivity() {
 
     fun newPostBtn() {
         startActivity(
-            Intent(this, NewPostActivity::class.java ))
+            Intent(this, NewPostActivity::class.java)
+        )
     }
 
     override fun onResume() {
         super.onResume()
         binding.swipeRefreshLayout.setOnRefreshListener {
             loadData()
-                binding.swipeRefreshLayout.isEnabled=true
+            binding.swipeRefreshLayout.isEnabled = true
         }
 
     }

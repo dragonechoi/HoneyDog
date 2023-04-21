@@ -56,13 +56,12 @@ class CatCommentAdapter(var context: Context, var items: MutableList<CommentItem
     }
 
 
-
     private fun commentDater(
         profileView: CircleImageView,
         nicknameView: TextView,
         commentView: TextView,
         numView: TextView,
-        commentNumView : TextView
+        commentNumView: TextView
     ) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("CatComment")
@@ -76,14 +75,14 @@ class CatCommentAdapter(var context: Context, var items: MutableList<CommentItem
                     val nickname = snapshot.getString("nickname")
                     val comment = snapshot.getString("comment")
                     val no = snapshot.getString("no").toString()
-                    val catCommentNum= snapshot.getString("commentNum").toString()
+                    val catCommentNum = snapshot.getString("commentNum").toString()
 
 
                     Glide.with(context).load(profile).into(profileView)
                     nicknameView.text = nickname
                     commentView.text = comment
                     numView.text = no
-                    commentNumView.text=catCommentNum
+                    commentNumView.text = catCommentNum
                 }
             }
     }

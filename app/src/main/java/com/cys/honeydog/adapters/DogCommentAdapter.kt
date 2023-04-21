@@ -3,7 +3,6 @@ package com.cys.honeydog.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.R
 import com.cys.honeydog.databinding.RecyclerCommentItemBinding
-import com.cys.honeydog.model.CommentItem
 import com.cys.honeydog.model.DogCommentItem
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
@@ -61,7 +59,7 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
         nicknameView: TextView,
         commentView: TextView,
         numView: TextView,
-        commentNumView :TextView
+        commentNumView: TextView
 
     ) {
         val firestore = FirebaseFirestore.getInstance()
@@ -82,7 +80,7 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
                     nicknameView.text = nickname
                     commentView.text = comment
                     numView.text = no
-                    commentNumView.text=dogcommentNum
+                    commentNumView.text = dogcommentNum
 
 
                 }

@@ -26,7 +26,7 @@ import java.util.Date
 class ProfilMainFragment : Fragment() {
     private lateinit var Binding: FragmentProfilMainBinding
     var item: MutableList<ProfilRecyclerItem> = mutableListOf()
-   lateinit var Pcontext: Context
+    lateinit var Pcontext: Context
     var imgUri: Uri? = null
     var nickname: String? = null
 
@@ -188,7 +188,7 @@ class ProfilMainFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Pcontext=context
+        Pcontext = context
     }
 
 }

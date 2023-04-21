@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CatCmmActivity"
-    android:background="#ffc4ed">
+    android:background="#ffc4ed"
+    tools:context=".activities.CatCmmActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/dog_community_appbar"
@@ -17,44 +17,44 @@
         android:id="@+id/community_intent_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/dog_community_appbar"
+        android:layout_alignParentRight="true"
         android:backgroundTint="@color/white"
         android:text="강아지 커뮤니티 이동"
-        android:textColor="@color/black"
-        android:layout_below="@id/dog_community_appbar"
-        android:layout_alignParentRight="true"/>
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/go_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
         android:layout_below="@id/dog_community_appbar"
+        android:layout_marginLeft="130dp"
+        android:backgroundTint="@color/white"
         android:text="홈"
-        android:textColor="@color/black"
-        android:layout_marginLeft="130dp"/>
+        android:textColor="@color/black" />
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@id/community_intent_btn">
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_cat_cmm"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"/>
+        android:layout_below="@id/community_intent_btn">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_cat_cmm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
-
-</RelativeLayout>
+    </RelativeLayout>
 
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -63,10 +63,10 @@
         android:layout_height="80dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="45dp"
         android:layout_marginRight="18dp"
-        android:src="@drawable/ic_action_post"
-        android:clickable="true"/>
+        android:layout_marginBottom="45dp"
+        android:clickable="true"
+        android:src="@drawable/ic_action_post" />
 
 
 </RelativeLayout>
