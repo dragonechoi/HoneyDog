@@ -1,18 +1,23 @@
 package com.cys.honeydog.fragments
 
+import android.content.ClipData.Item
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.cys.honeydog.activities.CatCmmActivity
 import com.cys.honeydog.activities.DogCmmActivity
 import com.cys.honeydog.adapters.MiniCmtItemAdapter
 import com.cys.honeydog.databinding.FragmentHomeBinding
+import com.cys.honeydog.model.DogCmmItem
 import com.cys.honeydog.model.MiniCmtItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.toObject
 
 
 class HomeFragment : Fragment() {
@@ -21,7 +26,7 @@ class HomeFragment : Fragment() {
     var item: MutableList<MiniCmtItem> = mutableListOf()
     lateinit var adapter: MiniCmtItemAdapter
 
-    companion object {
+    companion object{
         var commentNum = 0
     }
 
@@ -69,8 +74,8 @@ class HomeFragment : Fragment() {
 
         //Post 컬렉션데이터 호출
         postRef.get().addOnSuccessListener { documents ->
-            for (document in documents) {
-                val post = document.toObject(MiniCmtItem::class.java)
+            for (document in documents){
+                val post=document.toObject(MiniCmtItem::class.java)
                 item.add(post)
             }
             // 데이터를 모두 가져온 후 어댑터 설정

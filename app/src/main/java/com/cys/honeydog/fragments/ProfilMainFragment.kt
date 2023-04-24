@@ -1,7 +1,6 @@
 package com.cys.honeydog.fragments
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -26,9 +25,10 @@ import java.util.Date
 class ProfilMainFragment : Fragment() {
     private lateinit var Binding: FragmentProfilMainBinding
     var item: MutableList<ProfilRecyclerItem> = mutableListOf()
-    lateinit var Pcontext: Context
+
     var imgUri: Uri? = null
     var nickname: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,7 +71,7 @@ class ProfilMainFragment : Fragment() {
 
                     // Glide를 사용하여 이미지 로드 및 ImageView에 설정
                     if (profileUrl != null) {
-                        Glide.with(Pcontext)
+                        Glide.with(this)
                             .load(profileUrl)
                             .into(Binding.profilImage)
                     }
@@ -111,6 +111,7 @@ class ProfilMainFragment : Fragment() {
                     // 프로필 정보 업데이트
                     documentRef.update(updates).addOnSuccessListener {
 
+
                     }.addOnFailureListener { e ->
                         // 업데이트 실패
 
@@ -137,14 +138,12 @@ class ProfilMainFragment : Fragment() {
         documentRef.update(updates)
             .addOnSuccessListener {
                 // 업데이트 성공
-                Toast.makeText(Pcontext, "프로필 변경 완료", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "프로필 변경 완료", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 // 업데이트 실패
-                Toast.makeText(Pcontext, "프로필 변경 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "프로필 변경 실패", Toast.LENGTH_SHORT).show()
             }
-
-        Binding.etNameChange.text.clear()
     }
 
 
@@ -165,7 +164,7 @@ class ProfilMainFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }.addOnFailureListener {
             // 호출 실패 시 처리할 내용
-            Log.i("Error", it.message.toString())
+            Log.i("Error",it.message.toString())
         }
     }
 
@@ -185,10 +184,4 @@ class ProfilMainFragment : Fragment() {
 
         }
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Pcontext = context
-    }
-
 }

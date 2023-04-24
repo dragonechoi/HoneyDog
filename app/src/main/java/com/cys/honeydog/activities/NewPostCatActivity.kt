@@ -1,5 +1,6 @@
 package com.cys.honeydog.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
@@ -24,6 +26,7 @@ class NewPostCatActivity : AppCompatActivity() {
             layoutInflater
         )
     }
+    private var backPressedTime: Long = 0 // 뒤로가기 버튼을 누른 시간을 저장할 변수
     var imguri: Uri? = null
     var profileUrl: String? = null
 
@@ -39,6 +42,23 @@ class NewPostCatActivity : AppCompatActivity() {
         saveUserProfile()
 
 
+    }
+
+    override fun onBackPressed() {
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - backPressedTime < 2000) { // 2초 이내에 뒤로가기 버튼을 다시 누른 경우
+            super.onBackPressed()
+        } else {
+            backPressedTime = currentTime // 이전 시간을 현재 시간으로 대체
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+            builder.setMessage("게시글 작성을 종료 하시겠습니까??")
+            builder.setPositiveButton("예",
+                DialogInterface.OnClickListener { dialog, which ->
+                    finish() // 앱을 종료
+                })
+            builder.setNegativeButton("아니오", null)
+            builder.show()
+        }
     }
 
     private fun choiceImg() {

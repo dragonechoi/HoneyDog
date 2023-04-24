@@ -79,7 +79,7 @@ class NewIdActivity : AppCompatActivity() {
     }
 
     fun saveUserId() {
-        val id = binding.etEmail.text.toString().trim()
+        val id = binding.etEmail.text.toString()
         var password: String = binding.etPw.text.toString()
         var passwordConfirm: String = binding.etPwRecheck.text.toString()
         var nickname: String = binding.etName.text.toString()
@@ -94,7 +94,12 @@ class NewIdActivity : AppCompatActivity() {
             binding.etPwRecheck.selectAll()
 
         } else if (!id.matches(regex)) {
-            AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").show()
+            AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").setPositiveButton("확인" , object :DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    finish()
+                }
+
+            }).show()
             binding.etEmail.selectAll()
             return
         }
@@ -104,7 +109,12 @@ class NewIdActivity : AppCompatActivity() {
             .get().addOnSuccessListener {
                 if (it.documents.size > 0) {
                     AlertDialog.Builder(this)
-                        .setMessage("중복된 ID(아이디)가 있습니다\n다시 확인한 후 입력 해주시기 바랍니다.").show()
+                        .setMessage("중복된 ID(아이디)가 있습니다\n다시 확인한 후 입력 해주시기 바랍니다.").setPositiveButton("확인", object : DialogInterface.OnClickListener{
+                            override fun onClick(dialog: DialogInterface?, which: Int) {
+                               finish()
+                            }
+
+                        }).show()
                     binding.etEmail.requestFocus()
                     binding.etEmail.selectAll()
                 } else {
@@ -123,12 +133,10 @@ class NewIdActivity : AppCompatActivity() {
                                 override fun onClick(dialog: DialogInterface?, which: Int) {
                                     finish()
                                 }
-
                             }).show()
 
                     }.addOnFailureListener {
-                        Toast.makeText(this, "회원가입에 오류가 발생했습니다 \n다시 시도해주세요", Toast.LENGTH_SHORT)
-                            .show()
+                       AlertDialog.Builder(this).setMessage("회원가입에 실패 하였습니다")
                     }
                 }
             }.addOnFailureListener {
