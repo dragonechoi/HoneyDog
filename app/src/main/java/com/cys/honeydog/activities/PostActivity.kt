@@ -35,6 +35,7 @@ class PostActivity : AppCompatActivity() {
         binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
 
 
+
     }
 
 
