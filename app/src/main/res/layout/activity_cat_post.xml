@@ -163,6 +163,18 @@
 
 
         </RelativeLayout>
+        <TextView
+            android:id="@+id/delete_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/like"
+            android:layout_toLeftOf="@id/share_post"
+            android:text="삭제"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/share_post"
@@ -174,6 +186,7 @@
             android:layout_marginRight="13sp"
             android:text="공유하기"
             android:textSize="18dp" />
+
 
 
         <EditText

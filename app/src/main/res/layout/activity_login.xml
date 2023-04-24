@@ -16,16 +16,6 @@
         android:layout_marginTop="75dp"
         android:src="@drawable/cogi_love"/>
 
-    <Button
-        android:id="@+id/go_path"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#D7544c"
-        android:text="홈 화면 구경하기"
-        android:fontFamily="@font/kotra_hope"
-        android:textStyle="bold"
-        android:textSize="13sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/layout_id"

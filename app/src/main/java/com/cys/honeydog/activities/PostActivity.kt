@@ -1,16 +1,21 @@
 package com.cys.honeydog.activities
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.DogCommentAdapter
 import com.cys.honeydog.databinding.ActivityPostBinding
+import com.cys.honeydog.model.CatCmmItem
+import com.cys.honeydog.model.DogCmmItem
 import com.cys.honeydog.model.DogCommentItem
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,6 +29,9 @@ class PostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<DogCommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
+    private val postItem : DogCmmItem? = null
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +42,24 @@ class PostActivity : AppCompatActivity() {
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
 
+        binding.sharePost.setOnClickListener { clickSharePost() }
+        binding.like.setOnClickListener { clickLikeUp() }
+        binding.unlike.setOnClickListener { clickUnlikeUp() }
+
 
     }
 
+    private fun  clickUnlikeUp(){
+        Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
+    }
+    private fun clickLikeUp(){
+        Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun clickSharePost(){
+        Toast.makeText(this, "공유 구현 예정", Toast.LENGTH_SHORT).show()
+
+    }
 
     private fun ViewCatPost() {
         val imgUri = intent.getStringExtra("imageUri")
@@ -56,6 +79,27 @@ class PostActivity : AppCompatActivity() {
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
         loadComments()
+
+        binding.deleteTv.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("게시물 삭제")
+                .setMessage("정말로 게시물을 삭제하시겠습니까?")
+                .setPositiveButton("예") { dialog, which ->
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection("Post")
+                        .whereEqualTo("no", no)
+                        .whereEqualTo("id", G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                document.reference.delete()
+                                finish()
+                            }
+                        }
+                }
+                .setNegativeButton("아니오", null)
+                .show()
+        }
     }
 
     private fun commentUpload(no: Int) {
