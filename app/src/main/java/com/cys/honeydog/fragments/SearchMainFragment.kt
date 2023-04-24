@@ -20,12 +20,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-class SearchMainFragment: Fragment() {
+class SearchMainFragment : Fragment() {
     private lateinit var Binding: FragmentSearchMainBinding
-    var  item:MutableList<AniMalHospital> = mutableListOf()
+    var item: MutableList<AniMalHospital> = mutableListOf()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { Binding = FragmentSearchMainBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Binding = FragmentSearchMainBinding.inflate(inflater, container, false)
 
         return Binding.root
 
@@ -36,33 +41,36 @@ class SearchMainFragment: Fragment() {
 
 
 
-        Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(), item)
-        Binding.searchBtn.setOnClickListener{searchDataHospital()}
+        Binding.recyclerSearch.adapter = SearchFragmentAdapter(requireContext(), item)
+        Binding.searchBtn.setOnClickListener { searchDataHospital() }
 
     }
 
-    fun searchDataHospital(){
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    fun searchDataHospital() {
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 1)
 
-        val retrofit:Retrofit=Retrofit.Builder()
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://openapi.naver.com")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val retrofitService:RetrofitService=retrofit.create(RetrofitService::class.java)
+        val retrofitService: RetrofitService = retrofit.create(RetrofitService::class.java)
 
-        val call: Call<RetRofitHospital> =retrofitService.searchDataByJson(Binding.etSearch.text.toString())
+        val call: Call<RetRofitHospital> =
+            retrofitService.searchDataByJson(Binding.etSearch.text.toString())
 
-        call.enqueue(object  : Callback<RetRofitHospital>{
+        call.enqueue(object : Callback<RetRofitHospital> {
             override fun onResponse(
                 call: Call<RetRofitHospital>,
                 response: Response<RetRofitHospital>
             ) {
-                val naverSearch : RetRofitHospital? = response.body()
+                val naverSearch: RetRofitHospital? = response.body()
 
-                Binding.recyclerSearch.adapter=SearchFragmentAdapter(requireContext(),naverSearch!!.items)
+                Binding.recyclerSearch.adapter =
+                    SearchFragmentAdapter(requireContext(), naverSearch!!.items)
 
             }
 

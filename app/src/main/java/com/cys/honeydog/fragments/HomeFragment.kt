@@ -26,9 +26,6 @@ class HomeFragment : Fragment() {
     var item: MutableList<MiniCmtItem> = mutableListOf()
     lateinit var adapter: MiniCmtItemAdapter
 
-    companion object{
-        var commentNum = 0
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,8 +71,8 @@ class HomeFragment : Fragment() {
 
         //Post 컬렉션데이터 호출
         postRef.get().addOnSuccessListener { documents ->
-            for (document in documents){
-                val post=document.toObject(MiniCmtItem::class.java)
+            for (document in documents) {
+                val post = document.toObject(MiniCmtItem::class.java)
                 item.add(post)
             }
             // 데이터를 모두 가져온 후 어댑터 설정
