@@ -94,12 +94,13 @@ class NewIdActivity : AppCompatActivity() {
             binding.etPwRecheck.selectAll()
 
         } else if (!id.matches(regex)) {
-            AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").setPositiveButton("확인" , object :DialogInterface.OnClickListener{
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    finish()
-                }
+            AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다")
+                .setPositiveButton("확인", object : DialogInterface.OnClickListener {
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        finish()
+                    }
 
-            }).show()
+                }).show()
             binding.etEmail.selectAll()
             return
         }
@@ -109,9 +110,10 @@ class NewIdActivity : AppCompatActivity() {
             .get().addOnSuccessListener {
                 if (it.documents.size > 0) {
                     AlertDialog.Builder(this)
-                        .setMessage("중복된 ID(아이디)가 있습니다\n다시 확인한 후 입력 해주시기 바랍니다.").setPositiveButton("확인", object : DialogInterface.OnClickListener{
+                        .setMessage("중복된 ID(아이디)가 있습니다\n다시 확인한 후 입력 해주시기 바랍니다.")
+                        .setPositiveButton("확인", object : DialogInterface.OnClickListener {
                             override fun onClick(dialog: DialogInterface?, which: Int) {
-                               finish()
+                                finish()
                             }
 
                         }).show()
@@ -136,7 +138,7 @@ class NewIdActivity : AppCompatActivity() {
                             }).show()
 
                     }.addOnFailureListener {
-                       AlertDialog.Builder(this).setMessage("회원가입에 실패 하였습니다")
+                        AlertDialog.Builder(this).setMessage("회원가입에 실패 하였습니다")
                     }
                 }
             }.addOnFailureListener {

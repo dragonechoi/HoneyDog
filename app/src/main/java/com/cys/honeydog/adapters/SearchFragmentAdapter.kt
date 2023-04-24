@@ -41,7 +41,6 @@ class SearchFragmentAdapter(var context: Context, var items: MutableList<AniMalH
         } else {
             Glide.with(context).load(item.image).into(holder.binding.ivHospital)
         }
-
         holder.binding.changePage.setOnClickListener {
             //디바이스의 인터넷앱을 실행
             val intent = Intent(Intent.ACTION_VIEW)

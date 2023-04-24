@@ -39,13 +39,13 @@ class CatPostActivity : AppCompatActivity() {
             Toast.makeText(this, "구현 예정", Toast.LENGTH_SHORT).show()
         }
 
-        binding.sharePost.setOnClickListener{clickSharePost()}
-        binding.like.setOnClickListener{ Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()}
-        binding.unlike.setOnClickListener{ Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()}
+        binding.sharePost.setOnClickListener { clickSharePost() }
+        binding.like.setOnClickListener { Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show() }
+        binding.unlike.setOnClickListener { Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show() }
 
     }
 
-    private fun clickSharePost(){
+    private fun clickSharePost() {
         Toast.makeText(this, "공유", Toast.LENGTH_SHORT).show()
     }
 
@@ -79,11 +79,12 @@ class CatPostActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
-                                db.collection("CatComment").whereEqualTo("no",no).get().addOnSuccessListener { documents ->
-                                    for (document in documents){
-                                        document.reference.delete()
+                                db.collection("CatComment").whereEqualTo("no", no).get()
+                                    .addOnSuccessListener { documents ->
+                                        for (document in documents) {
+                                            document.reference.delete()
+                                        }
                                     }
-                                }
                                 document.reference.delete()
                                 finish()
                             }

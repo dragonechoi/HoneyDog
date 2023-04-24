@@ -48,13 +48,12 @@
             android:text="닉네임" />
 
 
-
         <TextView
             android:id="@+id/end_lin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/post_civ"
-            android:text= "=====================================================" />
+            android:text="=====================================================" />
 
 
         <RelativeLayout
@@ -163,6 +162,7 @@
 
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/delete_tv"
             android:layout_width="wrap_content"
@@ -197,11 +197,11 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/bg_login_btn"
+            android:gravity="start"
+            android:hint="댓글 입력"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:hint="댓글 입력"
-            android:padding="4dp"
-            android:gravity="start"/>
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/comment_btn"
@@ -222,8 +222,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/et_comment"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 
     </RelativeLayout>

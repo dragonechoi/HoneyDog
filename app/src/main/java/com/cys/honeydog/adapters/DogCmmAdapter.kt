@@ -74,7 +74,6 @@ class DogCmmAdapter(var context: Context, var items: MutableList<DogCmmItem>) :
                     return@addSnapshotListener
                 }
                 if (snapshot != null && snapshot.exists()) {
-
                     val nickName = snapshot.getString("nickname")
                     val title = snapshot.getString("title")
                     val iv = snapshot.getString("imageUri")

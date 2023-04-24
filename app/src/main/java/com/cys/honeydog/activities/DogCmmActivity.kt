@@ -18,10 +18,6 @@ class DogCmmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
-
-
         binding.editPost.setOnClickListener { newPostBtn() }
         binding.communityIntentBtn.setOnClickListener {
             startActivity(

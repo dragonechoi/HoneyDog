@@ -11,15 +11,15 @@ import com.cys.honeydog.fragments.SearchMainFragment
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-    val binding:ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
+    val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().add(binding.frameLayout.id,HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().add(binding.frameLayout.id, HomeFragment())
+            .commit()
 
         initNavigationBar()
 
@@ -30,26 +30,27 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.run {
             setOnItemSelectedListener {
                 when (it.itemId) {
-    R.id.menu_home -> {
-        changeFragment(HomeFragment())
-             }
-          R.id.menu_search -> {
-         changeFragment(SearchMainFragment())
+                    R.id.menu_home -> {
+                        changeFragment(HomeFragment())
+                    }
 
-          }
+                    R.id.menu_search -> {
+                        changeFragment(SearchMainFragment())
 
-             R.id.menu_profil -> {
-                 changeFragment(ProfilMainFragment())
-          }
+                    }
 
-        }
+                    R.id.menu_profil -> {
+                        changeFragment(ProfilMainFragment())
+                    }
+
+                }
                 true
             }
             selectedItemId = R.id.menu_home
         }
     }
 
-//initNavigationBar 메소드
+    //initNavigationBar 메소드
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(binding.frameLayout.id, fragment).commit()

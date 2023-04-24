@@ -158,7 +158,6 @@ class NewPostCatActivity : AppCompatActivity() {
         }
     }
 
-
     fun saveUserProfile() {
         val db = FirebaseFirestore.getInstance()
         db.collection("idUsers")

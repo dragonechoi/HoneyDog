@@ -50,7 +50,6 @@ class ProfilFragmentAdapter constructor(
             intent.putExtra("id", post.id)
             intent.putExtra("profile", post.profileUrl)
 
-
             context.startActivity(intent)
         }
 

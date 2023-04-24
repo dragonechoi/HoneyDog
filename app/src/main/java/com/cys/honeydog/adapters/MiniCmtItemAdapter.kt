@@ -49,7 +49,6 @@ class MiniCmtItemAdapter constructor(var context: Context, var items: MutableLis
             intent.putExtra("profileUrl", item.profileUrl)
             intent.putExtra("no", item.no)
 
-
             context.startActivity(intent)
         }
 

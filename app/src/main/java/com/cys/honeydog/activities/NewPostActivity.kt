@@ -62,7 +62,6 @@ class NewPostActivity : AppCompatActivity() {
                 Toast.makeText(this, "서버 문제로 인해 유저 정보를 불러오지 못했습니다", Toast.LENGTH_SHORT).show()
             }
     }
-
     override fun onBackPressed() {
         val currentTime = System.currentTimeMillis()
         if (currentTime - backPressedTime < 2000) { // 2초 이내에 뒤로가기 버튼을 다시 누른 경우

@@ -70,7 +70,6 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("no", list.no)
 
 
-
             context.startActivity(intent)
         }
     }

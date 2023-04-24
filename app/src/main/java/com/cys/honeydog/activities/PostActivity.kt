@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
 import com.cys.honeydog.UserProfile
@@ -57,6 +58,32 @@ class PostActivity : AppCompatActivity() {
 
         binding.commentBtn.setOnClickListener { commentUpload(no) }
         loadComments()
+
+        binding.deleteTv.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("게시물 삭제")
+                .setMessage("정말로 게시물을 삭제하시겠습니까?")
+                .setPositiveButton("예") { dialog, which ->
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection("Post")
+                        .whereEqualTo("no", no)
+                        .whereEqualTo("id", G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                db.collection("DogComment").whereEqualTo("no",no).get().addOnSuccessListener { documents ->
+                                    for (document in documents){
+                                        document.reference.delete()
+                                    }
+                                }
+                                document.reference.delete()
+                                finish()
+                            }
+                        }
+                }
+                .setNegativeButton("아니오", null)
+                .show()
+        }
     }
 
     private fun commentUpload(no: Int) {

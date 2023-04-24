@@ -18,5 +18,4 @@ class SearchPwActivity : AppCompatActivity() {
         }
     }
 
-
 }
