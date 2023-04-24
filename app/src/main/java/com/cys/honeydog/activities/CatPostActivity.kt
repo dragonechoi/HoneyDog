@@ -75,6 +75,11 @@ class CatPostActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
+                                db.collection("CatComment").whereEqualTo("no",no).get().addOnSuccessListener { documents ->
+                                    for (document in documents){
+                                        document.reference.delete()
+                                    }
+                                }
                                 document.reference.delete()
                                 finish()
                             }

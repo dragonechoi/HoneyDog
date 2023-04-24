@@ -92,8 +92,14 @@ class PostActivity : AppCompatActivity() {
                         .get()
                         .addOnSuccessListener { documents ->
                             for (document in documents) {
+                                db.collection("DogComment").whereEqualTo("no",no).get().addOnSuccessListener { documents ->
+                                    for (document in documents){
+                                        document.reference.delete()
+                                    }
+                                }
                                 document.reference.delete()
                                 finish()
+
                             }
                         }
                 }
