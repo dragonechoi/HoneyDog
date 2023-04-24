@@ -79,7 +79,7 @@ class NewIdActivity : AppCompatActivity() {
     }
 
     fun saveUserId() {
-        val id = binding.etEmail.text.toString().trim()
+        val id = binding.etEmail.text.toString()
         var password: String = binding.etPw.text.toString()
         var passwordConfirm: String = binding.etPwRecheck.text.toString()
         var nickname: String = binding.etName.text.toString()

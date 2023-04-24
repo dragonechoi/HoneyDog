@@ -47,7 +47,7 @@ class ProfilMainFragment : Fragment() {
         Binding.profilImage.setOnClickListener { clickChangeProfile() }
 
         Binding.chProfileBtn.setOnClickListener { ClickChangeProfileBtn() }
-        loadData()
+
 
         // Firebase 데이터 가져오기
         val db = FirebaseFirestore.getInstance()
@@ -84,6 +84,7 @@ class ProfilMainFragment : Fragment() {
     fun ClickChangeProfileBtn() {
         val db = FirebaseFirestore.getInstance()
         val documentRef = db.collection("idUsers").document(G.userAccount!!.id)
+        val poostRef = db.collection("Post").document()
         val updates = hashMapOf<String, Any>()
 
 
@@ -100,13 +101,13 @@ class ProfilMainFragment : Fragment() {
             // 저장할 파일 위치에 대한 참조객체
             val imgRef: StorageReference = fireBase.getReference("userProfile/$fileName")
 
+
             // 위 저장경로 참조객체에게 실제 파일 업로드 시키기
             imgRef.putFile(imgUri!!).addOnSuccessListener {
                 imgRef.downloadUrl.addOnSuccessListener { uri ->
                     // 이미지 URL 업데이트
                     val imgUrl = uri.toString()
                     updates["imageUrl"] = imgUrl
-
 
                     // 프로필 정보 업데이트
                     documentRef.update(updates).addOnSuccessListener {
@@ -134,6 +135,8 @@ class ProfilMainFragment : Fragment() {
             updates["nickname"] = newNickname
         }
 
+
+
         documentRef.update(updates)
             .addOnSuccessListener {
                 // 업데이트 성공
@@ -143,31 +146,69 @@ class ProfilMainFragment : Fragment() {
                 // 업데이트 실패
                 Toast.makeText(Pcontext, "프로필 변경 실패", Toast.LENGTH_SHORT).show()
             }
+        // Firebase 데이터 가져오기
+
+        db.collection("idUsers")
+            .document(G.userAccount!!.id)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    // 오류 처리
+                    return@addSnapshotListener
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    // 닉네임 가져오기
+                    val nickname = snapshot.getString("nickname")
+
+                    // 프로필 이미지 가져오기
+                    val profileUrl = snapshot.getString("imageUrl")
+
+                    // 닉네임을 TextView에 설정
+                    Binding.profilNickname.text = nickname
+
+                    // Glide를 사용하여 이미지 로드 및 ImageView에 설정
+                    if (profileUrl != null) {
+                        Glide.with(Pcontext)
+                            .load(profileUrl)
+                            .into(Binding.profilImage)
+                    }
+
+
+                    // 작성자 닉네임 변경
+                    val postUpdates = hashMapOf<String, Any>()
+                    postUpdates["nickname"] = newNickname
+                    postUpdates["profileUrl"] = profileUrl.toString()
+                    db.collection("Post")
+                        .whereEqualTo("id", G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                document.reference.update(postUpdates)
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            // 실패 처리
+                        }
+                    val CatPostUpdate = HashMap<String , Any>()
+                    CatPostUpdate ["nickname"] = newNickname
+                    CatPostUpdate ["profile"] = profileUrl.toString()
+                    db.collection("catPost")
+                        .whereEqualTo("userId",G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documents->
+                            for (document in documents){
+                                document.reference.update(CatPostUpdate)
+                            }
+                        }
+
+                }
+            }
 
         Binding.etNameChange.text.clear()
     }
 
 
-    private fun loadData() {
-        val fireStore = FirebaseFirestore.getInstance()
-        val postRef = fireStore.collection("Post")
 
-        //Post 컬렉션데이터 호출
-        postRef.get().addOnSuccessListener { documents ->
-            for (document in documents) {
-                val post = document.toObject(ProfilRecyclerItem::class.java)
-                item.add(post)
-            }
-            // 데이터를 모두 가져온 후 어댑터 설정
-
-            val adapter = ProfilFragmentAdapter(requireContext(), item)
-            Binding.profilRecycler.adapter = adapter
-            adapter.notifyDataSetChanged()
-        }.addOnFailureListener {
-            // 호출 실패 시 처리할 내용
-            Log.i("Error", it.message.toString())
-        }
-    }
 
     private fun clickChangeProfile() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
