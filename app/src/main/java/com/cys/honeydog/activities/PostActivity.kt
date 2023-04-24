@@ -47,6 +47,7 @@ class PostActivity : AppCompatActivity() {
         binding.unlike.setOnClickListener { clickUnlikeUp() }
 
 
+
     }
 
     private fun  clickUnlikeUp(){
