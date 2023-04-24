@@ -201,6 +201,28 @@ class ProfilMainFragment : Fragment() {
                             }
                         }
 
+                    val dogCommentUpdate= HashMap<String,Any>()
+                    dogCommentUpdate ["nickname"] = newNickname
+                    dogCommentUpdate["imgUrl"] = profileUrl.toString()
+                    db.collection("DogComment")
+                        .whereEqualTo("uid",G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documments->
+                            for (documment in documments){
+                                documment.reference.update(dogCommentUpdate)
+                            }
+                        }
+                    val catCommentUpdate = HashMap<String,Any>()
+                    catCommentUpdate ["nickname"] = newNickname
+                    catCommentUpdate["imgUrl"] = profileUrl.toString()
+                    db.collection("CatComment")
+                        .whereEqualTo("uid",G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documments->
+                            for (documment in documments){
+                                documment.reference.update(catCommentUpdate)
+                            }
+                        }
                 }
             }
 
