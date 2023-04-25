@@ -1,4 +1,4 @@
-package com.cys.honeydog
+package com.cys.honeydog.model
 
 data class UserAccount(var id: String, var password: String)
 

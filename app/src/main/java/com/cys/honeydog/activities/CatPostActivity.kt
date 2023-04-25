@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
-import com.cys.honeydog.UserProfile
+import com.cys.honeydog.model.UserProfile
 import com.cys.honeydog.adapters.CatCommentAdapter
 import com.cys.honeydog.databinding.ActivityCatPostBinding
 import com.cys.honeydog.model.CommentItem

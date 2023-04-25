@@ -20,9 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn org.conscrypt.**
--dontwarn org.bouncycastle.**
--dontwarn org.openjsse.**
+
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
 -keepattributes Signature, InnerClasses, EnclosingMethod
@@ -68,7 +66,12 @@
 
 
 
--keep class com.mrhi.myapp.** { *; }
--keep class com.mrhi.myapp.model.** { *; }
--keep interface com.mrhi.myapp.network.** { *; }
+-keep class com.cys.honeydog.model.**
+-keep class com.cys.honeydog.model.** { *; }
+-keep interface com.cys.honeydog.network.**
+
+
+-dontwarn org.conscrypt.**
+-dontwarn org.bouncycastle.**
+-dontwarn org.openjsse.**
 

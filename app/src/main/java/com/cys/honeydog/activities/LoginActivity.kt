@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.cys.honeydog.G
-import com.cys.honeydog.UserAccount
+import com.cys.honeydog.model.UserAccount
 import com.cys.honeydog.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
