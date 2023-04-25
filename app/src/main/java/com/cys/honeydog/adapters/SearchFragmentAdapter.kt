@@ -1,10 +1,12 @@
 package com.cys.honeydog.adapters
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -42,10 +44,20 @@ class SearchFragmentAdapter(var context: Context, var items:MutableList<AniMalHo
         }
 
         holder.binding.changePage.setOnClickListener{
-            //디바이스의 인터넷앱을 실행
-            val intent= Intent(Intent.ACTION_VIEW)
-            intent.data= Uri.parse(item.link)
-            context.startActivity(intent )
+            if (item.link != null) {
+                //디바이스의 인터넷앱을 실행
+                val intent= Intent(Intent.ACTION_VIEW)
+                intent.data= Uri.parse(item.link)
+                try {
+                    context.startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    Toast.makeText(context, "링크가 삭제 되었거나 존재하지 않는 페이지 입니다.", Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                }
+            } else {
+                // 링크가 null 일 경우, 사용자에게 알림
+                Toast.makeText(context, "링크가 없습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

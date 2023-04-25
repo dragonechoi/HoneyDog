@@ -25,8 +25,8 @@ class CatCmmActivity : AppCompatActivity() {
 
         loadData()
 
-        binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
 
+        binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
 
 
         binding.communityIntentBtn.setOnClickListener {
@@ -75,7 +75,7 @@ class CatCmmActivity : AppCompatActivity() {
                 val post = document.toObject(CatCmmItem::class.java)
                 item.add(post)
             }
-
+            binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
             //아답터 업데이트
             binding.recyclerCatCmm.adapter?.notifyDataSetChanged()
 

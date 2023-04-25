@@ -72,6 +72,7 @@ class SearchMainFragment : Fragment() {
                 Binding.recyclerSearch.adapter =
                     SearchFragmentAdapter(requireContext(), naverSearch!!.items)
 
+
             }
 
             override fun onFailure(call: Call<RetRofitHospital>, t: Throwable) {

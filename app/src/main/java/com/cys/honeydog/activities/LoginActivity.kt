@@ -1,10 +1,15 @@
 package com.cys.honeydog.activities
 
+import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.cys.honeydog.G
 import com.cys.honeydog.UserAccount
 import com.cys.honeydog.databinding.ActivityLoginBinding
@@ -18,6 +23,22 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        //Android 13 버전(api 33) 부터 알림에 대한 동적 퍼미션이 추가됨
+        //이 앱이 알림에 대한 퍼미션을 허용한 상태인지 체크
+
+
+        //Android 13 버전(api 33) 부터 알림에 대한 동적 퍼미션이 추가됨
+        //이 앱이 알림에 대한 퍼미션을 허용한 상태인지 체크
+        val checkResult =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+        if (checkResult == PackageManager.PERMISSION_DENIED) {
+            //알림 허용요청하는 다이알로그를 보이기
+            //requestPermission(); //예전방식
+            //퍼미션 요청 결과를 받아주는 대행사 객체를 이용함.
+            permissionResultLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            return
+        }
 
         binding.newId.setOnClickListener {
             startActivity(Intent(this, NewIdActivity::class.java))
@@ -96,6 +117,12 @@ class LoginActivity<TextInputLayout> : AppCompatActivity() {
                 }
             }
     }
-
+    var permissionResultLauncher = registerForActivityResult<String, Boolean>(
+        ActivityResultContracts.RequestPermission()
+    ) { result ->
+        if (result) Toast.makeText(this, "알림 허용", Toast.LENGTH_SHORT)
+            .show() else Toast.makeText(this, "알림을 보낼수 없습니다.", Toast.LENGTH_SHORT)
+            .show()
+    }
 
 }
