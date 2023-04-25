@@ -54,7 +54,7 @@ class NewPostCatActivity : AppCompatActivity() {
             builder.setMessage("게시글 작성을 종료 하시겠습니까??")
             builder.setPositiveButton("예",
                 DialogInterface.OnClickListener { dialog, which ->
-                    finish() // 앱을 종료
+                    finish()
                 })
             builder.setNegativeButton("아니오", null)
             builder.show()

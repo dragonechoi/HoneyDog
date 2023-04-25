@@ -2,11 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    app:cardMaxElevation="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_comment_profile"
@@ -48,7 +52,8 @@
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_below="@id/comment_nickname"
-            android:layout_toRightOf="@id/civ_comment_profile">
+            android:layout_toRightOf="@id/civ_comment_profile"
+            android:background="@drawable/bg_login_btn">
 
             <TextView
                 android:id="@+id/comment_tv"

@@ -1,5 +1,6 @@
 package com.cys.honeydog.activities
 
+import android.app.NotificationChannel
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -36,10 +37,14 @@ class CatPostActivity : AppCompatActivity() {
         binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
 
         binding.sharePost.setOnClickListener { clickSharePost() }
-        binding.like.setOnClickListener { Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show() }
+        binding.like.setOnClickListener { clickLikeCount() }
+
         binding.unlike.setOnClickListener { Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show() }
 
     }
+private fun  clickLikeCount(){
+
+}
 
     private fun clickSharePost() {
         Toast.makeText(this, "공유", Toast.LENGTH_SHORT).show()
@@ -125,6 +130,7 @@ class CatPostActivity : AppCompatActivity() {
                     commentCatRef.document().set(commentItem).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
+                            val notificationChannel = NotificationChannel.DEFAULT_CHANNEL_ID
                             loadComments()
 
                             val imm =
@@ -146,10 +152,6 @@ class CatPostActivity : AppCompatActivity() {
         val commentRef = fireStore.collection("CatComment")
             .whereEqualTo("no", intent.getIntExtra("no", -1))
             .orderBy("commentNum", Query.Direction.DESCENDING)
-
-
-
-
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
             Log.i("클리어", "클리어 완료 ")
