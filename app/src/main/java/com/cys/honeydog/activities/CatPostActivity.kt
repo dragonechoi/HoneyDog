@@ -13,6 +13,7 @@ import com.cys.honeydog.G
 import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.CatCommentAdapter
 import com.cys.honeydog.databinding.ActivityCatPostBinding
+import com.cys.honeydog.model.CatCmmItem
 import com.cys.honeydog.model.CommentItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -28,6 +29,7 @@ class CatPostActivity : AppCompatActivity() {
     private val UserProfile: UserProfile? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -36,15 +38,17 @@ class CatPostActivity : AppCompatActivity() {
         // 댓글 목록을 보여줄 RecyclerView에 어댑터 설정
         binding.recyclerComment.adapter = CatCommentAdapter(this, commentList)
 
+
         binding.sharePost.setOnClickListener { clickSharePost() }
         binding.like.setOnClickListener { clickLikeCount() }
 
         binding.unlike.setOnClickListener { Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show() }
 
     }
-private fun  clickLikeCount(){
 
-}
+    private fun clickLikeCount() {
+
+    }
 
     private fun clickSharePost() {
         Toast.makeText(this, "공유", Toast.LENGTH_SHORT).show()
@@ -79,15 +83,25 @@ private fun  clickLikeCount(){
                         .whereEqualTo("userId", G.userAccount!!.id)
                         .get()
                         .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                db.collection("CatComment").whereEqualTo("no", no).get()
-                                    .addOnSuccessListener { documents ->
-                                        for (document in documents) {
-                                            document.reference.delete()
+                            if (documents.isEmpty) {
+                                AlertDialog.Builder(this)
+                                    .setTitle("회원 정보 불일치")
+                                    .setMessage("회원 정보가 일치하지 않아 게시글이 삭제되지 않았습니다.")
+                                    .setPositiveButton("확인", null)
+                                    .show()
+                            } else {
+                                for (document in documents) {
+                                    db.collection("CatComment").whereEqualTo("no", no).get()
+                                        .addOnSuccessListener { documents ->
+                                            for (document in documents) {
+                                                document.reference.delete()
+                                            }
                                         }
-                                    }
-                                document.reference.delete()
-                                finish()
+
+                                    document.reference.delete()
+                                    finish()
+
+                                }
                             }
                         }
                 }

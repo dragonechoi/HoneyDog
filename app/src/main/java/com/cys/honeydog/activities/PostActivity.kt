@@ -29,9 +29,7 @@ class PostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<DogCommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
-    private val postItem : DogCmmItem? = null
-
-
+    private val postItem: DogCmmItem? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,17 +45,17 @@ class PostActivity : AppCompatActivity() {
         binding.unlike.setOnClickListener { clickUnlikeUp() }
 
 
-
     }
 
-    private fun  clickUnlikeUp(){
-        Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
-    }
-    private fun clickLikeUp(){
+    private fun clickUnlikeUp() {
         Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
     }
 
-    private fun clickSharePost(){
+    private fun clickLikeUp() {
+        Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun clickSharePost() {
         Toast.makeText(this, "공유 구현 예정", Toast.LENGTH_SHORT).show()
 
     }
@@ -89,18 +87,26 @@ class PostActivity : AppCompatActivity() {
                     val db = FirebaseFirestore.getInstance()
                     db.collection("Post")
                         .whereEqualTo("no", no)
-                        .whereEqualTo("id", G.userAccount!!.id)
+                        .whereEqualTo("userId", G.userAccount!!.id)
                         .get()
                         .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                db.collection("DogComment").whereEqualTo("no",no).get().addOnSuccessListener { documents ->
-                                    for (document in documents){
-                                        document.reference.delete()
-                                    }
+                            if (documents.isEmpty) {
+                                AlertDialog.Builder(this)
+                                    .setTitle("회원 정보 불일치")
+                                    .setMessage("회원 정보가 일치하지 않아 게시글이 삭제되지 않았습니다.")
+                                    .setPositiveButton("확인", null)
+                                    .show()
+                            } else {
+                                for (document in documents) {
+                                    db.collection("DogComment").whereEqualTo("no", no).get()
+                                        .addOnSuccessListener { documents ->
+                                            for (document in documents) {
+                                                document.reference.delete()
+                                            }
+                                        }
+                                    document.reference.delete()
+                                    finish()
                                 }
-                                document.reference.delete()
-                                finish()
-
                             }
                         }
                 }
@@ -139,22 +145,23 @@ class PostActivity : AppCompatActivity() {
                         "DogCommentNum" to commentNum
                     )
 
-                commentRef.document().set(commentItem).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+                    commentRef.document().set(commentItem).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
 
-                        Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
-                        loadComments()
+                            Toast.makeText(this, "댓글이 작성되었습니다.", Toast.LENGTH_SHORT).show()
+                            loadComments()
 
-                        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
-                        binding.etComment.text.clear()
+                            val imm =
+                                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                            imm.hideSoftInputFromWindow(binding.etComment.windowToken, 0)
+                            binding.etComment.text.clear()
 
 
-                    } else {
-                        Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "댓글 작성에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
-            }
         }
     }
 
@@ -163,7 +170,8 @@ class PostActivity : AppCompatActivity() {
         val fireStore = FirebaseFirestore.getInstance()
         val commentRef = fireStore.collection("DogComment")
             .whereEqualTo("no", intent.getIntExtra("no", -1))
-            .orderBy("DogCommentNum",Query.Direction.DESCENDING)
+            .orderBy("DogCommentNum", Query.Direction.DESCENDING)
+
 
         commentRef.get().addOnSuccessListener { documents ->
             commentList.clear()
@@ -175,7 +183,7 @@ class PostActivity : AppCompatActivity() {
             binding.recyclerComment.adapter = DogCommentAdapter(this, commentList)
         }.addOnFailureListener { exception ->
             Toast.makeText(this, "댓글 불러오기 실패", Toast.LENGTH_SHORT).show()
-                Log.i("Error","${exception.message}")
+            Log.i("Error", "${exception.message}")
         }
     }
 }

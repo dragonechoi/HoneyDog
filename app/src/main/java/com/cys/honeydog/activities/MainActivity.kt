@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val currentTime = System.currentTimeMillis()
-        if (currentTime - backPressedTime < 2000) { // 2초 이내에 뒤로가기 버튼을 다시 누른 경우
+        if (currentTime - backPressedTime < 20) { // 2초 이내에 뒤로가기 버튼을 다시 누른 경우
             super.onBackPressed()
         } else {
             backPressedTime = currentTime // 이전 시간을 현재 시간으로 대체

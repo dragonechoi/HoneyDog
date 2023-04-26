@@ -24,12 +24,6 @@ import org.w3c.dom.Text
 class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
     Adapter<CatCmmAdapter.VH>() {
 
-
-
-
-
-
-
     inner class VH(val binding: RecyclerCommunityListItemBinding) :
         ViewHolder(binding.root) {
 
@@ -47,6 +41,7 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         var list: CatCmmItem = items[position]
+
 
 
         if (list.imgUri.isNullOrEmpty()) {
@@ -69,6 +64,8 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             holder.binding.communityListNickname
         )
 
+
+
         holder.binding.communityList.setOnClickListener {
             val intent: Intent = Intent(context, CatPostActivity::class.java)
             intent.putExtra("imgUri", list.imgUri)
@@ -80,10 +77,14 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
             intent.putExtra("no", list.no)
 
 
-
             context.startActivity(intent)
+
         }
+
+
     }
+
+
     private fun loadCatPost(titleView: TextView, img: ImageView, nicknameView: TextView) {
         val firestore = FirebaseFirestore.getInstance()
         firestore.collection("catPost")
@@ -99,6 +100,8 @@ class CatCmmAdapter(var context: Context, var items: MutableList<CatCmmItem>) :
                     titleView.text = title
                     Glide.with(context).load(iv).into(img)
                     nicknameView.text = nickName
+
+
                 }
             }
     }

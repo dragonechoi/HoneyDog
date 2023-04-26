@@ -1,10 +1,14 @@
 package com.cys.honeydog.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -53,6 +57,42 @@ class DogCommentAdapter(var context: Context, var items: MutableList<DogCommentI
             holder.binding.commentNum,
             holder.binding.commentNum
         )
+        holder.binding.deleteCommentTv.setOnClickListener {
+            AlertDialog.Builder(context)
+                .setTitle("게시글 삭제")
+                .setMessage("댓글을 삭제 하시겠습니까?")
+                .setPositiveButton("예") { dialog, _ ->
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection("DogComment")
+                        .whereEqualTo("DogCommentNum", commentItem.DogCommentNum)
+                        .whereEqualTo("uid", G.userAccount!!.id)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            if (documents.isEmpty) {
+                                Log.i("notDelete","not comment Delete")
+                                AlertDialog.Builder(context)
+                                    .setTitle("회원 정보 불일치")
+                                    .setMessage("회원 정보가 일치하지 않아 게시글이 삭제되지 않았습니다.")
+                                    .setPositiveButton("확인") { _, _ ->
+                                        // Do nothing or handle the case where the user confirms the dialog
+                                    }
+                                    .show()
+                            } else {
+                                for (document in documents) {
+                                    document.reference.delete()
+                                }
+                                items.removeAt(position)
+                                notifyItemRemoved(position)
+                            }
+
+                        }
+                        .addOnFailureListener {
+
+                        }
+                }
+                .setNegativeButton("취소", null)
+                .show()
+        }
 
     }
 
