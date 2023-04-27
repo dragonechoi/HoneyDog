@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    app:cardMaxElevation="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,57 +15,67 @@
             android:id="@+id/civ_comment_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_margin="5dp"
             android:src="@drawable/cat_community"
             app:civ_border_color="@color/black"
-            app:civ_border_width="2dp" />
-
+            app:civ_border_width="2dp"
+            android:layout_margin="5dp"/>
         <TextView
             android:id="@+id/comment_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/civ_comment_profile"
             android:text="닉네임"
+            android:layout_toRightOf="@id/civ_comment_profile"
+            android:layout_marginTop="10dp"
             android:textSize="20dp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/post_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:layout_toRightOf="@id/comment_nickname"
             android:text="1"
-            android:visibility="invisible" />
-
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="4dp"/>
         <TextView
             android:id="@+id/comment_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:layout_toRightOf="@id/post_num"
             android:text="1"
-            android:visibility="invisible" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="4dp"/>
+        <TextView
+            android:id="@+id/delete_comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/kotra_hope"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
 
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_below="@id/comment_nickname"
-            android:layout_toRightOf="@id/civ_comment_profile">
+            android:layout_toRightOf="@id/civ_comment_profile"
+            android:background="@drawable/bg_login_btn">
 
             <TextView
                 android:id="@+id/comment_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
                 android:text="입력된 댓글"
+                android:padding="8dp"
                 android:textSize="17dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
+
 
 
     </RelativeLayout>

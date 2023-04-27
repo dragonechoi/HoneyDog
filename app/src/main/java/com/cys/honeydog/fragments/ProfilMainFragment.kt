@@ -77,16 +77,24 @@ class ProfilMainFragment : Fragment() {
                     }
                 }
             }
-
+        recyclerView()
 
     }
+
+    private fun recyclerView(){
+        val firestore=FirebaseFirestore.getInstance()
+        firestore.collection("idUsers").document(G.userAccount!!.id)
+
+            }
+
+
+
+
 
     fun ClickChangeProfileBtn() {
         val db = FirebaseFirestore.getInstance()
         val documentRef = db.collection("idUsers").document(G.userAccount!!.id)
         val updates = hashMapOf<String, Any>()
-
-
 
         if (imgUri != null) {
 

@@ -1,5 +1,6 @@
 package com.cys.honeydog.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,14 +20,16 @@ class CatCmmActivity : AppCompatActivity() {
     val binding: ActivityCatCmmBinding by lazy { ActivityCatCmmBinding.inflate(layoutInflater) }
     var item: MutableList<CatCmmItem> = mutableListOf()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
         loadData()
 
-        binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
 
+        binding.recyclerCatCmm.adapter = CatCmmAdapter(this, item)
 
 
         binding.communityIntentBtn.setOnClickListener {
@@ -50,17 +53,14 @@ class CatCmmActivity : AppCompatActivity() {
 
         }
 
-
-    }
-
-    override fun onResume() {
-        super.onResume()
         binding.swipeRefreshLayout.setOnRefreshListener {
+
             //데이터 로드
             loadData()
         }
-        binding.swipeRefreshLayout.isEnabled = true
     }
+
+
 
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
@@ -75,11 +75,15 @@ class CatCmmActivity : AppCompatActivity() {
                 val post = document.toObject(CatCmmItem::class.java)
                 item.add(post)
             }
-
+            val adapter = binding.recyclerCatCmm.adapter as? CatCmmAdapter
+            adapter?.items = item
             //아답터 업데이트
-            binding.recyclerCatCmm.adapter?.notifyDataSetChanged()
+            adapter?.notifyDataSetChanged()
 
+            //여기서 새로고침 기능을 수행
             binding.swipeRefreshLayout.isRefreshing = false
+            binding.swipeRefreshLayout.isEnabled = true
+            binding.swipeRefreshLayout.setColorSchemeResources(R.color.purple_200)
         }.addOnFailureListener { exception ->
 
         }
