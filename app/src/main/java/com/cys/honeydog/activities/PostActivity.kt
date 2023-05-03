@@ -88,7 +88,7 @@ class PostActivity : AppCompatActivity() {
                     val db = FirebaseFirestore.getInstance()
                     db.collection("Post")
                         .whereEqualTo("no", no)
-                        .whereEqualTo("userId", G.userAccount!!.id)
+                        .whereEqualTo("id", G.userAccount!!.id)
                         .get()
                         .addOnSuccessListener { documents ->
                             if (documents.isEmpty) {
