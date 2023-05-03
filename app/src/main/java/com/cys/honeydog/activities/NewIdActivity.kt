@@ -1,6 +1,5 @@
 package com.cys.honeydog.activities
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -80,69 +79,73 @@ class NewIdActivity : AppCompatActivity() {
 
     fun saveUserId() {
         val id = binding.etEmail.text.toString()
-        var password: String = binding.etPw.text.toString()
-        var passwordConfirm: String = binding.etPwRecheck.text.toString()
-        var nickname: String = binding.etName.text.toString()
-        var animalType: String = binding.acTv.text.toString()
+        val password = binding.etPw.text.toString()
+        val passwordConfirm = binding.etPwRecheck.text.toString()
+        val nickname = binding.etName.text.toString()
+        val animalType = binding.acTv.text.toString()
         val regex =
             "^[A-Za-z0-9]+([._-][A-Za-z0-9]+)*@[A-Za-z0-9]+([.-][A-Za-z0-9]+)*\\.[A-Za-z]{2,}$|^[A-Za-z0-9]+$".toRegex()
 
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         if (password != passwordConfirm) {
-            AlertDialog.Builder(this).setMessage("패스워드 확인에 문제가 생겼습니다").show()
+            AlertDialog.Builder(this)
+                .setMessage("패스워드 확인에 문제가 생겼습니다")
+                .setPositiveButton("확인", null)
+                .show()
             binding.etPwRecheck.selectAll()
+            return
+        }
 
-        } else if (!id.matches(regex)) {
-            AlertDialog.Builder(this).setMessage("아이디 입력에 문제가 생겼습니다").setPositiveButton("확인" , object :DialogInterface.OnClickListener{
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    finish()
-                }
-
-            }).show()
+        if (!id.matches(regex)) {
+            AlertDialog.Builder(this)
+                .setMessage("아이디 입력에 문제가 생겼습니다")
+                .setPositiveButton("확인", null)
+                .show()
             binding.etEmail.selectAll()
             return
         }
 
         db.collection("idUsers")
             .whereEqualTo("id", id)
-            .get().addOnSuccessListener {
+            .get()
+            .addOnSuccessListener {
                 if (it.documents.size > 0) {
                     AlertDialog.Builder(this)
-                        .setMessage("중복된 ID(아이디)가 있습니다\n다시 확인한 후 입력 해주시기 바랍니다.").setPositiveButton("확인", object : DialogInterface.OnClickListener{
-                            override fun onClick(dialog: DialogInterface?, which: Int) {
-                               finish()
-                            }
-
-                        }).show()
+                        .setMessage("중복된 ID(아이디)가 있습니다.\n다시 확인한 후 입력 해주시기 바랍니다.")
+                        .setPositiveButton("확인", null)
+                        .show()
                     binding.etEmail.requestFocus()
                     binding.etEmail.selectAll()
-                } else {
-                    val user: MutableMap<String, String> = mutableMapOf()
-                    user.put("id", id)
-                    user.put("password", password)
-                    user.put("nickname", nickname)
-                    user.put("animalType", animalType)
-                    user.put("imageUrl", profileUrl)
-
-
-                    db.collection("idUsers").document(id).set(user).addOnSuccessListener {
-                        AlertDialog.Builder(this)
-                            .setMessage("환영합니다 \n 회원가입에 성공 하였습니다")
-                            .setPositiveButton("확인", object : DialogInterface.OnClickListener {
-                                override fun onClick(dialog: DialogInterface?, which: Int) {
-                                    finish()
-                                }
-                            }).show()
-
-                    }.addOnFailureListener {
-                       AlertDialog.Builder(this).setMessage("회원가입에 실패 하였습니다")
-                    }
+                    return@addOnSuccessListener
                 }
-            }.addOnFailureListener {
+
+                val user: MutableMap<String, String> = mutableMapOf()
+                user.put("id", id)
+                user.put("password", password)
+                user.put("nickname", nickname)
+                user.put("animalType", animalType)
+                user.put("imageUrl", profileUrl)
+
+                db.collection("idUsers").document(id)
+                    .set(user)
+                    .addOnSuccessListener {
+                        AlertDialog.Builder(this)
+                            .setMessage("환영합니다. 회원가입에 성공 하였습니다.")
+                            .setPositiveButton("확인", null)
+                            .show()
+                        finish()
+                    }
+                    .addOnFailureListener {
+                        AlertDialog.Builder(this)
+                            .setMessage("회원가입에 실패 하였습니다.")
+                            .setPositiveButton("확인", null)
+                            .show()
+                    }
+            }
+            .addOnFailureListener {
                 Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
             }
-
     }
 
 
