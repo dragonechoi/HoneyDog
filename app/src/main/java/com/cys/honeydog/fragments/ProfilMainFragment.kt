@@ -1,9 +1,7 @@
 package com.cys.honeydog.fragments
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,14 +10,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
-import com.cys.honeydog.Profile
-import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
 import com.cys.honeydog.model.ProfilRecyclerItem
@@ -147,7 +142,7 @@ class ProfilMainFragment : Fragment() {
         val newNickname = Binding.etNameChange.text.toString()
         if (newNickname.isNotEmpty()) {
             updates["nickname"] = newNickname
-        }else {
+        } else {
             // EditText에 값을 입력하지 않은 경우, 이전 닉네임 값으로 업데이트
             updates["nickname"] = Binding.profilNickname.text.toString()
         }

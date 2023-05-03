@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0 // 뒤로가기 버튼을 누른 시간을 저장할 변수
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -29,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
 
     override fun onBackPressed() {
@@ -48,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             builder.show()
         }
     }
+
     //Main Activity Fragment 화면 전환
     fun initNavigationBar() {
         binding.bottomNav.run {

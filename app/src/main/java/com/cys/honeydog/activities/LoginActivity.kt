@@ -1,17 +1,11 @@
 package com.cys.honeydog.activities
 
-import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.cys.honeydog.G
-
 import com.cys.honeydog.databinding.ActivityLoginBinding
 import com.cys.honeydog.model.UserAccount
 import com.google.firebase.firestore.FirebaseFirestore

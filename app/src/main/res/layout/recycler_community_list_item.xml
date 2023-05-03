@@ -4,20 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:clickable="true"
-    app:contentPadding="8dp">
+    >
 
     <RelativeLayout
         android:id="@+id/community_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#84de3caf"
-        android:clickable="true">
+        android:clickable="true"
+        >
 
         <ImageView
             android:id="@+id/community_list_iv"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:src="@drawable/cat_community" />
+            android:src="@drawable/cat_community"
+            android:padding="4dp"/>
 
         <TextView
             android:id="@+id/community_list_title"

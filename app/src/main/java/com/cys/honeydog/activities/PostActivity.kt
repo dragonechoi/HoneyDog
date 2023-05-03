@@ -1,24 +1,18 @@
 package com.cys.honeydog.activities
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
-
 import com.cys.honeydog.adapters.DogCommentAdapter
 import com.cys.honeydog.databinding.ActivityPostBinding
-import com.cys.honeydog.model.CatCmmItem
-import com.cys.honeydog.model.DogCmmItem
 import com.cys.honeydog.model.DogCommentItem
 import com.cys.honeydog.model.UserProfile
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -30,7 +24,6 @@ class PostActivity : AppCompatActivity() {
     }
     private val commentList: MutableList<DogCommentItem> = mutableListOf()
     private val UserProfile: UserProfile? = null
-    private val postItem: DogCmmItem? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

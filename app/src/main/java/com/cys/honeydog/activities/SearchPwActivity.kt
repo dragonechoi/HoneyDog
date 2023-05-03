@@ -3,8 +3,8 @@ package com.cys.honeydog.activities
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cys.honeydog.model.UserProfile
 import com.cys.honeydog.databinding.ActivitySearchPwBinding
+import com.cys.honeydog.model.UserProfile
 
 class SearchPwActivity : AppCompatActivity() {
     val binding: ActivitySearchPwBinding by lazy { ActivitySearchPwBinding.inflate(layoutInflater) }
