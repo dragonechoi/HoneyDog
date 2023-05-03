@@ -141,6 +141,7 @@ class NewIdActivity : AppCompatActivity() {
                             .setMessage("회원가입에 실패 하였습니다.")
                             .setPositiveButton("확인", null)
                             .show()
+                        return@addOnFailureListener
                     }
             }
             .addOnFailureListener {

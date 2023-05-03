@@ -61,7 +61,6 @@ class CatCmmActivity : AppCompatActivity() {
     }
 
 
-
     private fun loadData() {
         val fireStore = FirebaseFirestore.getInstance()
         val postRef = fireStore.collection("catPost")
