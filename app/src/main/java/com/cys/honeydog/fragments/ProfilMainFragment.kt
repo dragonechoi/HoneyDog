@@ -1,7 +1,9 @@
 package com.cys.honeydog.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,11 +12,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.cys.honeydog.G
+import com.cys.honeydog.Profile
+import com.cys.honeydog.UserProfile
 import com.cys.honeydog.adapters.ProfilFragmentAdapter
 import com.cys.honeydog.databinding.FragmentProfilMainBinding
 import com.cys.honeydog.model.ProfilRecyclerItem
@@ -29,6 +34,7 @@ class ProfilMainFragment : Fragment() {
     lateinit var Pcontext: Context  //profile 변경및 닉네임 변경시 사용될 Context 초기화
     var imgUri: Uri? = null
     var nickname: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,14 +87,16 @@ class ProfilMainFragment : Fragment() {
 
     }
 
-    private fun recyclerView(){
-        val firestore=FirebaseFirestore.getInstance()
-        firestore.collection("idUsers").document(G.userAccount!!.id)
+    private fun recyclerView() {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.collection("Post")
+            .whereEqualTo("id", G.userAccount!!.id)
+            .get()
+            .addOnSuccessListener { documents ->
 
             }
 
-
-
+    }
 
 
     fun ClickChangeProfileBtn() {
@@ -129,9 +137,8 @@ class ProfilMainFragment : Fragment() {
             // 이미지가 선택되지 않은 경우, 프로필 정보 업데이트
             documentRef.update(updates).addOnSuccessListener {
                 Log.i("이미지 업로드 성공", "성공")
-
             }.addOnFailureListener { e ->
-
+                // 업데이트 실패
             }
 
         }
@@ -140,10 +147,10 @@ class ProfilMainFragment : Fragment() {
         val newNickname = Binding.etNameChange.text.toString()
         if (newNickname.isNotEmpty()) {
             updates["nickname"] = newNickname
+        }else {
+            // EditText에 값을 입력하지 않은 경우, 이전 닉네임 값으로 업데이트
+            updates["nickname"] = Binding.profilNickname.text.toString()
         }
-
-
-
         documentRef.update(updates)
             .addOnSuccessListener {
                 // 업데이트 성공
@@ -183,7 +190,7 @@ class ProfilMainFragment : Fragment() {
 
                     // 작성자 닉네임 변경
                     val postUpdates = hashMapOf<String, Any>()
-                    postUpdates["nickname"] = newNickname
+                    postUpdates["nickname"] = Binding.profilNickname.text.toString()
                     postUpdates["profileUrl"] = profileUrl.toString()
                     db.collection("Post")
                         .whereEqualTo("id", G.userAccount!!.id)
@@ -196,37 +203,37 @@ class ProfilMainFragment : Fragment() {
                         .addOnFailureListener { e ->
                             // 실패 처리
                         }
-                    val CatPostUpdate = HashMap<String , Any>()
-                    CatPostUpdate ["nickname"] = newNickname
-                    CatPostUpdate ["profile"] = profileUrl.toString()
+                    val CatPostUpdate = HashMap<String, Any>()
+                    CatPostUpdate["nickname"] = Binding.profilNickname.text.toString()
+                    CatPostUpdate["profile"] = profileUrl.toString()
                     db.collection("catPost")
-                        .whereEqualTo("userId",G.userAccount!!.id)
+                        .whereEqualTo("userId", G.userAccount!!.id)
                         .get()
-                        .addOnSuccessListener { documents->
-                            for (document in documents){
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
                                 document.reference.update(CatPostUpdate)
                             }
                         }
 
-                    val dogCommentUpdate= HashMap<String,Any>()
-                    dogCommentUpdate ["nickname"] = newNickname
+                    val dogCommentUpdate = HashMap<String, Any>()
+                    dogCommentUpdate["nickname"] = Binding.profilNickname.text.toString()
                     dogCommentUpdate["imgUrl"] = profileUrl.toString()
                     db.collection("DogComment")
-                        .whereEqualTo("uid",G.userAccount!!.id)
+                        .whereEqualTo("uid", G.userAccount!!.id)
                         .get()
-                        .addOnSuccessListener { documments->
-                            for (documment in documments){
+                        .addOnSuccessListener { documments ->
+                            for (documment in documments) {
                                 documment.reference.update(dogCommentUpdate)
                             }
                         }
-                    val catCommentUpdate = HashMap<String,Any>()
-                    catCommentUpdate ["nickname"] = newNickname
+                    val catCommentUpdate = HashMap<String, Any>()
+                    catCommentUpdate["nickname"] = Binding.profilNickname.text.toString()
                     catCommentUpdate["imgUrl"] = profileUrl.toString()
                     db.collection("CatComment")
-                        .whereEqualTo("uid",G.userAccount!!.id)
+                        .whereEqualTo("uid", G.userAccount!!.id)
                         .get()
-                        .addOnSuccessListener { documments->
-                            for (documment in documments){
+                        .addOnSuccessListener { documments ->
+                            for (documment in documments) {
                                 documment.reference.update(catCommentUpdate)
                             }
                         }
@@ -235,8 +242,6 @@ class ProfilMainFragment : Fragment() {
 
         Binding.etNameChange.text.clear()
     }
-
-
 
 
     private fun clickChangeProfile() {

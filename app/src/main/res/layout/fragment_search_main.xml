@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="700dp"
             android:layout_below="@id/tool_bar"
-            android:background="#31cdda">
+            android:background="@color/white">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_search"

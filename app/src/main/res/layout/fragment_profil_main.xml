@@ -76,8 +76,7 @@
         android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:orientation="vertical"
-        app:spanCount="2"
-        android:visibility="invisible"/>
+        app:spanCount="2" />
 
 
 
